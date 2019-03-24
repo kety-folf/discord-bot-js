@@ -57,7 +57,7 @@ client.on("message", (message) => {
         VC.join()
             
             .then(connection => {
-                message.channel.send("now playing driving into the sun by pepper coyote")
+                message.channel.send("now playing song name")
                 const dispatcher = connection.playFile(song[0]);
                 dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished");  });
             })
@@ -72,7 +72,7 @@ client.on("message", (message) => {
         VC.join()
 
             .then(connection => {
-                message.channel.send("now playing reg line by foxes and peppers")
+                message.channel.send("now playing song name")
                 const dispatcher = connection.playFile(song[1]);
                 dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
             })
@@ -87,7 +87,7 @@ client.on("message", (message) => {
         VC.join()
 
             .then(connection => {
-                message.channel.send("now playing all the single furries")
+                message.channel.send("now playing song name")
                 const dispatcher = connection.playFile(song[2]);
                 dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
             })
@@ -102,7 +102,7 @@ client.on("message", (message) => {
         VC.join()
 
             .then(connection => {
-                message.channel.send("now playing knock,knock by Niic")
+                message.channel.send("now playing song name")
                 const dispatcher = connection.playFile(song[3]);
                 dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
             })
@@ -117,7 +117,7 @@ client.on("message", (message) => {
         VC.join()
 
             .then(connection => {
-                message.channel.send("now playing star by pepper coyote")
+                message.channel.send("now playing song name")
                 const dispatcher = connection.playFile(song[4]);
                 dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
             })
@@ -144,11 +144,11 @@ client.on("message", (message) => {
     }
         if (message.content.startsWith(prefix + "songs")) {
             message.channel.send("songs you can play ")
-            message.channel.send("driving into the sun by pepper coyote = +play1 ")
-            message.channel.send("  reg line by foxes and peppers = +play2 ")
-            message.channel.send("all the single furries = +play3 ")
-            message.channel.send("knock,knock by Niic = +play4")
-            message.channel.send("star by Pepper Coyote = +play5")
+            message.channel.send("song1 +play1 ")
+            message.channel.send("  song2+play2 ")
+            message.channel.send("song3 +play3 ")
+            message.channel.send(" song4= +play4")
+            message.channel.send("song5 +play5")
             return;
         
     }
@@ -159,4 +159,4 @@ client.on("message", (message) => {
     }
    
 });
-client.login("NDI1MTM4NzcyMjIxMzYyMTc2.D2IY6w.dMMBRFiN1XQVBRYmSxzmwHlaEv4");
+client.login("NoT_a_priVaTe_BoT_KeY");
