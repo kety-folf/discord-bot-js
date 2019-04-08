@@ -30,7 +30,10 @@ client.on('message', async message => {
         message.channel.send("bot was made by Kety_the_folf#1470 coded in JS with discord.js");
         return;
     }
-
+ if (message.content.startsWith(prefix + "code")) {
+        message.channel.send('if you want to try and make my code better')
+        message.channel.send('https://github.com/kety-folf/discord-bot-js')
+    }
     if (message.content.startsWith(prefix + "leave")) {
         if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
         if (!message.guild.me.voiceChannel) return message.channel.send('bot is not in a VC.');
@@ -72,7 +75,11 @@ client.on('message', async message => {
                 {
                     name: "playYT",
                     value: "Plays from youtube there is no queue and you need to use the url/video ID."
-                }
+                },
+                         {
+                         name: "code",
+                         value: "code for this bot"
+                         }
 
 
                 ],
