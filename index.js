@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefix = "+";
+const config = require("./config.json");
 const opus = require("node-opus");
 const ytdl = require('ytdl-core');
 const { getInfo } = require('ytdl-getinfo')
@@ -202,4 +203,4 @@ value: "command to play is +play 8"
     }
 });
 
-client.login("NoT_a_priVaTe_BoT_KeY");
+client.login(config.token);
