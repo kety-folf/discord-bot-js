@@ -192,7 +192,7 @@ value: "command to play is +play 8"
     }
    
     if (message.content.startsWith(prefix + "quit")) {
-        if (message.member.roles.find("name", admin)) {
+        if (message.member.roles.some(r => ["admin", "moderater"].includes(r.name))
             client.destroy()
             message.channel.send("shuting down")
         } else {
