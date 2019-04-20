@@ -163,7 +163,7 @@ client.on('message', async message => {
             let info = await ytdl.getInfo(args[0]);
             let connection = await message.member.voiceChannel.join();
         let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' }));
-        dispatcher.on("end", _end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
+      
             message.channel.send(`Now Playing: ${info.title}`);
        
         return;
