@@ -1,19 +1,20 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const prefix = "+";
 const config = require("./config.json");
+const prefix = config.prefix;
+const search = require('yt-search');
 const opus = require("node-opus");
 const ytdl = require('ytdl-core');
-const { getInfo } = require('ytdl-getinfo')
+const { getInfo } = require('ytdl-getinfo');
 var rate = 64000;
 
-const songPrefixes = ["now playing driving into the sun by pepper coyote", 'now playing reg line by foxes and peppers', "now playing all the single furries", "now playing knock,knock by Niic", "now playing star by pepper coyote", "now playing Fuwwies", "now playing story by foxes and peppers", "now playing suit up by foxes and peppers"]
-var encoder = new opus.OpusEncoder(rate);{
-    var song = ['\song1.mp3', '\song2.mp3', '\song3.mp3','\song4.mp3','\song5.mp3','\song6.aiff','\song7.mp3','\song8.mp3']  
-};
-const ffmpeg = require("ffmpeg")
+const songPrefixes = ["now playing driving into the sun by pepper coyote", 'now playing reg line by foxes and peppers', "now playing all the single furries", "now playing knock,knock by Niic", "now playing star by pepper coyote", "now playing Fuwwies", "now playing story by foxes and peppers", "now playing suit up by foxes and peppers"];
+var encoder = new opus.OpusEncoder(rate); {
+    var song = ['\song1.mp3', '\song2.mp3', '\song3.mp3', '\song4.mp3', '\song5.mp3', '\song6.aiff', '\song7.mp3', '\song8.mp3'];
+}
+const ffmpeg = require("ffmpeg");
 client.on("ready", () => {
-    console.log("Connected as " + client.user.tag)
+    console.log("Connected as " + client.user.tag);
     client.user.setActivity("bot prefix is +");
 });
 client.on('message', async message => {
@@ -26,21 +27,49 @@ client.on('message', async message => {
         message.channel.send("pong!");
         return;
     }
+    if (message.content.startsWith(prefix + "search")) {
+        let term = args[0];
+        search(`${term}`, function (err, r) {
+            if (err) throw err;
+            console.log(r);
+            var vid = r.videos;
+            
+            var first = vid[0];
+            let videos = r.videos.slice(1, 10);
+            let resp = '';
+            for (var i in videos) {
+                resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\`\n`;
+                resp += `**[${parseInt(i) + 1}]:** \`https://www.youtube.com`+`${videos[i].url}\`\n`;
+            }
+            resp += `\n**use url with +playYT**`;
+            message.channel.send(resp);
 
+            const filter = m => isNaN(m.content) && m.content < videos.length+1 && m.content > 0;
+            const collecter = message.channel.createMessageCollector(filter);
+            collecter.videos = videos;
+            collecter.once('Collect', function (m) {
+                console.log(m)
+                message.channel.send([this.videos[parseInt(m.content) - 1].url]);
+            });
+
+        });
+        
+        
+    }
     if (message.content.startsWith(prefix + "info")) {
         message.channel.send("bot was made by Kety_the_folf#1470 coded in JS with discord.js");
         return;
     }
- if (message.content.startsWith(prefix + "code")) {
-        message.channel.send('if you want to try and make my code better')
-        message.channel.send('https://github.com/kety-folf/discord-bot-js')
+    if (message.content.startsWith(prefix + "code")) {
+        message.channel.send('if you want to try and make my code better');
+        message.channel.send('https://github.com/kety-folf/discord-bot-js');
     }
     if (message.content.startsWith(prefix + "leave")) {
         if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
         if (!message.guild.me.voiceChannel) return message.channel.send('bot is not in a VC.');
         if (message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send('you are not in the same VC as the bot.');
         message.guild.me.voiceChannel.leave();
-        message.channel.send('leaving VC.')
+        message.channel.send('leaving VC.');
         return;
     }
     if (message.content.startsWith(prefix + "help")) {
@@ -77,10 +106,10 @@ client.on('message', async message => {
                     name: "playYT",
                     value: "Plays from youtube there is no queue and you need to use the url/video ID."
                 },
-                         {
-                         name: "code",
-                         value: "code for this bot"
-                         }
+                {
+                    name: "code",
+                    value: "code for this bot"
+                }
 
 
                 ],
@@ -103,104 +132,99 @@ client.on('message', async message => {
 
     if (message.content.startsWith(prefix + "test2")) {
         return message.reply("test");
-        return;
+        
 
 
     }
     if (message.content.startsWith(prefix + "play")) {
-        let songNum = args[0]
-        if (!args[0]) return message.reply('please input a song number following the command');
-        if (songNum < 1 || songNum > 7) return;
+        let songNum = args[0];
+        if (!songNum) return message.reply('please input a song number following the command');
+        if (songNum < 1 || songNum > 7) return message.reply('please use a number > 0 and < 8');
         var VC = message.member.voiceChannel;
         if (!VC)
-            return message.reply("join a voice chat")
+            return message.reply("join a voice chat");
         VC.join()
 
             .then(connection => {
-                message.channel.send(songPrefixes[songNum - 1])
-                const dispatcher = connection.playFile(song[songNum - 1]);
-                dispatcher.on("end", end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
+                message.channel.send(songPrefixes[songNum - 1]);
+                dispatcher.on("end", _end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
             })
             .catch(console.error);
         return;
     }
-    
+
     if (message.content.startsWith(prefix + "playYT")) {
-        if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
-        if (message.guild.me.voiceChannel) return message.channel.send('I am already In a voice channel.');
-        if (!args[0]) return message.channel.send('please input a url following the command');
-        let validate = await ytdl.validateURL(args[0]);
-        if (!validate) return message.channel.send("input a **valid** url following the command");
-        let info = await ytdl.getInfo(args[0]);
-        let connection = await message.member.voiceChannel.join();
+        
+            if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
+            if (message.guild.me.voiceChannel) return message.channel.send('I am already In a voice channel.');
+            if (!args[0]) return message.channel.send('please input a url following the command');
+            let validate = await ytdl.validateURL(args[0]);
+            if (!validate) return message.channel.send("input a **valid** url following the command");
+            let info = await ytdl.getInfo(args[0]);
+            let connection = await message.member.voiceChannel.join();
         let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' }));
-        message.channel.send(`Now Playing: ${info.title}`);
+        dispatcher.on("end", _end => { VC.leave(); client.user.setActivity("prefix is +"); message.channel.send("song finished"); });
+            message.channel.send(`Now Playing: ${info.title}`);
+       
         return;
     }
-    
-    
-        if (message.content.startsWith(prefix + "songs")) {
-message.channel.send({embed: {
-    color: 3447003,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    title: "**Songs you can play**",
-    fields: [{
-        name: "song 1",
-        value: "command to play is +play 1"
-      },
-    {
-      name: "song2",
-      value: "command to play is +play 2."  
-},
-        {
-    name: "song 3",
-    value: "command to play is +play 3"
-        },
-{
-    name: "song 4",
-    value: "command to play is +play 4"
-},
-{
-    name: "song 5",
-    value: "command to play is +play 5"
-},
-{
-name: "song 6",
-value: "comand to play is +play 6"
-},
-{
-name: "song 7",
-value: "command to play is +play 7"
-},
- {
-name: "song 8",
-value: "command to play is +play 8"
-}     
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "©Kety_the_folf#1470"
-    }
-  }
-});
-            return;
-        
-    }
-   
-    if (message.content.startsWith(prefix + "quit")) {
-        if (message.member.roles.some(r => ["admin", "moderater"].includes(r.name))
-            client.destroy()
-            message.channel.send("shuting down")
-        } else {
-            return message.reply("you dont have the perms to run this")
-        }
-        
+
+
+    if (message.content.startsWith(prefix + "songs")) {
+        message.channel.send({
+            embed: {
+                color: 3447003,
+                author: {
+                    name: client.user.username,
+                    icon_url: client.user.avatarURL
+                },
+                title: "**Songs you can play**",
+                fields: [{
+                    name: "song 1",
+                    value: "command to play is +play 1"
+                },
+                {
+                    name: "song2",
+                    value: "command to play is +play 2."
+                },
+                {
+                    name: "song 3",
+                    value: "command to play is +play 3"
+                },
+                {
+                    name: "song 4",
+                    value: "command to play is +play 4"
+                },
+                {
+                    name: "song 5",
+                    value: "command to play is +play 5"
+                },
+                {
+                    name: "song 6",
+                    value: "comand to play is +play 6"
+                },
+                {
+                    name: "song 7",
+                    value: "command to play is +play 7"
+                },
+                {
+                    name: "song 8",
+                    value: "command to play is +play 8"
+                }
+                ],
+                timestamp: new Date(),
+                footer: {
+                    icon_url: client.user.avatarURL,
+                    text: "©Kety_the_folf#1470"
+                }
+            }
+        });
         return;
+
     }
+
+    
+    
 });
 
 client.login(config.token);
