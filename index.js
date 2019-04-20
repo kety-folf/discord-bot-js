@@ -44,15 +44,8 @@ client.on('message', async message => {
             resp += `\n**use url with +playYT**`;
             message.channel.send(resp);
 
-            const filter = m => isNaN(m.content) && m.content < videos.length+1 && m.content > 0;
-            const collecter = message.channel.createMessageCollector(filter);
-            collecter.videos = videos;
-            collecter.once('Collect', function (m) {
-                console.log(m)
-                message.channel.send([this.videos[parseInt(m.content) - 1].url]);
-            });
 
-        });
+        }
         
         
     }
