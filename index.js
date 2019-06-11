@@ -166,7 +166,15 @@ client.on('message', async message => {
             timeStr += `**${label}**: ${time}\n`
         }      
         message.channel.send(timeStr);
-    }   
+    }
+          if (message.content.startsWith(prefix + "r"))
+               if (message.author.id == "263443630767734784" {
+            client.user.setActivity(`RESTARTING`);
+            process.exit();
+
+        }
+
+    }
 });
 
 client.login(config.token);
