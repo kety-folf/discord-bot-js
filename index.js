@@ -1,17 +1,16 @@
-
-const Discord = require("discord.js");
-const client = new Discord.Client 
-const prefix = "+";
 const config = require("./config.json");
-const opus = require("node-opus");
+const Discord = require("discord.js");
+const db = require("quick.db")
+const request = require('request');
+const client = new Discord.Client 
+const prefix =  config.prefix;
 const ytdl = require('ytdl-core');
-const { getInfo } = require('ytdl-getinfo')
-var rate = 64000;
+// rate = 64000;
 const ffmpeg = require("ffmpeg")
 const search = require('yt-search');
 client.on("ready", () => {
     console.log("Connected as " + client.user.tag)
-    client.user.setActivity(`bot prefix is + `);
+    client.user.setActivity(`with the best Folf |+help for help`);
 client.user.setStatus("online");
 });
 client.on('message', async message => {
@@ -20,10 +19,8 @@ client.on('message', async message => {
     const arg = message.content.substring(1).trim(" ")
     if (!message.content.startsWith(prefix)) return;
 
-    if (message.content.startsWith(prefix + "ping")) {
-        message.channel.send("pong!");
-        return;
-    }
+
+
 
     if (message.content.startsWith(prefix + "info")) {
         message.channel.send("bot was made by Kety_the_folf#1470 coded in JS with discord.js");
@@ -32,13 +29,14 @@ client.on('message', async message => {
     if (message.content.startsWith(prefix + "code")) {
         message.channel.send('if you want to try and make my code better')
         message.channel.send('https://github.com/kety-folf/discord-bot-js')
+client.user.setActivity("looking at this chat||prefix is +");
     }
-    if (message.content.startsWith(prefix + "leave")) {
+   if (message.content.startsWith(prefix + "leave")) {
         if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
         if (!message.guild.me.voiceChannel) return message.channel.send('bot is not in a VC.');
         if (message.guild.me.voiceChannelID !== message.member.voiceChannelID) return message.channel.send('you are not in the same VC as the bot.');
         message.guild.me.voiceChannel.leave();
-        message.channel.send('leaving VC.')
+       message.channel.send('leaving VC.')
         return;
     }
     if (message.content.startsWith(prefix + "help")) {
@@ -55,6 +53,7 @@ client.on('message', async message => {
                     name: "Info",
                     value: "Info About the Bot"
                 },
+				
                 {
                     name: "ping",
                     value: "returns pong."
@@ -62,33 +61,52 @@ client.on('message', async message => {
 
 
                 {
-                    name: "stop",
+                    name: "leave",
                     value: "stops music and leaves VC"
                 },
                 {
-                    name: "play",
-                    value: "Plays from youtube there is no queue and you need to use the url. to get a url you can use +search"
-                },
+					name: "search",
+					value: "searches youtube"
+				},
+               
                 {
                     name: "code",
                     value: "code for this bot"
 
                 },
-                {
-                    name: "search",
-                    value: "searches youtube and gets top 10 resuts and url "
-                },
+               {
+                    name: "play ",
+                   value: "plays music from youtube needs full url "
+               },
                 {
                     name: "time",
                     value: "gets time in mutiple timeZones"
-                }
+                },
+				{
+					name: "r",
+					value: "restarts the bot. (Kety_the_folf#0001 only)"
+				},
+				{
+					name: "pfp",
+					value: "gets the users profile pic"
+				},
+				{
+					name: "fox",
+					value: "gets a random image of a fox"
+				},
+				{
+					name: "say",
+					value: "says message following command"
+				}
+				
+			
 
 
                 ],
                 timestamp: new Date(),
                 footer: {
                     icon_url: client.user.avatarURL,
-                    text: "©Kety_the_folf#1470"
+                    text: "©Kety_the_folf#0001"
                 }
             }
         });
@@ -99,51 +117,51 @@ client.on('message', async message => {
 
     if (message.content.startsWith(prefix + "test")) {
         message.author.send("this is a test");
+
         return;
     }
 
-    if (message.content.startsWith(prefix + "test2")) {
-        return message.reply("test");
-        return;
-
-
-    }
+    
 
     if (message.content.startsWith(prefix + "search")) {
-        let term = arg;
+       let term = arg;
         search(`${term}`, function (err, r) {
             if (err) return message.channel.send(err);
-
-            var vid = r.videos;
+           var vid = r.videos;
 
             var first = vid[0];
-            let videos = r.videos.slice(1, 11);
+           let videos = r.videos.slice(1, 11);
             let resp = '';
             for (var i in videos) {
                 resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\`\n`;
                 resp += `**[${parseInt(i) + 1}]:** \`https://www.youtube.com` + `${videos[i].url}\`\n`;
             }
-            resp += `\n**use url with +play**`;
+           resp += `\n**use url with +play**`;
             message.channel.send(resp);
+
             resp = ''
         });
     }
     if (message.content.startsWith(prefix + "play")) {
-        if (!message.member.voiceChannel) return message.channel.send('you must be in a voice channel.');
-        if (message.guild.me.voiceChannel) return message.channel.send('I am already In a voice channel.');
+		
+		
+       if (!message.member.voiceChannel) message.channel.send('you must be in a voice channel.');
+       if (message.guild.me.voiceChannel) return message.channel.send('I am already In a voice channel.');
         if (!args[0]) return message.channel.send('please input a url following the command');
         let validate = await ytdl.validateURL(args[0]);
         if (!validate) return message.channel.send("input a **valid** url following the command");
-        message.channel.send("downloading/geting info for song/video")
+       message.channel.send("downloading/geting info for song/video")
         let info = await ytdl.getInfo(args[0]);
         let connection = await message.member.voiceChannel.join();
-        let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' }));
+       let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
 
-        message.channel.send(`Now Playing: ${info.title}`);
+       message.channel.send(`Now Playing: ${info.title}`);
+	
         return;
     }
 
-    if (message.content.startsWith(prefix + "time")) 
+    if (message.content.startsWith(prefix + "time")) {
+        // List of timezones and locations to be used
         const timezoneList = [
             ["Eastern (Server) Time", "America/New_York"],
             ["UK Time", "Europe/London"],
@@ -152,30 +170,66 @@ client.on('message', async message => {
             ["US Pacific Time", "America/Los_Angeles"],
             ["Central European Time", "Europe/Berlin"],
             ["Hong Kong/Philippines/Western Australia Time", "Asia/Hong_Kong"],
-            ["New Zealand", "Pacific/Auckland"]
-        ];       
+            ["New Zealand Time", "Pacific/Auckland"]
+        ];
+
+        // List of settings for time/date formatting
         const settings = {
             hour12: true,
             hour: "numeric",
             minute: "2-digit"
-        };     
+        };
+
+        // Create variables to be used later
         let now = new Date();
-        let timeStr = "";       
+        let timeStr = "";
+
+        // Build the time string using the locations and timezones
         for (let [label, location] of timezoneList) {
             let time = now.toLocaleString("en-US", { timeZone: location, ...settings });
             timeStr += `**${label}**: ${time}\n`
-        }      
-        message.channel.send(timeStr);
-    }
-          if (message.content.startsWith(prefix + "r"))
-               if (message.author.id == "263443630767734784" {
-            client.user.setActivity(`RESTARTING`);
-            process.exit();
-
         }
 
+        // Send message to the channel in which the command was used
+        message.channel.send(timeStr);
+
     }
+    if (message.content.startsWith(prefix + "r")) {
+        if (message.author.id = ("263443630767734784")) {
+            client.user.setActivity(`RESTARTING`);
+            
+           process.exit();
+        }
+	}
+	
+		if (message.content.startsWith(prefix + "pfp")){
+			 var user = message.mentions.users.first();
+    let embed = new Discord.RichEmbed()
+  .setImage(user.avatarURL)
+  .setColor('#275BF0')
+    message.channel.send(embed)
+	return;
+  }
+	if (message.content.startsWith(prefix + "fox")){
+		
+		let embed = new Discord.RichEmbed()
+	    .setImage(`https://randomfox.ca/images/${Math.floor(Math.random()*123)}.jpg`)
+		.setColor('#ffcc00')
+		.setTitle('Fox')
+		message.channel.send(embed)
+			return;
+		}
+
+
+if (message.content.startsWith(prefix + "say")){
+	let term = arg.substring(3).trim(" ");
+  message.channel.send(term);
+   return;
+}
+    
+      
+   
+   
 });
 
 client.login(config.token);
-
