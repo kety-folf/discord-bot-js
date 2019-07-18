@@ -7,10 +7,11 @@ if you want to run the bot you will need to run npm install (only tested on wind
 # how to setup
 create a config.json
 and put in the following
-```JSON
+```
 {
 "token":"Your Discord private key",
 "prefix":"~",(or any prefix you want it to be)
 "e621Key": "your e621 api key"
-}```
+}
+```
 then run the bat file
