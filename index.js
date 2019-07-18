@@ -1,4 +1,4 @@
-const config = require("./config.json");
+﻿const config = require("./config.json");
 const db = require('quick.db')
 const fs = require('fs')
 let e621 = require('e621-api').default;
