@@ -12,7 +12,7 @@ const ffmpeg = require("ffmpeg")
 const search = require('yt-search');
 client.on("ready", () => {
     console.log("Connected as " + client.user.tag + " in "+ `${client.guilds.size}` + " servers")
-    client.user.setActivity(`with a very cute Folf | prefix is ~  `);
+    client.user.setActivity(`with a very cute Folf | prefix: ${config.prefix}`);
 client.user.setStatus("online");
 });
 client.on('message', async message => {
@@ -31,15 +31,21 @@ client.on('message', async message => {
 		embedlink('code', 'if you want to  make my code better', 'https://github.com/kety-folf/discord-bot-js')
     }
    if (message.content.startsWith(prefix + "leave")) {
-        if (!message.member.voiceChannel) return embedtxt('Error', 'you must be in a voice channel.');
-        if (!message.guild.me.voiceChannel) return embedtxt('Error', 'bot is not in a VC.');
+        if (!message.member.voiceChannel) return embedErr('Error', 'you must be in a voice channel.');
+        if (!message.guild.me.voiceChannel) return embedErr('Error', 'bot is not in a VC.');
         if (message.guild.me.voiceChannelID !== message.member.voiceChannelID) return embedtxt('music', 'you are not in the same VC as the bot.');
         message.guild.me.voiceChannel.leave();
       
 	   embedtxt('music', 'leaving VC.' )
         return;
     }
-	
+	function embedErr(title, decrption){
+		let embed = new Discord.RichEmbed()
+		.setColor('#f92e02')
+		.setTitle(title)
+		.setDescription(decrption)
+		message.channel.send(embed)
+	};
 	function embedtxt(title, decrption){
 		let embed = new Discord.RichEmbed()
 		.setColor('#0099ff')
@@ -141,7 +147,7 @@ client.on('message', async message => {
 					value: 'get started with the money system' 
 				},
 				{
-					name: 'bal',
+					name: 'bal or balance',
 					value: 'see your balance' 
 				},
 				{
@@ -175,7 +181,7 @@ client.on('message', async message => {
 })
 }
 else{
-	embedtxt('Error', 'not nsfw channel')
+	embedErr('Error', 'not nsfw channel')
 }
 	}
 
@@ -189,7 +195,7 @@ else{
         embedtxt('CPU Information:', '- manufucturer: ' + data.manufacturer + ' - brand: ' + data.brand +' - speed: ' + data.speed + ' - cores: ' + data.cores + ' - physical cores: ' + data.physicalCores);
          
     })
-    .catch(error => embedtxt('error', error));
+    .catch(error => embedErr('error', error));
 	
         si.mem()
 		.then(data1 => {
@@ -200,7 +206,7 @@ else{
         
     })
 	
-    .catch(error =>    embedtxt('error', error));
+    .catch(error =>    embedErr('error', error));
 	si.cpuCurrentspeed()
 	.then(data2 => {
         embedtxt('CPU Speed Information:',
@@ -210,7 +216,7 @@ else{
         
     })
 	
-    .catch(error =>    embedtxt('error', error));
+    .catch(error =>    embedErr('error', error));
 	si.cpuTemperature()
 	.then(temp => {
 	embedtxt('CPU temp:', temp.main);
@@ -218,14 +224,14 @@ else{
 	
 	
 	
-    .catch(error =>    embedtxt('error', error));
+    .catch(error =>    embedErr('error', error));
     
 	si.osInfo()
 	 .then(os => {
         embedtxt('OS Information:', ' - platform: ' + os.platform +' - release: ' + os.release + ' -build: ' + os.build + ' - distro: ' + os.distro);
          
     })
-    .catch(error => embedtxt('error', error))
+    .catch(error => embedErr('error', error))
 
 }
 
@@ -236,7 +242,7 @@ else{
     if (message.content.startsWith(prefix + "search")) {
        let term = arg;
         search(`${term}`, function (err, r) {
-            if (err) return embedtxt("Error", err);
+            if (err) return embedErr("Error", err);
            var vid = r.videos;
 
             var first = vid[0];
@@ -246,7 +252,7 @@ else{
                 resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\`\n`;
                 resp += `**[${parseInt(i) + 1}]:** \`https://www.youtube.com` + `${videos[i].url}\`\n`;
             }
-           resp += `\n**use url with -play**`;
+           resp += `\n**use url with ~play**`;
           
 			embedtxt('search', resp);
             resp = ''
@@ -255,11 +261,11 @@ else{
     if (message.content.startsWith(prefix + "play")) {
 		
 		
-       if (!message.member.voiceChannel) embedtxt("Error", 'you must be in a voice channel.');
-       if (message.guild.me.voiceChannel) return embedtxt('Error', 'I am already In a voice channel.');
-        if (!args[0]) return embedtxt('Error', 'please input a url following the command.');
+       if (!message.member.voiceChannel) embedErr("Error", 'you must be in a voice channel.');
+       if (message.guild.me.voiceChannel) return embedErr('Error', 'I am already In a voice channel.');
+        if (!args[0]) return embedErr('Error', 'please input a url following the command.');
         let validate = await ytdl.validateURL(args[0]);
-        if (!validate) return embedtxt('Error', "input a **valid** url following the command");
+        if (!validate) return embedErr('Error', "input a **valid** url following the command");
        embedtxt("Info","downloading/geting info for song/video")
         let info = await ytdl.getInfo(args[0]);
         let connection = await message.member.voiceChannel.join();
@@ -307,17 +313,14 @@ embedtxt('Music', `Now Playing: ${info.title}` );
 		message.channel.send(embed)
 
     }
-    if (message.content.startsWith(prefix + "r")) {
+    if (message.content.startsWith(prefix + "r" || prefix + 'restart')) {
         if (message.author.id == ("263443630767734784")) {
             client.user.setActivity(`RESTARTING`);
           
            process.exit();
         }
 		else {
-			let embed = new Discord.RichEmbed()
-			.setTitle("Error")
-			.setDescription("you can not use this command");
-			message.channel.send(embed)
+			embedErr("Error", "you dont have perms to run this command ")
 			return;
 		}
 	}
@@ -334,7 +337,7 @@ embedtxt('Music', `Now Playing: ${info.title}` );
 		if (message.content.startsWith(prefix + "pfp")){
 			 var user = message.mentions.users.first() ;
 			 if(!user){
-				 embedtxt('error', '@ someone to get a pfp')
+				 user = message.author
 			 }
 			  embedimg('', user, user.avatarURL);
 	return;
@@ -353,14 +356,14 @@ if (message.content.startsWith(prefix + "say")){
 if (message.content.startsWith(prefix + 'commandAdd')){
 	var data = arg.substring(3);
 
-fs.appendFile("C:/Users/Administrator/Desktop/DiscordBot/data/commands-to-add.txt",`\r\n ${arg.substring(10)}\r\n`, (err) => {
-  if (err) embedtxt('Error',err);
+fs.appendFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-add.txt",`\r\n ${arg.substring(10)}\r\n`, (err) => {
+  if (err) embedErr('Error',err);
   embedtxt('file edit',"Successfully Written to File.");
 });
 	
 }
 if (message.content.startsWith(prefix + 'commands')){
-	fs.readFile("C:/Users/Administrator/Desktop/DiscordBot/data/commands-to-add.txt", function(err, buf) {
+	fs.readFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-add.txt", function(err, buf) {
   embedtxt('', buf);
   
 });
@@ -372,7 +375,7 @@ if (message.content.startsWith(prefix + 'createBank' )){
   embedtxt('bank', 'account created')
 }
 
-if(message.content.startsWith(prefix + 'balance')){
+if(message.content.startsWith(prefix + 'balance' || prefix + 'bal' )){
  var user = message.mentions.users.first()
  if(!user) {
 	 user = message.author
@@ -385,9 +388,9 @@ if (message.content.startsWith(prefix + 'slots')){
 	var bet = arg.substring(5);
 	var win = bet*Math.floor(Math.random()*10)
 	var bal = db.get(`${message.author.id}.bal`)
-	if(isNaN(bet)) return embedtxt('Error', `${bet} is not a number, are you trying to brake something.`)
-	if(bet < 0) return embedtxt('ERROR', 'Stop Trying To Get Unlimited Money. yes i know you would try to do this')
-	if (bet > bal) return embedtxt('error', `bet ${bet} > bal ${bal}`);
+	if(isNaN(bet)) return embedErr('Error', `${bet} is not a number, are you trying to brake something.`)
+	if(bet < 0) return embedErr('ERROR', 'Stop Trying To Get Unlimited Money. yes i know you would try to do this')
+	if (bet > bal) return embedErr('error', `bet ${bet} > bal ${bal}`);
 	db.subtract(`${message.author.id}.bal`, bet)
 	var num1 = Math.floor(Math.random()*5)
 	var num2 = Math.floor(Math.random()*5)
@@ -406,7 +409,6 @@ if(message.content.startsWith(prefix + 'coinFlip' )){
 	var flip = arg.substring(8);
 	db.subtract(`${message.author.id}.bal`, 5)
 	flipvalue = Math.floor(Math.random()*2);
-	//embedtxt('log', `${flip} ${flipvalue}`)
 	if (!flip) return embedtxt('error', 'you must pick heads or tails');
 	if (flip === ' heads' && flipvalue === 0){
 		db.add(`${message.author.id}.bal`, bal*.5);
@@ -428,6 +430,7 @@ if (flip == ' tails' && flipvalue === 1){
 				 var user2 = message.mentions.users.last();
 				 if (!user1) return embedtxt('Error', "@ a user you want to boop");
 				 var user = message.author;
+				 if(user == user1 || user == user2) return embedimg('boop', `${user} has booped them self`, 'https://cdn.discordapp.com/attachments/597631229357064195/598388881490051202/Cbn90rRUsAAuhCh.jpg')
 				 if (user1 != user2){
 					 embedimg('Boop', ` ${user} has booped ${user1} and ${user2} `, 'https://cdn.discordapp.com/attachments/597631229357064195/598388881490051202/Cbn90rRUsAAuhCh.jpg');
 				 }
