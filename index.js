@@ -1,4 +1,5 @@
-﻿const config = require("./config.json");
+﻿// import files
+const config = require("./config.json");
 const db = require('quick.db')
 const fs = require('fs')
 let e621 = require('e621-api').default;
@@ -6,27 +7,25 @@ let enums = require('e621-api/build/enums');
 let wrapper = new e621('Folf-Bot-Discord', 'kety-folf', config.e621Key, 50);
 const Discord = require("discord.js");
 const si = require('systeminformation')
-const client = new Discord.Client; 
+const client = new Discord.Client; //create client
 const ytdl = require('ytdl-core');
 const ffmpeg = require("ffmpeg")
 const search = require('yt-search');
-client.on("ready", () => {
+
+client.on("ready", () => {// when bot starts 
     console.log("Connected as " + client.user.tag + " in "+ `${client.guilds.size}` + " servers")
     client.user.setActivity(`with a very cute Folf | prefix: ${config.prefix}`);
 client.user.setStatus("online");
 });
-client.on('message', async message => {
-	var prefix =  config.prefix;
+client.on('message', async message => {//when bot sees a message
+	var prefix =  config.prefix;//set up prefix
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
    
     const arg = message.content.substring(1).trim(" ");
-    	
 
-      
-    
 	if (message.content.startsWith("prefix")) return message.channel.send("my prefix is ~");
 	if (message.content.startsWith("Prefix")) return message.channel.send("my prefix is ~");
-    if (message.content.startsWith(prefix + "code")) {
+    if (message.content.startsWith(prefix + "code")) {//code command for link to git hub page
         
 		embedlink('GitHub', 'if you want to  make my code better', 'https://github.com/kety-folf/discord-bot-js')
     }
@@ -39,7 +38,7 @@ client.on('message', async message => {
 	   embedtxt('music', 'leaving VC.' )
         return;
     }
-	function embedErr(title, decrption){
+	function embedErr(title, decrption){// embed function for errors
 		let embed = new Discord.RichEmbed()
 		.setColor('#f92e02')
 		.setTitle(title)
@@ -52,14 +51,14 @@ client.on('message', async message => {
 		else
 			return text;
 	  };
-	function embedtxt(title, decrption){
+	function embedtxt(title, decrption){// embed text
 		let embed = new Discord.RichEmbed()
 		.setColor('#0099ff')
 		.setTitle(title)
 		.setDescription(decrption)
 		message.channel.send(embed)
 	};
-	function embedlink(title, decrption, url){
+	function embedlink(title, decrption, url){// embed url
 		let embed = new Discord.RichEmbed()
 		.setColor('#0099ff')
 		.setTitle(title)
@@ -67,7 +66,7 @@ client.on('message', async message => {
 		.setURL(url)
 		message.channel.send(embed)
 	};
-	function embedimg(title, decrption, img){
+	function embedimg(title, decrption, img){ //embed image
 		let embed = new Discord.RichEmbed()
 		.setColor('#0099ff')
 		.setTitle(title)
@@ -75,7 +74,7 @@ client.on('message', async message => {
 		.setImage(img)
 		message.channel.send(embed)
 	};
-    if (message.content.startsWith(prefix + "help")) {
+    if (message.content.startsWith(prefix + "help")) {// help command
         message.channel.send({
             embed: {
                 color: 3447003,
@@ -175,7 +174,7 @@ client.on('message', async message => {
 
         return;
     }
-	if (message.content.startsWith(prefix + 'e621')){
+	if (message.content.startsWith(prefix + 'e621')){//e621 command
 		if (message.channel.nsfw){
 		wrapper.posts.getPopularPosts(enums.e621PopularityStrings.daily)
 .then((data) => {
@@ -187,21 +186,20 @@ else{
 }
 	}
 
-	if (message.content.startsWith(prefix + "eval")) {
-		if(message.author.id !== "263443630767734784") return;
+	if (message.content.startsWith(prefix + "eval")) {//eval command
+		if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
 		try {
 		  const code = arg.substring(4).trim(" ");
 		  let evaled = eval(code);
 	 
 		  if (typeof evaled !== "string")
 			evaled = require("util").inspect(evaled);
-			let embed = new Discord.RichEmbed()
+			let embed = new Discord.RichEmbed()//embed for eval command
 		.setColor('#0099ff')
 		.setTitle('eval')
 		.addField('IN', clean(code))
 		.addField('OUT', clean(evaled))
 		message.channel.send(embed)
-		  //message.channel.send(clean(evaled), {code:"xl"});
 		} catch (err) {
 		  message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
 		  
@@ -209,7 +207,7 @@ else{
 	  }
 
 
-    if (message.content.startsWith(prefix + "info")) {
+    if (message.content.startsWith(prefix + "info")) {// info command
         embedtxt('Info', "bot was made by Kety_the_folf#0001 coded in JS with discord.js");
         si.cpu()
     .then(data => {
@@ -260,14 +258,14 @@ else{
 
 	
 
-    if (message.content.startsWith(prefix + "search")) {
-       let term = arg;
-        search(`${term}`, function (err, r) {
+    if (message.content.startsWith(prefix + "search")) {// yt search command
+       let term = arg;//get text after command
+        search(`${term}`, function (err, r) {// search youtube
             if (err) return embedErr("Error", err);
            var vid = r.videos;
 
             var first = vid[0];
-           let videos = r.videos.slice(1, 11);
+           let videos = r.videos.slice(1, 11);//get first 10 resuts
             let resp = '';
             for (var i in videos) {
                 resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\`\n`;
@@ -279,7 +277,7 @@ else{
             resp = ''
         });
     }
-    if (message.content.startsWith(prefix + "play")) {
+    if (message.content.startsWith(prefix + "play")) {//play command
 		
 		
        if (!message.member.voiceChannel) embedErr("Error", 'you must be in a voice channel.');
@@ -297,7 +295,7 @@ embedtxt('Music', `Now Playing: ${info.title}` );
         return;
     }
 
-    if (message.content.startsWith(prefix + "time")) {
+    if (message.content.startsWith(prefix + "time")) {// time command
         // List of timezones and locations to be used
         const timezoneList = [
             ["Eastern (Server) Time", "America/New_York"],
@@ -334,7 +332,7 @@ embedtxt('Music', `Now Playing: ${info.title}` );
 		message.channel.send(embed)
 
     }
-    if (message.content.startsWith(prefix + "r" || prefix + 'restart')) {
+    if (message.content.startsWith(prefix + "r" || prefix + 'restart')) {//restart command
         if (message.author.id == ("263443630767734784")) {
             client.user.setActivity(`RESTARTING`);
           
@@ -355,7 +353,7 @@ embedtxt('Music', `Now Playing: ${info.title}` );
   embedtxt('bank', 'account created')
 	}
 	}
-		if (message.content.startsWith(prefix + "pfp")){
+		if (message.content.startsWith(prefix + "pfp")){// pfp command
 			 var user = message.mentions.users.first() ;
 			 if(!user){
 				 user = message.author
@@ -363,18 +361,18 @@ embedtxt('Music', `Now Playing: ${info.title}` );
 			  embedimg('', user, user.avatarURL);
 	return;
   }
-	if (message.content.startsWith(prefix + "fox")){
+	if (message.content.startsWith(prefix + "fox")){// random fox command
 		embedimg('Fox', 'Powered by randomfox.ca', `https://randomfox.ca/images/${Math.floor(Math.random()*123)}.jpg`);
 			return;
 		}
 
 
-if (message.content.startsWith(prefix + "say")){
+if (message.content.startsWith(prefix + "say")){// say command
 	let term = arg.substring(3).trim(" ");
   message.channel.send(term);
    return;
 }
-if (message.content.startsWith(prefix + 'commandAdd')){
+if (message.content.startsWith(prefix + 'commandAdd')){// command suguestion comman
 	var data = arg.substring(3);
 
 fs.appendFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-add.txt",`\r\n ${arg.substring(10)}\r\n`, (err) => {
@@ -383,20 +381,20 @@ fs.appendFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-ad
 });
 	
 }
-if (message.content.startsWith(prefix + 'commands')){
+if (message.content.startsWith(prefix + 'commands')){// see suguested command
 	fs.readFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-add.txt", function(err, buf) {
   embedtxt('', buf);
   
 });
 	
 }
-if (message.content.startsWith(prefix + 'createBank' )){
+if (message.content.startsWith(prefix + 'createBank' )){// set up your accout for the db
 	db.set(`${message.author.id}.bal`, 100)
   
   embedtxt('bank', 'account created')
 }
 
-if(message.content.startsWith(prefix + 'balance') || message.content.startsWith(prefix + 'bal')){
+if(message.content.startsWith(prefix + 'balance') || message.content.startsWith(prefix + 'bal')){//see your balance 
  var user = message.mentions.users.first()
  if(!user) {
 	 user = message.author
@@ -404,7 +402,7 @@ if(message.content.startsWith(prefix + 'balance') || message.content.startsWith(
 var bal = db.get(`${user.id}.bal`)
  embedtxt('bal',`${user} ${bal}`) 
 }
-if (message.content.startsWith(prefix + 'slots')){
+if (message.content.startsWith(prefix + 'slots')){//slots command because if you have money you would want to spend it
 	
 	var bet = arg.substring(5);
 	var win = bet*Math.floor(Math.random()*10)
@@ -424,7 +422,7 @@ if (message.content.startsWith(prefix + 'slots')){
 	
 }
 
-if(message.content.startsWith(prefix + 'coinFlip' )){
+if(message.content.startsWith(prefix + 'coinFlip' )){//flip a coin command
 	var bal = db.get(`${message.author.id}.bal`);
 	
 	var flip = arg.substring(8);
@@ -446,7 +444,7 @@ if (flip == ' tails' && flipvalue === 1){
 	embedtxt('heads ', 'you lost');
 }
 }
- if (message.content.startsWith(prefix + "boop")){
+ if (message.content.startsWith(prefix + "boop")){// boop command *Boops you*
 	 			 var user1 = message.mentions.users.first();
 				 var user2 = message.mentions.users.last();
 				 if (!user1) return embedtxt('Error', "@ a user you want to boop");
@@ -467,4 +465,4 @@ if (flip == ' tails' && flipvalue === 1){
    
 });
 
-client.login(config.token);
+client.login(config.token);// login to the discord api
