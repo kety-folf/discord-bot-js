@@ -24,11 +24,11 @@ client.on('message', async message => {
 
       
     
-	if (message.content.startsWith("prefix")) return message.channel.send("my prefix is -");
-	if (message.content.startsWith("Prefix")) return message.channel.send("my prefix is -");
+	if (message.content.startsWith("prefix")) return message.channel.send("my prefix is ~");
+	if (message.content.startsWith("Prefix")) return message.channel.send("my prefix is ~");
     if (message.content.startsWith(prefix + "code")) {
         
-		embedlink('code', 'if you want to  make my code better', 'https://github.com/kety-folf/discord-bot-js')
+		embedlink('GitHub', 'if you want to  make my code better', 'https://github.com/kety-folf/discord-bot-js')
     }
    if (message.content.startsWith(prefix + "leave")) {
         if (!message.member.voiceChannel) return embedErr('Error', 'you must be in a voice channel.');
@@ -46,6 +46,12 @@ client.on('message', async message => {
 		.setDescription(decrption)
 		message.channel.send(embed)
 	};
+	function clean(text) {
+		if (typeof(text) === "string")
+		  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+		else
+			return text;
+	  };
 	function embedtxt(title, decrption){
 		let embed = new Discord.RichEmbed()
 		.setColor('#0099ff')
@@ -83,10 +89,6 @@ client.on('message', async message => {
                     name: "Info",
                     value: "Info About the Bot and server"
                 },
-				
-                
-
-
                 {
                     name: "leave",
                     value: "stops music and leaves VC"
@@ -185,7 +187,26 @@ else{
 }
 	}
 
-
+	if (message.content.startsWith(prefix + "eval")) {
+		if(message.author.id !== "263443630767734784") return;
+		try {
+		  const code = arg.substring(4).trim(" ");
+		  let evaled = eval(code);
+	 
+		  if (typeof evaled !== "string")
+			evaled = require("util").inspect(evaled);
+			let embed = new Discord.RichEmbed()
+		.setColor('#0099ff')
+		.setTitle('eval')
+		.addField('IN', clean(code))
+		.addField('OUT', clean(evaled))
+		message.channel.send(embed)
+		  //message.channel.send(clean(evaled), {code:"xl"});
+		} catch (err) {
+		  message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+		  
+		}
+	  }
 
 
     if (message.content.startsWith(prefix + "info")) {
@@ -375,7 +396,7 @@ if (message.content.startsWith(prefix + 'createBank' )){
   embedtxt('bank', 'account created')
 }
 
-if(message.content.startsWith(prefix + 'balance' || prefix + 'bal' )){
+if(message.content.startsWith(prefix + 'balance') || message.content.startsWith(prefix + 'bal')){
  var user = message.mentions.users.first()
  if(!user) {
 	 user = message.author
