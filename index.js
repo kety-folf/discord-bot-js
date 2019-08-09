@@ -17,6 +17,7 @@ client.on("ready", () => {// when bot starts
     client.user.setActivity(`with a very cute Folf | prefix: ${config.prefix}`);
 client.user.setStatus("online");
 });
+
 client.on('message', async message => {//when bot sees a message
 	var prefix =  config.prefix;//set up prefix
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -74,6 +75,7 @@ client.on('message', async message => {//when bot sees a message
 		.setImage(img)
 		message.channel.send(embed)
 	};
+	
     if (message.content.startsWith(prefix + "help")) {// help command
         message.channel.send({
             embed: {
@@ -86,12 +88,16 @@ client.on('message', async message => {//when bot sees a message
                 description: "Commands",
                 fields: [{
                     name: "Info",
-                    value: "Info About the Bot and server"
+                    value: "Info About the Bot and server. this command sends lots of embeds about the system"
                 },
                 {
                     name: "leave",
                     value: "stops music and leaves VC"
-                },
+				},
+				{
+					name: 'ping',
+					value: 'sends bots ping'
+				},
                 {
 					name: "search",
 					value: "searches youtube"
@@ -185,10 +191,19 @@ else{
 	embedErr('Error', 'not nsfw channel')
 }
 	}
-
+	if(message.content.startsWith(prefix + "ping")){
+		message.channel.startTyping();
+		var m = await message.channel.send("Checking Ping..");
+		m.edit("Ping Calculated!");
+		m.delete().catch(noerr=>{});
+		message.channel.send(`If you want to know my ping, ${message.author.username}...\nBot Ping: ${(m.createdTimestamp - message.createdTimestamp)}ms`);
+		 message.channel.stopTyping();
+		 return;
+	}
 	if (message.content.startsWith(prefix + "eval")) {//eval command
 		if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
 		try {
+			message.channel.startTyping();
 		  const code = arg.substring(4).trim(" ");
 		  let evaled = eval(code);
 	 
@@ -200,9 +215,10 @@ else{
 		.addField('IN', clean(code))
 		.addField('OUT', clean(evaled))
 		message.channel.send(embed)
+		message.channel.stopTyping();
 		} catch (err) {
 		  message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-		  
+		  message.channel.stopTyping();
 		}
 	  }
 
@@ -211,7 +227,7 @@ else{
         embedtxt('Info', "bot was made by Kety_the_folf#0001 coded in JS with discord.js");
         si.cpu()
     .then(data => {
-        embedtxt('CPU Information:', '- manufucturer: ' + data.manufacturer + ' - brand: ' + data.brand +' - speed: ' + data.speed + ' - cores: ' + data.cores + ' - physical cores: ' + data.physicalCores);
+        embedtxt('CPU Information:', '- manufucturer: ' + data.manufacturer + ' - brand: ' + data.brand + ' - cores: ' + data.cores + ' - physical cores: ' + data.physicalCores);
          
     })
     .catch(error => embedErr('error', error));
@@ -224,25 +240,7 @@ else{
         '  - total: ' + data1.total);
         
     })
-	
-    .catch(error =>    embedErr('error', error));
-	si.cpuCurrentspeed()
-	.then(data2 => {
-        embedtxt('CPU Speed Information:',
-        '  - avg: ' + data2.avg +
-        '  - min: ' + data2.min +
-        '  - max: ' + data2.max);
-        
-    })
-	
-    .catch(error =>    embedErr('error', error));
-	si.cpuTemperature()
-	.then(temp => {
-	embedtxt('CPU temp:', temp.main);
-	})
-	
-	
-	
+
     .catch(error =>    embedErr('error', error));
     
 	si.osInfo()
@@ -278,17 +276,17 @@ else{
         });
     }
     if (message.content.startsWith(prefix + "play")) {//play command
-		
+		let URL = arg.substring(4)
 		
        if (!message.member.voiceChannel) embedErr("Error", 'you must be in a voice channel.');
        if (message.guild.me.voiceChannel) return embedErr('Error', 'I am already In a voice channel.');
-        if (!args[0]) return embedErr('Error', 'please input a url following the command.');
-        let validate = await ytdl.validateURL(args[0]);
+        if (!URL) return embedErr('Error', 'please input a url following the command.');
+        let validate = await ytdl.validateURL(URL);
         if (!validate) return embedErr('Error', "input a **valid** url following the command");
        embedtxt("Info","downloading/geting info for song/video")
-        let info = await ytdl.getInfo(args[0]);
+        let info = await ytdl.getInfo(URL);
         let connection = await message.member.voiceChannel.join();
-       let dispatcher = await connection.playStream(ytdl(args[0], { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
+       let dispatcher = await connection.playStream(ytdl(URL, { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
 embedtxt('Music', `Now Playing: ${info.title}` );
        
 	
@@ -343,14 +341,19 @@ embedtxt('Music', `Now Playing: ${info.title}` );
 			return;
 		}
 	}
-	if (message.content.startsWith(prefix + 'setupAccount')){
+	if (message.content.startsWith(prefix + 'setupdb')){
 		  if (message.author.id == ("263443630767734784")) {
-			  var user = message.mentions.users.first()
- if(!user) {
-	 user = message.author
+			  
+	var u		
+	
+ for(u in client.users.array()){
+	var User = client.users.array()[u];
+	 db.set(`${User.id}.bal`, 400)
+	console.log(User.username)
  }
- db.set(`${user.id}.bal`, 300)
-  embedtxt('bank', 'account created')
+ 
+ embedtxt('database', 'done adding users')
+			
 	}
 	}
 		if (message.content.startsWith(prefix + "pfp")){// pfp command
@@ -372,7 +375,7 @@ if (message.content.startsWith(prefix + "say")){// say command
   message.channel.send(term);
    return;
 }
-if (message.content.startsWith(prefix + 'commandAdd')){// command suguestion comman
+if (message.content.startsWith(prefix + 'commandAdd')){// command suguestion command
 	var data = arg.substring(3);
 
 fs.appendFile("C:/Users/Administrator/Desktop/discord-bot-js/data/commands-to-add.txt",`\r\n ${arg.substring(10)}\r\n`, (err) => {
@@ -424,14 +427,14 @@ if (message.content.startsWith(prefix + 'slots')){//slots command because if you
 
 if(message.content.startsWith(prefix + 'coinFlip' )){//flip a coin command
 	var bal = db.get(`${message.author.id}.bal`);
-	
+	var win1 =  5*Math.floor(math.random()*20)
 	var flip = arg.substring(8);
 	db.subtract(`${message.author.id}.bal`, 5)
 	flipvalue = Math.floor(Math.random()*2);
 	if (!flip) return embedtxt('error', 'you must pick heads or tails');
 	if (flip === ' heads' && flipvalue === 0){
-		db.add(`${message.author.id}.bal`, bal*.5);
-		embedtxt('heads',`you won ${bal*.5}`);
+		db.add(`${message.author.id}.bal`, win1);
+		embedtxt('heads',`you won ${win1}`);
 	}
 	if (flip === ' heads' && flipvalue === 1){
 	embedtxt('tails ', 'you lost')	;
