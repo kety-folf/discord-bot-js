@@ -9,7 +9,7 @@ const Discord = require("discord.js");
 const si = require('systeminformation')
 const client = new Discord.Client; //create client
 const ytdl = require('ytdl-core');
-const ffmpeg = require("ffmpeg")
+const ffmpeg = require("ffmpeg");
 const search = require('yt-search');
 
 client.on("ready", () => {// when bot starts 
@@ -29,7 +29,8 @@ client.on('message', async message => {//when bot sees a message
     if (message.content.startsWith(prefix + "code")) {//code command for link to git hub page
         
 		embedlink('GitHub', 'if you want to  make my code better', 'https://github.com/kety-folf/discord-bot-js')
-    }
+	}
+	
    if (message.content.startsWith(prefix + "leave")) {
         if (!message.member.voiceChannel) return embedErr('Error', 'you must be in a voice channel.');
         if (!message.guild.me.voiceChannel) return embedErr('Error', 'bot is not in a VC.');
@@ -427,7 +428,7 @@ if (message.content.startsWith(prefix + 'slots')){//slots command because if you
 
 if(message.content.startsWith(prefix + 'coinFlip' )){//flip a coin command
 	var bal = db.get(`${message.author.id}.bal`);
-	var win1 =  5*Math.floor(math.random()*20)
+	var win1 =  5*Math.floor(Math.random()*20)
 	var flip = arg.substring(8);
 	db.subtract(`${message.author.id}.bal`, 5)
 	flipvalue = Math.floor(Math.random()*2);
@@ -440,8 +441,8 @@ if(message.content.startsWith(prefix + 'coinFlip' )){//flip a coin command
 	embedtxt('tails ', 'you lost')	;
 }
 if (flip == ' tails' && flipvalue === 1){
-	db.add(`${message.author.id}.bal`, bal*.5);
-		embedtxt(' tails',`you won ${bal*.5}`);
+	db.add(`${message.author.id}.bal`, win1);
+		embedtxt(' tails',`you won ${win1}`);
 	}
 	if (flip === ' tails' && flipvalue === 0){
 	embedtxt('heads ', 'you lost');
