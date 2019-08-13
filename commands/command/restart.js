@@ -18,5 +18,5 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     usage: '',
     category: 'misc',
     accessableby: 'dev',
-   aliases: ["r", "reboot","reload"]
+   aliases: ["r", "reboot"]
   };

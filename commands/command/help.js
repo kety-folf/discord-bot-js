@@ -87,7 +87,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   },
   {
     name: 'dev commands',
-    value: 'eval, restart, setupdb'
+    value: 'eval, restart, setupdb, reload'
 
   },
   {

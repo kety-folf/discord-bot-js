@@ -9,10 +9,13 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
      let validate = await ytdl.validateURL(URL);
      if (!validate) return embedErr('Error', "input a **valid** url following the command");
     embedtxt("Info","downloading/geting info for song/video")
-     let info = await ytdl.getInfo(URL);
+    
      let connection = await message.member.voiceChannel.join();
     let dispatcher = await connection.playStream(ytdl(URL, { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
-embedtxt('Music', `Now Playing: ${info.title}` );
+    ytdl.getInfo(URL, function(err, info) {
+      embedtxt('Music', `Now Playing: ${info.title}`);
+});
+
     
  
      return;
@@ -27,5 +30,5 @@ embedtxt('Music', `Now Playing: ${info.title}` );
     usage: '<youtube url>',
     category: 'music',
     accessableby: 'members',
-   aliases: ['join', "ytplay"]
+   aliases: ['join', "ytplay", 'p']
   };
