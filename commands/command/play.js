@@ -12,15 +12,10 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     
      let connection = await message.member.voiceChannel.join();
     let dispatcher = await connection.playStream(ytdl(URL, { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
-    ytdl.getInfo(URL, function(err, info) {
-      embedtxt('Music', `Now Playing: ${info.title}`);
-});
-
-    
- 
-     return;
    
-  
+      embedtxt('Music', `Now Playing: ${URL}`);
+   
+     return;
   };
   
  

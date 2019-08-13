@@ -1,3 +1,4 @@
+const { RichEmbed } = require('discord.js');
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
 
     // List of timezones and locations to be used
@@ -30,7 +31,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     }
 
     // Send message to the channel in which the command was used
-    let embed = new Discord.RichEmbed()
+    let embed = new RichEmbed()
     .setTitle("Time")
     .setDescription(timeStr)
     message.channel.send(embed)

@@ -67,7 +67,7 @@ folf.on('message', async message => {
 		message.channel.send(embed)
 	};
   
-  if(message.author.folf || message.channel.type !== 'text') return;
+  if(message.author.bot || message.channel.type !== 'text') return;
 
   const args = message.content.slice(folf.prefix.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
