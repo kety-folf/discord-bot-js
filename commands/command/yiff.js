@@ -1,12 +1,15 @@
 const FurryBotAPI = require("furrybotapi");
  
-const fb = new FurryBotAPI("kety-folf's-bot/2.0.3");
+const fb = new FurryBotAPI("kety-folf's-bot/ pre-1.10.9");
 
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
-  
-   
+  let type = message.content.substring(5).trim(' ')
+ 
+   if (!type) {
+     type = 'gay'
+  }
     if (message.channel.nsfw){
-      fb.apiRequest("furry", false, "yiff/gay", false).then(res => embedimg('yiff','',res.imageURL));
+      fb.apiRequest("furry", false, `yiff/${type}`, false).then(res => embedimg('yiff','',res.imageURL));
 	
 }
 else{
@@ -17,8 +20,8 @@ else{
  
   module.exports.help = {
     name: 'yiff',
-    description: 'sends yiff to the channel',
-    usage: '',
+    description: 'sends yiff to the channel ',
+    usage: '[gay | straight | dickgirl | lesbian]',
     category: 'NSFW',
     accessableby: 'members',
     aliases: []
