@@ -68,8 +68,8 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     value: "boop a user"
   },
   {
-    name: "e621",
-    value: "gets a image from e621 (must be in NSFW channel)"
+    name: "yiff",
+    value: "sends yiff to the chat (must be in NSFW channel)"
     
   },
   
