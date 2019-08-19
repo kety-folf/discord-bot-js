@@ -1,8 +1,11 @@
 const { RichEmbed } = require('discord.js');
 const  { stripIndents }  = require('common-tags');
 const  { readdir }  = require('fs');
+const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
+  db.add('count.help',1)
   const embed = new RichEmbed()
+ 
     .setColor()
     .setAuthor(`${message.guild.me.displayName} Help`, message.guild.iconURL)
     .setThumbnail(folf.user.displayAvatarURL);
@@ -24,6 +27,14 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
           {
               name: "leave",
               value: "stops music and leaves VC"
+            },
+            {
+              name: 'blep',
+              value: 'I dont know what to put here'
+            },
+            {
+             name: 'fursuit',
+             value:'sends a picture of a fursuit'
             },
             {
              name: 'ping',

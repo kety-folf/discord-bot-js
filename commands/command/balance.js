@@ -1,6 +1,7 @@
 const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
     var user = message.mentions.users.first()
+    if(message.author.id !== "263443630767734784") db.add(`count.bal`,1)
     if(!user) {
         user = message.author
     }

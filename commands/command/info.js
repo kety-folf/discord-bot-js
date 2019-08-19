@@ -1,5 +1,7 @@
 const si = require('systeminformation')
+const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
+    if(message.author.id !== "263443630767734784") db.add('count.info',1);
     embedtxt('Info', "bot was made by Kety_the_folf#0001 coded in JS with discord.js");
     si.cpu()
 .then(data => {

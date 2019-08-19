@@ -1,8 +1,10 @@
-module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
-    if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
+module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, clean) => {
+    const db = require('quick.db')
+  if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
+    db.add(`count.eval`,1)
     try {
         message.channel.startTyping();
-      const code = arg.substring(4).trim(" ");
+      const code = message.substring(4).trim(" ");
       let evaled = eval(code);
  
       if (typeof evaled !== "string")
@@ -10,12 +12,12 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
         let embed = new Discord.RichEmbed()//embed for eval command
     .setColor('#0099ff')
     .setTitle('eval')
-    .addField('IN', clean(code))
-    .addField('OUT', clean(evaled))
+    .addField('IN', code)
+    .addField('OUT', evaled)
     message.channel.send(embed)
     message.channel.stopTyping();
     } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+      message.channel.send(`\`ERROR\` \`\`\`xl\n${err}\n\`\`\``);
       message.channel.stopTyping();
     }
    

@@ -1,5 +1,6 @@
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
-
+ const db = require('quick.db')
+  if(message.author.id !== "263443630767734784") db.add(`count.boop`,1)
     var user1 = message.mentions.users.first();
     var user2 = message.mentions.users.last();
     if (!user1) return embedtxt('Error', "@ a user you want to boop");

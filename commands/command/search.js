@@ -1,7 +1,8 @@
 const ytdl = require('ytdl-core');
 const search = require('yt-search');
+const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg) => {
-
+  if(message.author.id !== "263443630767734784") db.add('count.search',1)
     let term = arg;//get text after command
     search(`${term}`, function (err, r) {// search youtube
         if (err) return embedErr("Error", err);

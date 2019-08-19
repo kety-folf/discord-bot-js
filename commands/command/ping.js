@@ -1,4 +1,6 @@
+const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
+  if(message.author.id !== "263443630767734784") db.add('count.ping',1)
     message.channel.startTyping();
     var m = await message.channel.send("Checking Ping..");
     m.edit("Ping Calculated!");

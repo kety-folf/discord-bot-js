@@ -74,7 +74,7 @@ folf.on('message', async message => {
 
   if(!message.content.startsWith(folf.prefix)) return;
   const commandfile = folf.commands.get(cmd) || folf.commands.get(folf.aliases.get(cmd));
-  if(commandfile) commandfile.run(folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg);
+  if(commandfile) commandfile.run(folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg, clean);
 
 });
 
