@@ -11,7 +11,6 @@ and put in the following
 {
 "token":"Your Discord private key",(the one for bots)
 "prefix":"~",(or any prefix you want it to be)
-"e621Key": "your e621 api key"(not needed unless you want it)
 }
 ```
 then run the bat file
