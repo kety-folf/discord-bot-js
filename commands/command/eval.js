@@ -1,15 +1,16 @@
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, clean) => {
-    const db = require('quick.db')
+  const { RichEmbed } = require('discord.js');
+  const db = require('quick.db')
   if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
     db.add(`count.eval`,1)
     try {
         message.channel.startTyping();
-      const code = message.substring(4).trim(" ");
+      const code = args.join(" ");
       let evaled = eval(code);
  
       if (typeof evaled !== "string")
         evaled = require("util").inspect(evaled);
-        let embed = new Discord.RichEmbed()//embed for eval command
+        let embed = new RichEmbed()//embed for eval command
     .setColor('#0099ff')
     .setTitle('eval')
     .addField('IN', code)
