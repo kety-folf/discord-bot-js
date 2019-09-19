@@ -1,7 +1,10 @@
 const db = require ('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg) => {
-
+user = message.author
 var bal = db.get(`${message.author.id}.bal`);
+if(bal==null || bal==undefined){
+  db.set(`${user.id}.bal`,400)
+}
 if(message.author.id !== "263443630767734784") db.add(`count.coinflip`,1)
 if (bal < 5) embedErr('error', 'you dont have any money');
 var win1 =  5*Math.floor(Math.random()*20)
@@ -13,6 +16,7 @@ if (flip === ' heads' && flipvalue === 0){
     db.add(`${message.author.id}.bal`, win1);
     embedtxt('heads',`you won ${win1}`);
 }
+embedtxt("debug ", `this is a debug message because this command is broken flipvalue = ${flipvalue}`)
 if (flip === ' heads' && flipvalue === 1){
 embedtxt('tails ', 'you lost')	;
 }

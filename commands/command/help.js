@@ -142,7 +142,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
 module.exports.help = {
   name: 'help',
   description: 'Displays all commands that the bot has.',
-  usage: 'help|h|hlp|commands',
+  usage: '<command Name>',
   category: 'miscellaneous',
   accessableby: 'Members',
   aliases: ['h', 'hlp', 'commands']

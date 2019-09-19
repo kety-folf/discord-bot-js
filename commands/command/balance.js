@@ -5,9 +5,13 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     if(!user) {
         user = message.author
     }
-   var bal = db.get(`${user.id}.bal`)
-    embedtxt('balance',`${user} $${bal}`)
     
+   var bal = db.get(`${user.id}.bal`);
+   if(bal==null || bal==undefined){
+    db.set(`${user.id}.bal`,400)
+  }
+    embedtxt('balance',`${user} $${bal}`);
+   
   
   };
   
