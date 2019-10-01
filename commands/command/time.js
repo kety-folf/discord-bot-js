@@ -11,7 +11,8 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
         ["US Pacific Time", "America/Los_Angeles"],
         ["Central European Time", "Europe/Berlin"],
         ["Hong Kong/Philippines/Western Australia Time", "Asia/Hong_Kong"],
-        ["New Zealand Time", "Pacific/Auckland"]
+        ["New Zealand Time", "Pacific/Auckland"],
+        ["Chile Time", "America/Santiago"]
     ];
 
     // List of settings for time/date formatting

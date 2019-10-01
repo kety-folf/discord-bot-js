@@ -1,6 +1,6 @@
 const FurryBotAPI = require("furrybotapi");
  const db = require('quick.db')
-const fb = new FurryBotAPI("kety-folf's-bot/ pre-1.10.9");
+const fb = new FurryBotAPI("kety-folf's-bot/ 1.11.0");
 
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
   if(message.author.id !== "263443630767734784") db.add('count.yiff', 1)
