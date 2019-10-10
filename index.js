@@ -1,6 +1,6 @@
 ﻿
 const { Client, Collection, RichEmbed } = require('discord.js');
-const { readdirSync, readdir } = require('fs');
+const { readdirSync } = require('fs');
 const { token, prefix, owners } = require('./config.json');
 
 const folf = new Client();

@@ -93,6 +93,14 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     value: 'play some slots '
   },
   {
+    name: 'furry',
+    value: 'sends some furry art'
+  },
+  {
+    name: '8ball',
+    value:'just a 8ball command'
+  },
+  {
     name: 'coinFlip',
     value: 'flip a coin for some money cost $5' 
   },

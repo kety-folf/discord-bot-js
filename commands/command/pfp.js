@@ -13,7 +13,7 @@ return;
  
   module.exports.help = {
     name: 'pfp',
-    description: 'sends profile pic of user',
+    description: 'sends profile pic of user mentioned',
     usage: '<@user you want the pfp for or leave blank for you>',
     category: 'misc',
     accessableby: 'members'
