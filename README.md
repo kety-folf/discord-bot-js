@@ -3,6 +3,10 @@ bot made by Kety_the_folf#0001 on discord
 if you want to run the bot you will need to run npm install (only tested on windows)
 
 ---
+# hosted on an aws server 
+bot invite: https://top.gg/bot/425138772221362176
+
+---
 
 # how to setup
 create a config.json
