@@ -8,7 +8,9 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   
    embedtxt('music', 'leaving VC.' )
     
-   
+  if (!message.member.voiceChannel) return message.channel.send('You have to be in a voice channel to stop the music!');
+  serverQueue.songs = [];
+  serverQueue.connection.dispatcher.end();
   };
   
  

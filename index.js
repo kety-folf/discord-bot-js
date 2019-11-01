@@ -1,13 +1,13 @@
 ﻿
 const { Client, Collection, RichEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { token, prefix, owners } = require('./config.json');
+const { token, prefix } = require('./config.json');
 
 const folf = new Client();
 folf.commands = new Collection();
 folf.aliases = new Collection();
 folf.prefix = prefix;
-folf.owners = owners;
+
 
 const load = dirs => {
 	const commands = readdirSync(`./commands/${dirs}/`).filter(d => d.endsWith('.js'));

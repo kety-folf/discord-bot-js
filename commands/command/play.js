@@ -2,7 +2,8 @@ const ytdl = require('ytdl-core');
 const ffmpeg = require("ffmpeg");
 const db = require('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg) => {
-    let URL = arg.substring(4)
+  
+
 		if(message.author.id !== "263443630767734784") db.add('count.play',1)
     if (!message.member.voiceChannel) embedErr("Error", 'you must be in a voice channel.');
     if (message.guild.me.voiceChannel) return embedErr('Error', 'I am already In a voice channel.');
@@ -15,7 +16,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
     let dispatcher = await connection.playStream(ytdl(URL, { filter: 'audioonly' })).on('end', () => message.guild.me.voiceChannel.leave());
    
       embedtxt('Music', `Now Playing: ${URL}`);
-   
+    let URL = arg.substring(4)
      return;
   };
   
