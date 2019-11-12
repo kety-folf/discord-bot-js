@@ -1,5 +1,5 @@
 const db = require('quick.db');
-module.exports.run = async (fol, message, args, embedErr,embedimg,embedlink,embedtxt) => {
+module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt) => {
   if(message.author.id !== "263443630767734784") db.add('count.pfp',1);
     var user = message.mentions.users.first() ;
     if(!user){

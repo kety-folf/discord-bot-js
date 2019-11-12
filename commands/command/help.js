@@ -39,37 +39,37 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
             {
              name: 'ping',
               value: 'sends bots ping'
-          },
-          {
-    name: "search",
-    value: "searches youtube"
-  },
+           },
+           {
+                name: "search",
+              value: "searches youtube"
+           },
          
           {
               name: "code",
               value: "code for this bot"
 
           },
-         {
+          {
               name: "play ",
              value: "plays music from youtube needs full url "
-         },
+          },
           {
               name: "time",
               value: "gets time in mutiple timeZones"
           },
-  {
-    name: "r",
-    value: "restarts the bot. (Kety_the_folf#0001 only)"
-  },
-  {
-    name: "pfp",
-    value: "gets the users profile pic"
-  },
-  {
-    name: "fox",
-    value: "gets a random image of a fox"
-  },
+          {
+              name: "r",
+              value: "restarts the bot. (Kety_the_folf#0001 only)"
+         },
+        {
+              name: "pfp",
+               value: "gets the users profile pic"
+         },
+           {
+               name: "fox",
+               value: "gets a random image of a fox"
+           },
   {
     name: "say",
     value: "says message following command"

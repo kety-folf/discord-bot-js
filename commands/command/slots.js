@@ -5,7 +5,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
 	var win = bet*Math.floor(Math.random()*10)
 	var bal = db.get(`${message.author.id}.bal`)
 	if(bal==null || bal==undefined){
-		db.set(`${user.id}.bal`,400)
+		db.set(`${message.author.id}.bal`,400)
 	  }
 	if(isNaN(bet)) return embedErr('Error', `${bet} is not a number, are you trying to brake something.`)
 	if(bet < 0) return embedErr('ERROR', 'Stop Trying To Get Unlimited Money. yes i know you would try to do this')
