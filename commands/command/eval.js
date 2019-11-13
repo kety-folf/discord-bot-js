@@ -1,6 +1,7 @@
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, clean) => {
   const { RichEmbed } = require('discord.js');
   const db = require('quick.db')
+  const coin = require ('coin-flipper');
   if(message.author.id !== "263443630767734784") return embedErr('Error', 'Bot owner only');
     db.add(`count.eval`,1)
     try {
