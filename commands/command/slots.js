@@ -15,7 +15,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
 	var num2 = Math.floor(Math.random()*5)
 	var num3 = Math.floor(Math.random()*5)
 	embedtxt('slots', `${num1}|${num2}|${num3}`)
-	if (num1 == num2 && num2 == num3 && num1 == num3){
+	if (num1 == num2 && num2 == num3){
 		db.add(`${message.author.id}.bal`, win)
 		embedtxt('slots', `you won ${win}`)
 	} 
