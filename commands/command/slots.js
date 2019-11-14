@@ -2,7 +2,7 @@ const db = require ('quick.db')
 module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg)=> {
 	if(message.author.id !== "263443630767734784") db.add('count.slots',1)
     var bet = arg.substring(5);
-	var win = bet*Math.floor(Math.random()*10)
+	var win = bet*Math.floor(Math.random()* (10 - 2 + 1)) + 1
 	var bal = db.get(`${message.author.id}.bal`)
 	if(bal==null || bal==undefined){
 		db.set(`${message.author.id}.bal`,400)
