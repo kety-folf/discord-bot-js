@@ -1,7 +1,6 @@
-module.exports.run = async (ctx) =>
-{
+module.exports.run = async (ctx) => {
   return ctx.sendEmbed('Fox',
-      'Powered by randomfox.ca',
+      'Powered by randomfox.ca', "",
       `https://randomfox.ca/images/${ctx.utils.getRandNum(123)}.jpg`);  
 };
   
@@ -11,5 +10,4 @@ module.exports.info = {
   usage: '',
   category: 'fun',
   accessableby: 'members'
- // aliases: []
 };
