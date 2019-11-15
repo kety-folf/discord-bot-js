@@ -22,7 +22,11 @@ class Account
 	{
 		this.userId = userId;
 		this.balance = balance; // .bal
-		this.updated = false
+		this.updated = false;
+		this.endpoints = 
+		{
+			bal: ".bal"
+		};
 	}
 
 	take(amount)
@@ -49,11 +53,6 @@ class Account
 		{
 			db.set(userId + this.endpoints.bal, this.balance);
 		}
-	}
-
-	endpoints = 
-	{
-		bal: ".bal"
 	}
 }
 
