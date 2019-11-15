@@ -1,12 +1,13 @@
 module.exports.run = async (ctx) => {
     const flip = Math.round(Math.random() * 1) == 1 ? "heads" : "tails";
     const bet = 5;
-    const guess = ctx.args[0];
     
-    if (!guess)
+    if (!ctx.args[0])
         return ctx.error("error", "sorry you need to speak up there bucko");
     
-    if (guess.toLowerCase() != "heads" || guess.toLowerCase() != "tails")
+    const guess = ctx.args[0].toLowerCase();
+    
+    if (guess != "heads" || guess != "tails")
         return ctx.error("error", "heads... or tails? you cant just be typing iajgejuhbjmfrt");
     
     var account = ctx.getAccount(ctx.user.id);
@@ -20,7 +21,7 @@ module.exports.run = async (ctx) => {
     const flipTitle = `the coin landed on ${flip}`;
     var flipResult = `you lost \$${bet}`;
     
-    if (flip.toLowerCase() == guess) {
+    if (flip == guess) {
         account.give(reward);
         flipResult = `you won \$${reward}`;
     }
