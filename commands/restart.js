@@ -1,5 +1,4 @@
-module.exports.run = async (ctx) =>
-{
+module.exports.run = async (ctx) => {
     ctx.folf.user.setActivity(`RESTARTING`);
     process.exit();
 };
