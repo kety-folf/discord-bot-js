@@ -1,9 +1,7 @@
-module.exports.run = async (ctx) =>
-{
-    try
-    {
+module.exports.run = async (ctx) => {
+    try {
         ctx.channel.startTyping();
-        const code = args.join(" ");
+        const code = ctx.args.join(" ");
         let script = eval(code);
  
         if (typeof(script) !== "string")
@@ -14,7 +12,7 @@ module.exports.run = async (ctx) =>
           .addField('OUT', evaled);
 
         ctx.channel.stopTyping();
-        return ctx.channel.sendEmbed(embed);
+        return ctx.channel.send(embed);
     }
     catch (err)
     {
@@ -29,5 +27,4 @@ module.exports.info = {
   usage: ' <code>',
   category: 'misc',
   accessableby: 'dev'
- // aliases: []
 };
