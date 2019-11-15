@@ -1,32 +1,30 @@
 const system = require('systeminformation');
 
-module.exports.run = async (ctx) =>
-{
-    try 
-    {
+module.exports.run = async (ctx) => {
+    try {
         const cpuData = await system.cpu();
         const memData = await system.mem();
         const osData = await system.osInfo();
 
         let embed = ctx.utils.createEmbed("Info", "bot was made by Kety_the_folf#0001 coded in JS with discord.js")
         .addField('CPU Information:',
-            '- manufucturer: ' + cpuData.manufacturer +
-            ' - brand: ' + cpuData.brand +
-            ' - cores: ' + cpuData.cores +
-            ' - physical cores: ' + cpuData.physicalCores)
+            ' - manufucturer: ' + cpuData.manufacturer +
+            '\n - brand: ' + cpuData.brand +
+            '\n - cores: ' + cpuData.cores +
+            '\n - physical cores: ' + cpuData.physicalCores)
 
         .addField("RAM Information:",
             '  - free: ' + memData.free +
-            '  - used: ' + memData.used +
-            '  - total: ' + memData.total)
+            '\n  - used: ' + memData.used +
+            '\n  - total: ' + memData.total)
 
         .addField("OS Information:",
             ' - platform: ' + osData.platform +
-            ' - release: ' + osData.release +
-            ' -build: ' + osData.build +
-            ' - distro: ' + osData.distro);
+            '\n - release: ' + osData.release +
+            '\n - build: ' + osData.build +
+            '\n - distro: ' + osData.distro);
 
-        return ctx.channel.sendEmbed(embed);
+        return ctx.channel.send(embed);
     }
     catch(error)
     {
