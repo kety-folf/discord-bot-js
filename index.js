@@ -15,6 +15,17 @@ folf.commands = new Collection();
 folf.aliases = new Collection();
 folf.prefix = prefix;
 
+// base constructor for a server account
+class Server
+{
+	constructor(serverId)
+	{
+		this.serverId = serverId;
+		this.songs = [];
+		this.voiceClient = null;
+	}
+}
+
 // base constructor for an account
 class Account
 {
@@ -246,6 +257,11 @@ folf.on('message', async message =>
 				balance = db.get(balanceId);
 
 				return new Account(userId, balance);
+			},
+			getServer: function(serverId)
+			{
+				// Set up server stuff here.
+				return new Server(serverId);
 			},
 			sendEmbed: function(title = "", description = "", url = "", imageUrl = "")
 			{
