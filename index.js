@@ -144,6 +144,23 @@ folf.on('message', async message =>
 			else
 				return text;
 		},
+		
+		toPascalCase: function(text)
+		{
+			if (text)
+			{
+				var result = text.slice(0, 1).toUpperCase();
+				
+				if (text.Length > 1)
+				{
+					result += text.slice(1);
+				}
+			
+				return result;
+			}
+		
+			return text;
+		},
 
 		getRandNum: function(max, min = 0)
 		{
@@ -185,7 +202,7 @@ folf.on('message', async message =>
 			embed.setAuthor(user.username, user.avatarURL);
 			
 			return embed;
-		}
+		},
 		
 		reloadCommand: function(commandName)
 		{
