@@ -4,14 +4,9 @@ module.exports.run = async (ctx) =>
 {
     try 
     {
-        var cpuData;
-        var memData;
-        var osData;
-        
-        // should make asynchronous now
-        system.cpu().then(result => cpuData = result);
-        system.mem().then(result => memData = result);
-        system.osInfo().then(result => osInfo = result);
+        const cpuData = await system.cpu();
+        const memData = await system.mem();
+        const osData = await system.osInfo();
 
         let embed = ctx.utils.createEmbed("Info", "bot was made by Kety_the_folf#0001 coded in JS with discord.js")
         .addField('CPU Information:',
