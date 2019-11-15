@@ -3,7 +3,7 @@ module.exports.run = async (ctx) =>
 	if (ctx.args.length < 1) // 1 = required arg count
 		return ctx.error("error", "wheres the money, pal? all i see is NULL");
 	
-	var bet = ctx.args[0];
+	const bet = ctx.args[0];
 	var account = ctx.getAccount(ctx.user.id);
 		
 	if(isNaN(bet))
@@ -18,7 +18,7 @@ module.exports.run = async (ctx) =>
 		return ctx.error("error",
 			`bet ${bet} > bal ${account.balance}`);
 
-	var reward = bet * ctx.utils.getRandNum(10, 2);
+	const reward = bet * ctx.utils.getRandNum(10, 2);
 
 	account.take(bet);
 	
@@ -36,16 +36,11 @@ module.exports.run = async (ctx) =>
 	if (won)
 	{
 		slotDisplay = `you won ${reward}`;
-	}
-
-	ctx.sendEmbed('slots', slotDisplay);
-
-	if (num1 == num2 && num2 == num3)
-	{
 		account.give(reward);
 	}
 
 	account.sync();
+	return ctx.sendEmbed('slots', slotDisplay);
 };
 
 // IDEA: create args in info, to determine if the correct amount of arguments were sent?
