@@ -1,6 +1,6 @@
 module.exports.run = async (ctx) =>
 {
-	if (args.length < 1) // 1 = required arg count
+	if (ctx.args.length < 1) // 1 = required arg count
 		return ctx.error("error", "wheres the money, pal? all i see is NULL");
 	
 	var bet = ctx.args[0];
