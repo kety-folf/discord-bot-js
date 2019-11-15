@@ -1,11 +1,11 @@
 module.exports.run = async (ctx) =>
 {
-    let question = ctx.message.content.slice(ctx.folf.prefix.length).trim().substring(5);
+    const question = ctx.args.join(" ");
 
     if(!question)
       return ctx.error('error', 'no question given');
 
-    var replies =
+    const replies =
     [
       "It is certain",
       "It is decidedly so",
