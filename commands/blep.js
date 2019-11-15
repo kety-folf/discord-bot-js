@@ -3,7 +3,7 @@ const fb = new FurryBotAPI("kety-folf's-bot/ pre-1.10.9");
 
 module.exports.run = async (ctx) => {
     fb.apiRequest("animals", true, "blep", false)
-        .then(result => ctx.sendEmbed("blep", "", result.imageURL)); 
+        .then(result => ctx.sendEmbed("blep", "", "", result.imageURL)); 
 };
 
 module.exports.info = {
