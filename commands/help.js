@@ -40,10 +40,10 @@ module.exports.run = async (ctx) =>
     
     command = command.info;
 
-    embed.setDescription(stripIndents`The bot prefix is: \`${ctx.folf.prefix}\`\n
+    embed.setDescription(stripIndents`The bot prefix is: \`${prefix}\`\n
     ❯ Command: ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
     ❯ Description: ${command.description || 'No Description'}
-    ❯ Usage: ${command.usage ? `\`${ctx.folf.prefix}${command.name} ${command.usage}\`` : 'No Usage'}
+    ❯ Usage: ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : 'No Usage'}
     ❯ Accessable by: ${command.accessableby || 'Members'}
     ❯ Aliases: ${command.aliases ? command.aliases.join(', ') : 'None'}`);
 
