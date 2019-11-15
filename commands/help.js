@@ -9,11 +9,9 @@ module.exports.run = async (ctx) =>
     .setAuthor(`${ctx.guild.me.displayName} Help`, ctx.guild.iconURL)
     .setThumbnail(ctx.folf.user.displayAvatarURL);
 
-  
-
-  // For next time; my brain is diedid
   if (!commandName)
   {
+      ctx.utils.setAuthor(embed, ctx.folf.user);
       embed.setAuthor(ctx.folf.user.username, ctx.folf.user.avatarURL);
 
       ctx.folf.commands.forEach(c =>
@@ -31,7 +29,7 @@ module.exports.run = async (ctx) =>
   else
   {
     embed.setDescription(`commands for ${ctx.folf.user.tag}\nThe prefix is: \`${prefix}\``);
-    embed.setFooter(`${ctx.folf.user.username} | Total Commands: ${ctx.folf.commands.size}`, ctx.folf.user.displayAvatarURL);
+    embed.setFooter(`${ctx.folf.user.username} | Total Commands: ${ctx.folf.commands.size}`, ctx.folf.user.avatarURL);
 
     let command = ctx.folf.commands.get(ctx.folf.aliases.get(commandName) || commandName);
     
@@ -51,6 +49,8 @@ module.exports.run = async (ctx) =>
   }
 };
 
+// command.run(ctx, (possible class that stores the corresponding command arguments in a collection?)
+// args: [ { name: "commandName", pos: 0, optional: "false" ]
 module.exports.info = {
   name: 'help',
   description: 'Displays all commands that the bot has.',
