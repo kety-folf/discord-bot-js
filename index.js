@@ -174,6 +174,18 @@ folf.on('message', async message =>
 
 			return embed;
 		},
+		// creates the author reference for a user.
+		setAuthor: function(embed, user = null)
+		{
+			if (!user)
+			{
+				user = folf.user;
+			}
+			
+			embed.setAuthor(user.username, user.avatarURL);
+			
+			return embed;
+		}
 		
 		reloadCommand: function(commandName)
 		{
