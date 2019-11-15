@@ -1,5 +1,4 @@
-module.exports.run = async (ctx) =>
-{
+module.exports.run = async (ctx) => {
     if (!ctx.message.member.voiceChannel)
         return ctx.error('Error', 'you must be in a voice channel.');
 
@@ -10,15 +9,16 @@ module.exports.run = async (ctx) =>
         return ctx.error('Error', 'you are not in the same VC as the bot.');
 
     ctx.guild.me.voiceChannel.leave();
-  
     ctx.sendEmbed('music', 'leaving VC.');
   
     if (!ctx.message.member.voiceChannel)
         return ctx.channel.send('You have to be in a voice channel to stop the music!');
   
-    // not sure where this leads...?
-    serverQueue.songs = [];
-    serverQueue.connection.dispatcher.end();
+    var server = ctx.getServer(ctx.guild.id);
+    server.songs = [];
+    
+    if (server.voiceClient)
+        server.voiceClient.dispatcher.end();
 };
  
 module.exports.info = {
