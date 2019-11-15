@@ -3,13 +3,12 @@ const  { stripIndents }  = require('common-tags'); // not sure what this does.
 module.exports.run = async (ctx) =>
 {
   const prefix = ctx.folf.prefix;
-  const commandName = ctx.args[0].toLowerCase();
 
   let embed = ctx.utils.createEmbed(`Bot prefix is ${prefix}`, "Commands")
     .setAuthor(`${ctx.guild.me.displayName} Help`, ctx.guild.iconURL)
     .setThumbnail(ctx.folf.user.displayAvatarURL);
 
-  if (!commandName)
+  if (!ctx.args[0])
   {
       ctx.utils.setAuthor(embed, ctx.folf.user);
 
@@ -23,10 +22,11 @@ module.exports.run = async (ctx) =>
 
       embed.setTimestamp(new Date());
       embed.setFooter("©Kety_the_folf#0001", ctx.folf.user.avatarURL);
-      return ctx.channel.sendEmbed(embed);
+      return ctx.channel.send(embed);
   }
   else
   {
+    const commandName = ctx.args[0].toLowerCase();
     // commands for ${ctx.folf.user.tag}
     embed.setFooter(`${ctx.folf.user.username} | Total Commands: ${ctx.folf.commands.size}`, ctx.folf.user.avatarURL);
 
@@ -44,7 +44,7 @@ module.exports.run = async (ctx) =>
     ❯ Accessable by: ${command.accessableby || 'Members'}
     ❯ Aliases: ${command.aliases ? command.aliases.join(', ') : 'None'}`);
 
-    return ctx.channel.sendEmbed(embed);
+    return ctx.channel.send(embed);
   }
 };
 
