@@ -1,81 +1,287 @@
-﻿
-const { Client, Collection, RichEmbed } = require('discord.js');
-const { readdirSync } = require('fs');
-const { token, prefix } = require('./config.json');
+﻿// prerequisites
+const { Client, Collection, RichEmbed, Util } = require("discord.js");
+const { readdirSync } = require("fs");
+const { token, prefix } = require("./config.json");
+const db = require("quick.db");
+const DEV_ID = "263443630767734784";
+
+if (prefix.length == 0)
+{
+	prefix = "~"; // Default prefix.
+}
 
 const folf = new Client();
 folf.commands = new Collection();
 folf.aliases = new Collection();
 folf.prefix = prefix;
 
-
-const load = dirs => {
-	const commands = readdirSync(`./commands/${dirs}/`).filter(d => d.endsWith('.js'));
-	for (const file of commands) {
-	  const pull = require(`./commands/${dirs}/${file}`);
-	  folf.commands.set(pull.help.name, pull);
-	  if (pull.help.aliases) pull.help.aliases.forEach(a => folf.aliases.set(a, pull.help.name));
+// base constructor for an account
+class Account
+{
+	constructor(userId, balance)
+	{
+		this.userId = userId;
+		this.balance = balance; // .bal
+		this.updated = false
 	}
-  };
-  const commandsDir = readdirSync('./commands/');
-  commandsDir.forEach(x => load(x));
 
-folf.on('ready', async () => {
+	take(amount)
+	{
+		if (typeof(amount) == "number")
+		{
+			this.balance -= amount;
+			this.updated = true;
+		}
+	}
 
-	console.log("Connected as " + folf.user.tag + " in "+ `${folf.guilds.size}` + " servers")
-   folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
-folf.user.setStatus("online");
+	give(amount)
+	{
+		if (typeof(amount == "number"))
+		{
+			this.balance += amount;
+			this.updated = true;
+		}
+	}
+	
+	sync()
+	{
+		if (this.updated)
+		{
+			db.set(userId + this.endpoints.bal, this.balance);
+		}
+	}
 
+	endpoints = 
+	{
+		bal: ".bal"
+	}
+}
+
+const commandPath = "./commands/";
+
+function getCommands(path)
+{
+	const commandFiles = readdirSync(path).filter(d => d.endsWith(".js"));
+
+	for (const file of commandFiles)
+	{
+		// grab the command location.
+		const commandSource = require(`${path}${file}`);
+		  
+		folf.commands.set(commandSource.info.name, commandSource);
+		  
+		// if there are any aliases set, append all aliases to the main command name.
+
+	  	if (commandSource.info.aliases)
+			commandSource.info.aliases.forEach(c => folf.aliases.set(c, commandSource.info.name));
+	}
+};
+
+function reloadCommand(commandName)
+{
+	const commandFiles = readdirSync(commandPath).filter(f => f.endsWith(".js"));
+
+	for (const file of commandFiles)
+	{
+		if (file == commandName)
+		{
+			try
+			{
+				const filePath = `${commandPath}${file}.js`;
+				delete require.cache[require.resolve(filePath)];
+				folf.commands.delete(commandName);
+
+				const commandSource = require(filePath);
+				folf.commands.set(commandName, commandSource);
+
+				if (commandSource.info.aliases)
+					commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+				
+				return true;
+			}
+			catch(error)
+			{
+				console.log(error);
+				return false;
+			}
+		}
+	}
+}
+
+// gets the commands at a specified directory.
+getCommands(commandPath);
+
+// when the bot is finished getting ready, do this:
+folf.on('ready', async () =>
+{
+	console.log(`Connected to Discord as ${folf.user.tag} across ${folf.guilds.size} servers.`);
+   	folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
+	folf.user.setStatus("online");
 });
 
-folf.on('message', async message => {
-	const arg = message.content.substring(1).trim(" ");
-	function embedErr(title, decrption){// embed function for errors
-		let embed = new RichEmbed()
-		.setColor('#f92e02')
-		.setTitle(title)
-		.setDescription(decrption)
-		message.channel.send(embed)
-	};
-	function clean(text) {
-		if (typeof(text) === "string")
-		  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-		else
-			return text;
-	  };
-	function embedtxt(title, decrption){// embed text
-		let embed = new RichEmbed()
-		.setColor('#0099ff')
-		.setTitle(title)
-		.setDescription(decrption)
-		message.channel.send(embed)
-	};
-	function embedlink(title, decrption, url){// embed url
-		let embed = new RichEmbed()
-		.setColor('#0099ff')
-		.setTitle(title)
-		.setDescription(decrption)
-		.setURL(url)
-		message.channel.send(embed)
-	};
-	function embedimg(title, decrption, img){ //embed image
-		let embed = new RichEmbed()
-		.setColor('#0099ff')
-		.setTitle(title)
-		.setDescription(decrption)
-		.setImage(img)
-		message.channel.send(embed)
-	};
-  
-  if(message.author.bot || message.channel.type !== 'text') return;
+// when a message is sent, do this:
+folf.on('message', async message =>
+{
+	const initialBalance = 400;
+	const errorColor = "#F92E02";
+	const embedColor = "#0099FF";
 
-  const args = message.content.slice(folf.prefix.length).trim().split(/ +/g);
-  const cmd = args.shift().toLowerCase();
+	const utils =
+	{
+		isType: function(obj, typeName)
+		{
+			return typeof(obj) === typeName;
+		},
 
-  if(!message.content.startsWith(folf.prefix)) return;
-  const commandfile = folf.commands.get(cmd) || folf.commands.get(folf.aliases.get(cmd));
-  if(commandfile) commandfile.run(folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg, clean);
+		escape: function(text)
+		{
+			const zeroWidthChar = String.fromCharCode(8203);
 
+			if (this.isType(text, "string"))
+				return text
+					.replace(/`/g, "`" + zeroWidthChar)
+					.replace(/@/g, "@" + zeroWidthChar);
+			else
+				return text;
+		},
+
+		getRandNum: function(max, min = 0)
+		{
+			var inclusive = 1;
+
+			if (min == 0)
+				inclusive = 0;
+
+			return Math.floor(Math.random() * (max - min + (inclusive * 1))) + (inclusive * 1);
+		},
+
+		// creates an embed, and still allows you to customize it.
+		createEmbed: function(title = "", description = "", url = "", imageUrl = "")
+		{
+			let embed = new RichEmbed().setColor(embedColor);
+
+			if (title.length > 0)
+				embed.setTitle(title);
+			
+			if (description.length > 0)
+				embed.setDescription(description);
+
+			if (url.length > 0)
+				embed.setURL(url);
+
+			if (imageUrl.length > 0)
+				embed.setImage(imageUrl);
+
+			return embed;
+		},
+		
+		reloadCommand: function(commandName)
+		{
+			return reloadCommand(commandName);
+		}
+	};
+
+	// Handle all of the possible parsing errors before moving forward
+	if(message.author.bot || message.channel.type !== "text") // must be in guild
+		return;
+
+	if(!message.content.startsWith(folf.prefix))
+  		return;
+
+	const args = message.content.slice(folf.prefix.length).trim().split(/ +/g);
+  	const commandName = args.shift().toLowerCase();
+
+	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
+	
+	if(command)
+	{
+		// a generic container that easily stores everything you need.
+		const ctx =
+		{
+			/*client*/folf: folf,
+			self: folf.user, // dont know if this takes up much space
+			message: message,
+			channel: message.channel,
+			guild: message.guild,
+			user: message.author,
+			args: args,
+			db: db,
+			utils: utils,
+			getAccount: function(userId)
+			{
+				var balanceId = `${userId}.bal`;
+				var balance = db.get(balanceId);
+				if (balance == null || balance == undefined)
+				{
+					db.set(balanceId, initialBalance);
+				}
+				balance = db.get(balanceId);
+
+				return new Account(userId, balance);
+			},
+			sendEmbed: function(title = "", description = "", url = "", imageUrl = "")
+			{
+				let embed = utils.createEmbed(title, description, url, imageUrl);
+				return message.channel.sendEmbed(embed);
+			},
+			error: function(title, description = "")
+			{
+				let embed = utils.createEmbed(title, description);
+				embed.setColor(errorColor);
+				return message.channel.sendEmbed(embed);
+			}
+		};
+
+		try
+		{
+			if (command.info.accessableby == 'dev')
+			{
+				if (message.author.id != DEV_ID)
+				{
+					ctx.error("Error", "you dont have perms to run this command ");
+					return;
+				}
+			}
+
+			command.run(ctx);
+			// db.add('count.fox',1)
+			// db.add('count.help',1)
+			// handle db increment here.
+			if (message.author.id !== DEV_ID)
+			{
+				// db.add('count.leave',1);
+				// db.add('count.play',1);
+				// db.add('count.info',1);
+				// db.add('count.pfp',1);
+				// db.add('count.furry',1);
+				// db.add('count.fursuit',1);
+				// db.add(`count.coinflip`,1)
+				// db.add('count.belp',1);
+				// db.add(`count.boop`,1)
+				// db.add("count.code", 1);
+				// db.add(`count.bal`,1)
+				// db.add('count.8ball',1)
+				// db.add('count.say',  1);
+				// db.add('count.search',1)
+				// db.add('count.yiff',  1)
+				// db.add('count.ping',  1)
+				// db.add('count.slots', 1)
+				// db.add('count.time',  1)
+				// db.add('count.furry', 1);
+				db.add(`count.${command.info.name}`, 1);
+			}
+			else
+			{
+				// db.add(`count.eval`,1)
+			}
+		}
+		catch(error)
+		{
+			console.log(error);
+			ctx.error("bot broke");
+		}
+	}
 });
 
 folf.login(token).catch(e => console.log(e));
+// log bot here, catch errors that occur.
