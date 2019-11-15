@@ -12,7 +12,6 @@ module.exports.run = async (ctx) =>
   if (!commandName)
   {
       ctx.utils.setAuthor(embed, ctx.folf.user);
-      embed.setAuthor(ctx.folf.user.username, ctx.folf.user.avatarURL);
 
       ctx.folf.commands.forEach(c =>
         {
@@ -28,7 +27,7 @@ module.exports.run = async (ctx) =>
   }
   else
   {
-    embed.setDescription(`commands for ${ctx.folf.user.tag}\nThe prefix is: \`${prefix}\``);
+    // commands for ${ctx.folf.user.tag}
     embed.setFooter(`${ctx.folf.user.username} | Total Commands: ${ctx.folf.commands.size}`, ctx.folf.user.avatarURL);
 
     let command = ctx.folf.commands.get(ctx.folf.aliases.get(commandName) || commandName);
@@ -38,8 +37,8 @@ module.exports.run = async (ctx) =>
     
     command = command.info;
 
-    embed.setDescription(stripIndents`The bot prefix is: \`${prefix}\`\n
-    ❯ Command: ${command.name.slice(0, 1).toUpperCase() + command.name.slice(1)}
+    embed.setDescription(stripIndents`
+    ❯ Command: ${ctx.utils.toPascalCase(command.name)}
     ❯ Description: ${command.description || 'No Description'}
     ❯ Usage: ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : 'No Usage'}
     ❯ Accessable by: ${command.accessableby || 'Members'}
