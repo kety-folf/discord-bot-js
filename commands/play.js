@@ -1,9 +1,8 @@
 const ytdl = require('ytdl-core');
 const ffmpeg = require("ffmpeg");
 
-module.exports.run = async (ctx) =>
-{
-      let url = args[0];
+module.exports.run = async (ctx) => {
+      let url = ctx.args[0];
 
       if (!ctx.message.member.voiceChannel)
         ctx.error("Error", 'you must be in a voice channel.');
@@ -30,7 +29,6 @@ module.exports.run = async (ctx) =>
     
      return;
   };
-  
  
   module.exports.info = {
     name: 'play',
