@@ -24,13 +24,14 @@ module.exports.run = async (ctx) => {
 
     // Create variables to be used later
     let now = new Date();
-    let time = "";
+    var time = "";
 
     // Build the time string using the locations and timezones
     for (let [label, location] of timezones)
     {
+        // TODO: create conjoin thing that can split correctly, probably Array.join();
         let localTime = now.toLocaleString("en-US", { timeZone: location, ...settings });
-        time += `**${label}**: ${localTime}`;
+        time += `**${label}**: ${localTime}\n`;
     }
 
     return ctx.sendEmbed("Time", time);
@@ -42,5 +43,4 @@ module.exports.info = {
   usage: '',
   category: 'misc',
   accessableby: 'members'
- // aliases: []
 };
