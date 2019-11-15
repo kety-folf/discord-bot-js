@@ -1,12 +1,6 @@
-module.exports.run = async (ctx) =>
-{
-    var user = ctx.message.mentions.users.first();
-    if(!user)
-    {
-        user = ctx.user;
-    }
-
-     return ctx.sendEmbed('', user, '', user.avatarURL);
+module.exports.run = async (ctx) => {
+     const user = ctx.message.mentions.users.first() || ctx.user;
+     return ctx.sendEmbed("", user, "", user.avatarURL);
 };
   
 module.exports.info = {
@@ -14,6 +8,6 @@ module.exports.info = {
   description: 'sends profile pic of user mentioned',
   usage: '<@user you want the pfp for or leave blank for you>',
   category: 'misc',
-  accessableby: 'members'
- // aliases: []
+  accessableby: 'members',
+  aliases: [ "avatar" ]
 };
