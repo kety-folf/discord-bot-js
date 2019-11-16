@@ -10,12 +10,12 @@ module.exports.run = async (ctx) => {
        
         const videos = result.videos.slice(1, 11); //get first 10 results
         
-        var response = "";
+        var resp = "";
         for (var i = 0; i < videos.length; i++)
         {
-            response += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\` - \`https://www.youtube.com${videos[i].url}\`\n`;
+            resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\` - \`https://www.youtube.com${videos[i].url}\`\n`;
         }
-        response += `\n**use url with ~play**`;
+        resp += `\n**use url with ~play**`;
       
         return ctx.sendEmbed('search', resp);
     });
