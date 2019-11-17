@@ -119,7 +119,10 @@ function getFilesWithName(path, name, extension = null) {
 }
 
 function getCommandNameFromAlias(commandAlias) {
-	var matchedCommands = folf.commands.filter(s => s.info.aliases.some(a => a == commandAlias));
+	var matchedCommands = folf.commands
+	    .filter(s => s.info)
+	    .filter(s => s.info.aliases)
+	    .filter(s => s.info.aliases.some(a => a == commandAlias));
 
 	if (matchedCommands.length == 1)
 		return matchedCommands[0].info.name;
