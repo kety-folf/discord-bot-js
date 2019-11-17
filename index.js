@@ -118,24 +118,6 @@ function getFilesWithName(path, name, extension = null) {
 	return getFiles(path, extension).filter(f => f.startsWith(name));
 }
 
-function getCommandNameFromAlias(commandAlias) {
-	var matchedCommands = folf.commands
-	    .filter(s => s.info)
-	    .filter(s => s.info.aliases)
-	    .filter(s => s.info.aliases.some(a => a == commandAlias));
-	
-	matchedCommands.forEach(m => console.log(m.info.name + '\n'));
-
-	if (matchedCommands.length == 1)
-		return matchedCommands[0].info.name;
-	
-	throw new Error(matchedCommands.length > 1 ? "More than one command uses the same aliases." : "There was no command with the matching alias.");
-}
-
-function hasCommand(commandName) {
-	return folf.commands.get(commandName) || folf.commands.get(getCommandNameFromAlias(commandName));
-}
-
 function setCommands() {
 	const files = getFiles(commandPath, ".js");
 
@@ -257,6 +239,27 @@ const utils = {
 };
 
 setCommands();
+
+function getCommandNameFromAlias(commandAlias) {
+	var matchedCommands = folf.commands
+	    .filter(s => s.info)
+	    .filter(s => s.info.aliases)
+	    .filter(s => s.info.aliases.some(a => a == commandAlias));
+	
+	matchedCommands.forEach(m => console.log(m.info.name + '\n'));
+
+	if (matchedCommands.length == 1)
+		return matchedCommands[0].info.name;
+	
+	throw new Error(matchedCommands.length > 1 ? "More than one command uses the same aliases." : "There was no command with the matching alias.");
+}
+
+function hasCommand(commandName) {
+	var command = folf.commands.get(commandName);
+	if (!command)
+		command = folf.commands.get(getCommandNameFromAlias(commandName);
+	return command;
+}
 
 // when the bot is finished getting ready, do this:
 folf.on('ready', async () => {
