@@ -12,7 +12,7 @@ class Server
 class Context {
 	// constructor(options: ContextOptions) {
 	constructor(client, message, db) {
-		this.client = client;
+		this.folf = client;
 		this.self = client.user;
 		this.message = message;
 		this.channel = message.channel;
