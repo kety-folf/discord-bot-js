@@ -98,7 +98,7 @@ const initialBalance = 400;
 
 const folf = new Client();
 folf.commands = new Collection();
-//folf.aliases = new Collection();
+folf.aliases = new Collection();
 folf.prefix = prefix;
 
 function exists(obj) {
@@ -116,17 +116,6 @@ function getFiles(path, extension = null) {
 
 function getFilesWithName(path, name, extension = null) {
 	return getFiles(path, extension).filter(f => f.startsWith(name));
-}
-
-function setCommands() {
-	const files = getFiles(commandPath, ".js");
-
-	for (const file of files) {
-
-		const commandSource = require(`${commandPath}${file}`);
-		folf.commands.set(commandSource.info.name, commandSource);
-		console.log(`${file}: has been loaded.`);
-	}
 }
 
 // return a boolean stating if the command was successfully deleted or not.
@@ -173,8 +162,19 @@ function setCommand(filePath) {
 		throw new Error("The command source is missing an information export.");
 
 	folf.command.set(commandSource.info.name, commandSource);
-	//if (commandSource.info.aliases)
-	//	commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+	
+	if (commandSource.info.aliases)
+	    commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+	
+	console.log(`Found command: ${file}`);
+}
+
+function setCommands() {
+	const files = getFiles(commandPath, ".js");
+
+	for (const file of files) {
+		setCommand(`${commandPath}${file}`);
+	}
 }
 
 const utils = {
@@ -244,7 +244,7 @@ setCommands();
 function getCommandNameFromAlias(commandAlias) {
 	console.log("reading commands.");
 	folf.commands.forEach(c => console.log(c.info ? c.info.name || "no name" : "empty" + '\n'));
-	
+
 	var commandMatch = folf.commands
 	    .find(s => s.info ?
 		  s.info.aliases ?
@@ -300,11 +300,11 @@ folf.on('message', async message => {
 	console.log(args.join("\n") + ": Parsed Args");
 	console.log(rawArgs + ": Raw Args");
 	
-	//const command = hasCommand(commandName);
+	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
 	
-	var command = folf.commands.get(commandName);
-	if (!command)
-		command = folf.commands.get(getCommandNameFromAlias(commandName));
+	//var command = folf.commands.get(commandName);
+	//if (!command)
+	//	command = folf.commands.get(getCommandNameFromAlias(commandName));
 	
 	if(command)
 	{
