@@ -2,8 +2,8 @@ module.exports.run = async (ctx) =>
 {
     ctx.channel.startTyping();
     var message = await ctx.channel.send("Checking Ping..");
-
-    message.edit("Ping Calculated!");
+    await message.edit("Ping Calculated!");
+    
     const ping = message.editedTimestamp - message.createdTimestamp;
     
     ctx.channel.stopTyping();
