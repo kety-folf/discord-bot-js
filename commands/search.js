@@ -1,10 +1,8 @@
-const ytdl = require('ytdl-core');
 const search = require('yt-search');
 
 module.exports.run = async (ctx) => {
     const term = ctx.args.join(" ");
-    search(term, function (error, result)
-    {
+    search(term, function (error, result) {
         if (error)
             return ctx.error("Error", error);
        
@@ -15,6 +13,7 @@ module.exports.run = async (ctx) => {
         {
             resp += `**[${parseInt(i) + 1}]:** \`${videos[i].title}\` - \`https://www.youtube.com${videos[i].url}\`\n`;
         }
+
         resp += `\n**use url with ~play**`;
       
         return ctx.sendEmbed('search', resp);

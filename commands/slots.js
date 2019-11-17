@@ -1,5 +1,6 @@
-module.exports.run = async (ctx) =>
-{
+const casino = require("../services/slotService.js");
+
+module.exports.run = async (ctx) => {
 	if (ctx.args.length < 1) // 1 = required arg count
 		return ctx.error("error", "wheres the money, pal? all i see is NULL");
 	
@@ -22,14 +23,8 @@ module.exports.run = async (ctx) =>
 
 	account.take(bet);
 	
-	var slots = [];
-	var i;
-	for(i = 0; i < 3; i++) // might want to tweak win%
-	{
-		slots[i] = ctx.utils.getRandNum(5);
-	}
-
-	var won = slots.every(s => s == s[0]);
+	var slots = casino.getSlots(ctx.utils, 3, 5);
+	const won = slots.every(s => s == s[0]);
 
 	var slotDisplay = slots.join("|");
 

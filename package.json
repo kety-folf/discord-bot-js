@@ -1,16 +1,13 @@
 {
   "dependencies": {
-    "coin-flipper": "^1.0.6",
     "common-tags": "^1.8.0",
     "discord-db": "^1.0.2",
     "discord.js": "^11.5.1",
     "e621": "0.0.2",
-    "e621-api": "^0.3.9",
     "ffmpeg": "0.0.4",
     "furrybotapi": "^1.0.7",
     "get": "^1.4.0",
     "lowdb": "^1.0.0",
-    "nekos-image-api": "^1.3.3",
     "node-opus": "^0.3.2",
     "npm": "^6.13.0",
     "path": "^0.12.7",

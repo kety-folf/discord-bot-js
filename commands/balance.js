@@ -1,5 +1,5 @@
 module.exports.run = async (ctx) => {
-  var user = ctx.message.mentions.users.first() || ctx.user;
+  const user = ctx.message.mentions.users.first() || ctx.user;
   var account = ctx.getAccount(user.id);
   
   return ctx.sendEmbed('balance', `${user.username} \$${account.balance}`);

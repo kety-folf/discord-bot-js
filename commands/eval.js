@@ -1,7 +1,7 @@
 module.exports.run = async (ctx) => {
     try {
         ctx.channel.startTyping();
-        const code = ctx.args.join(" ");
+        const code = ctx.rawArgs;
         let script = eval(code);
  
         if (typeof(script) !== "string")

@@ -1,5 +1,4 @@
-class Server
-{
+﻿class Server {
 	constructor(serverId)
 	{
 		this.serverId = serverId;
@@ -43,6 +42,10 @@ class Context {
 
 	sendEmbed(title, description = "", url = "", imageUrl = "") {
 		return this.channel.send(utils.createEmbed(title, description, url, imageUrl))
+	}
+
+	reply(message, embed = null) {
+		return this.channel.send(message, embed);
 	}
 
 	error(title = "", reason = "") {
@@ -95,49 +98,95 @@ const initialBalance = 400;
 
 const folf = new Client();
 folf.commands = new Collection();
-folf.aliases = new Collection();
+//folf.aliases = new Collection();
 folf.prefix = prefix;
 
-function getCommands(path) {
-	const commandFiles = readdirSync(path).filter(d => d.endsWith(".js"));
+function exists(obj) {
+	return typeof obj == "undefined" || obj === null;
+}
 
-	for (const file of commandFiles) {
-		// grab the command location.
+function getFiles(path, extension = null) {
+	var files = readdirSync(path);
+	if (exists(extension)) {
+		files = files.filter(d => d.endsWith(extension));
+	}
+
+	return files;
+}
+
+function getFilesWithName(path, name, extension = null) {
+	return getFiles(path, extension).filter(f => f.startsWith(name));
+}
+
+function getCommandNameFromAlias(commandAlias) {
+	var matchedCommands = folf.commands.filter(s => s.info.aliases.some(a => a == commandAlias));
+
+	if (matchedCommands.length == 1)
+		return matchedCommands[0].info.name;
+	
+	throw new Error("More than one command uses the same aliases.");
+}
+
+function hasCommand(commandName) {
+	return folf.commands.get(commandName) || folf.commands.get(getCommandNameFromAlias(commandName));
+}
+
+function setCommands() {
+	const files = getFiles(commandPath, ".js");
+
+	for (const file of files) {
+
 		const commandSource = require(`${path}${file}`);
-		  
 		folf.commands.set(commandSource.info.name, commandSource);
-		  
-		// if there are any aliases set, append all aliases to the main command name.
+	}
+}
 
-	  	if (commandSource.info.aliases)
-			commandSource.info.aliases.forEach(c => folf.aliases.set(c, commandSource.info.name));
+// return a boolean stating if the command was successfully deleted or not.
+function deleteCommand(commandName) {
+	try {
+		if (!hasCommand(commandName))
+			return false;
+
+		const filePath = `${commandPath}${commandName}`;
+		delete require.cache[require.resolve(filePath)];
+		folf.commands.delete(commandName);
+
+		return true;
+	}
+	catch(error) {
+		console.log(error);
 	}
 }
 
 function reloadCommand(commandName) {
-	const commandFiles = readdirSync(commandPath).filter(f => f.endsWith(".js"));
+	const commandFiles = getFilesWithName(commandPath, commandName, ".js");
 
-	for (const file of commandFiles) {
-		if (file == commandName) {
-			try {
-				const filePath = `${commandPath}${file}.js`;
-				delete require.cache[require.resolve(filePath)];
-				folf.commands.delete(commandName);
+	if (commandFiles.length > 1)
+		throw new Error(`There are more than one existing files with the name: ${commandName}`);
 
-				const commandSource = require(filePath);
-				folf.commands.set(commandName, commandSource);
+	try {
+			const filePath = `${commandPath}${commandName}`;
 
-				if (commandSource.info.aliases)
-					commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
-				
-				return true;
-			}
-			catch(error) {
-				console.log(error);
-				return false;
-			}
-		}
+			deleteCommand(commandName);
+			setCommand(filePath);
+
+			return true;
 	}
+	catch(error) {
+			console.log(error);
+			return false;
+	}
+}
+
+function setCommand(filePath) {
+	const commandSource = require(filePath);
+
+	if (!commandSource.info)
+		throw new Error("The command source is missing an information export.");
+
+	folf.command.set(commandSource.info.name, commandSource);
+	//if (commandSource.info.aliases)
+	//	commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
 }
 
 const utils = {
@@ -151,7 +200,8 @@ const utils = {
 		else
 			return text;
 	},
-	
+
+	// HelloWorld
 	toPascalCase: function(text) {
 		if (text)
 		{
@@ -201,20 +251,17 @@ const utils = {
 	}
 };
 
-// gets the commands at a specified directory.
-getCommands(commandPath);
+setCommands();
 
 // when the bot is finished getting ready, do this:
-folf.on('ready', async () =>
-{
+folf.on('ready', async () => {
 	console.log(`Connected to Discord as ${folf.user.tag} across ${folf.guilds.size} servers.`);
    	folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
 	folf.user.setStatus("online");
 });
 
 // when a message is sent, do this:
-folf.on('message', async message =>
-{
+folf.on('message', async message => {
 	// Handle all of the possible parsing errors before moving forward
 	if(message.author.bot || message.channel.type !== "text") // must be in guild
 		return;
@@ -267,7 +314,7 @@ folf.on('message', async message =>
 		}
 		catch(error) {
 			console.log(error);
-			ctx.error("bot broke");
+			return ctx.error("bot broke");
 		}
 	}
 });
