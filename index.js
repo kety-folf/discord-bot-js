@@ -123,11 +123,13 @@ function getCommandNameFromAlias(commandAlias) {
 	    .filter(s => s.info)
 	    .filter(s => s.info.aliases)
 	    .filter(s => s.info.aliases.some(a => a == commandAlias));
+	
+	matchedCommands.forEach(m => console.log(m.info.name + '\n'));
 
 	if (matchedCommands.length == 1)
 		return matchedCommands[0].info.name;
 	
-	throw new Error("More than one command uses the same aliases.");
+	throw new Error(matchedCommands.length > 1 ? "More than one command uses the same aliases." : "There was no command with the matching alias.");
 }
 
 function hasCommand(commandName) {
