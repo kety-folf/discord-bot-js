@@ -257,7 +257,7 @@ function getCommandNameFromAlias(commandAlias) {
 function hasCommand(commandName) {
 	var command = folf.commands.get(commandName);
 	if (!command)
-		command = folf.commands.get(getCommandNameFromAlias(commandName);
+		command = folf.commands.get(getCommandNameFromAlias(commandName));
 	return command;
 }
 
