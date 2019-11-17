@@ -136,7 +136,7 @@ function setCommands() {
 
 	for (const file of files) {
 
-		const commandSource = require(`${path}${file}`);
+		const commandSource = require(`${commandPath}${file}`);
 		folf.commands.set(commandSource.info.name, commandSource);
 	}
 }
