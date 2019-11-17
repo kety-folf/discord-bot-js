@@ -166,7 +166,7 @@ function setCommand(filePath) {
 	if (commandSource.info.aliases)
 	    commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
 	
-	console.log(`Found command: ${file}`);
+	console.log(`Found command: ${commandSource.info.name}`);
 }
 
 function setCommands() {
