@@ -22,6 +22,7 @@ class Context {
 		this.db = db;
 		this.args = [];
 		this.rawArgs = "";
+		this.utils = null;
 	}
 
 	getAccount(userId) {
@@ -240,6 +241,7 @@ folf.on('message', async message =>
 		const ctx = new Context(folf, message, db);
 		ctx.rawArgs = rawArgs; // this is just all of the text as one string.
 		ctx.args = args;
+		ctx.utils = utils;
 
 		try {
 			if (command.info.accessableby == 'dev') {
