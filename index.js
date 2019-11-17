@@ -161,7 +161,7 @@ function setCommand(filePath) {
 	if (!commandSource.info)
 		throw new Error("The command source is missing an information export.");
 
-	folf.command.set(commandSource.info.name, commandSource);
+	folf.commands.set(commandSource.info.name, commandSource);
 	
 	if (commandSource.info.aliases)
 	    commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
