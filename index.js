@@ -228,12 +228,12 @@ folf.on('message', async message =>
 		return;
 	
 	const args = rawArgs.trimLeft().match(/((?:[\w\d])+)(?: *)/gi);
-	console.log(rawArgs);
-	console.log(args.join("\n"));
-	const commandName = args[0].toLowerCase();
+	console.log(args.join("\n") + ": Parsed Args");
+	const commandName = args.shift().toLowerCase();
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
-
+	console.log(rawArgs + ": Raw Args");
+	
 	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
 	
 	if(command)
