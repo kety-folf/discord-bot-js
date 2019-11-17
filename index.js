@@ -282,7 +282,7 @@ folf.on('message', async message => {
 	console.log(args.join("\n") + ": Parsed Args");
 	console.log(rawArgs + ": Raw Args");
 	
-	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
+	const command = hasCommand(commandName);
 	
 	if(command)
 	{
