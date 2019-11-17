@@ -244,16 +244,24 @@ setCommands();
 function getCommandNameFromAlias(commandAlias) {
 	console.log("reading commands.");
 	folf.commands.forEach(c => console.log(c.info ? c.info.name || "no name" : "empty" + '\n'));
-	var matchedCommands = folf.commands
-	    .filter(s => s.info ? s.info.aliases ? s.info.aliases.some(a => a == commandAlias) : false : false);
 	
-	matchedCommands.forEach(m => console.log(m.info.name + '\n'));
-	console.log("commands have been matched.");
+	var commandMatch = folf.commands
+	    .find(s => s.info ?
+		  s.info.aliases ?
+		  s.info.aliases.some(a => a == commandAlias)
+		  || (s.info.name ? s.info.name == commandAlias : false)
+		  : s.info.name ?
+		  s.info.name == commandAlias
+		  : false
+		  : false);
 	
-	if (matchedCommands.length == 1)
-		return matchedCommands[0].info.name;
+	if (commandMatch)
+	{
+		console.log("found a matching command.");
+		return commandMatch.info.name;
+	}
 	
-	throw new Error(matchedCommands.length > 1 ? "More than one command uses the same aliases." : "There was no command with the matching alias.");
+	throw new Error("A command could not be matched.");
 }
 
 function hasCommand(commandName) {
@@ -292,12 +300,11 @@ folf.on('message', async message => {
 	console.log(args.join("\n") + ": Parsed Args");
 	console.log(rawArgs + ": Raw Args");
 	
-	const command = hasCommand(commandName);
-	/*
-		var command = folf.commands.get(commandName);
-		if (!command)
-			command = folf.commands.get(getCommandNameFromAlias(commandName));
-	*/
+	//const command = hasCommand(commandName);
+	
+	var command = folf.commands.get(commandName);
+	if (!command)
+		command = folf.commands.get(getCommandNameFromAlias(commandName));
 	
 	if(command)
 	{
