@@ -6,8 +6,9 @@ module.exports.run = async (ctx) => {
         return ctx.error("error", "sorry you need to speak up there bucko");
     
     const guess = ctx.args[0].toLowerCase();
+    console.log(guess + ": Coin Guess");
     
-    if (guess != "heads" || guess != "tails")
+    if ((guess != "heads") || (guess != "tails"))
         return ctx.error("error", "heads... or tails? you cant just be typing iajgejuhbjmfrt");
     
     var account = ctx.getAccount(ctx.user.id);
