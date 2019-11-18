@@ -6,6 +6,10 @@ module.exports.run = async (ctx) => {
         return ctx.error("error", "sorry you need to speak up there bucko");
     
     const guess = ctx.args[0].toLowerCase();
+    for(int i = 0; i < guess.length; i++)
+    {
+        console.log(`\'${guess.getChar(i)}\': CHAR_${guess.charCodeAt(i)}`);
+    }
     console.log(guess + ": Coin Guess");
     
     if ((guess !== "heads") || (guess !== "tails"))
