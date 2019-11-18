@@ -11,8 +11,12 @@ module.exports.run = async (ctx) => {
     {
         if (side == "heads")
             return true;
+        //if (side == "h")
+        //    return true;
         if (side == "tails")
             return true;
+        //if (side == "t")
+        //    return true;
         
         return false;
     }
@@ -26,7 +30,6 @@ module.exports.run = async (ctx) => {
         return ctx.error("error", "you dont have any money");
 
     const reward =  bet * ctx.utils.getRandNum(24, 2);
-    account.take(bet);
     
     const flipTitle = `the coin landed on ${flip}`;
     var flipResult = `you lost \$${bet}`;
@@ -35,6 +38,8 @@ module.exports.run = async (ctx) => {
         account.give(reward);
         flipResult = `you won \$${reward}`;
     }
+    else
+        account.take(bet);
     
     account.sync();
     return ctx.sendEmbed(flipTitle, flipResult);
