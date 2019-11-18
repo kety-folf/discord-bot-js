@@ -8,7 +8,7 @@ module.exports.run = async (ctx) => {
     const guess = ctx.args[0].toLowerCase();
     for(var i = 0; i < guess.length; i++)
     {
-        console.log(`\'${guess.getChar(i)}\': CHAR_${guess.charCodeAt(i)}`);
+        console.log(`\'${guess.charAt(i)}\': CHAR_${guess.charCodeAt(i)}`);
     }
     console.log(guess + ": Coin Guess");
     
