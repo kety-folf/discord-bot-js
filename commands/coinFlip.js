@@ -11,8 +11,18 @@ module.exports.run = async (ctx) => {
         console.log(`\'${guess.charAt(i)}\': CHAR_${guess.charCodeAt(i)}`);
     }
     console.log(guess + ": Coin Guess");
+    console.log(guess.toString() == "heads");
+    console.log(guess.toString() == "heads");
+    console.log(guess.toString() != "heads");
+    console.log(guess.toString() == "tails");
+    console.log(guess.toString() == "tails");
+    console.log(guess.toString() != "tails");
+    console.log(guess.toString() === "heads");
+    console.log(guess.toString() === "tails");
+    console.log(guess.toString() !== "heads");
+    console.log(guess.toString() !== "tails");
     
-    if ((guess.toString() !== "heads".toString()) || (guess.toString() !== "tails".toString()))
+    if ((guess != "heads") || (guess !== "tails"))
         return ctx.error("error", "heads... or tails? you cant just be typing iajgejuhbjmfrt");
     
     var account = ctx.getAccount(ctx.user.id);
