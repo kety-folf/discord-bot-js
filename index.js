@@ -310,6 +310,10 @@ folf.on('message', async message => {
 		return;
 	
 	var args = rawArgs.trimLeft().match(/((?:[\w\d])+)(?: *)/gi);
+	
+	for (var int i = 0; i < args.length; i++)
+		args[i] = args[i].trim();
+	
 	const commandName = args.shift().trim().toLowerCase();
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
