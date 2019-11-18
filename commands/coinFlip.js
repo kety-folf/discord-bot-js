@@ -12,7 +12,7 @@ module.exports.run = async (ctx) => {
     }
     console.log(guess + ": Coin Guess");
     
-    if ((guess !== "heads") || (guess !== "tails"))
+    if ((guess.toString() !== "heads".toString()) || (guess.toString() !== "tails".toString()))
         return ctx.error("error", "heads... or tails? you cant just be typing iajgejuhbjmfrt");
     
     var account = ctx.getAccount(ctx.user.id);
