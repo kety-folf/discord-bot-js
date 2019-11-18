@@ -6,23 +6,18 @@ module.exports.run = async (ctx) => {
         return ctx.error("error", "sorry you need to speak up there bucko");
     
     const guess = ctx.args[0].toLowerCase();
-    for(var i = 0; i < guess.length; i++)
+
+    function ensure(side)
     {
-        console.log(`\'${guess.charAt(i)}\': CHAR_${guess.charCodeAt(i)}`);
+        if (side == "heads")
+            return true;
+        if (side == "tails")
+            return true;
+        
+        return false;
     }
-    console.log(guess + ": Coin Guess");
-    console.log(guess.toString() == "heads");
-    console.log(guess.toString() == "heads");
-    console.log(guess.toString() != "heads");
-    console.log(guess.toString() == "tails");
-    console.log(guess.toString() == "tails");
-    console.log(guess.toString() != "tails");
-    console.log(guess.toString() === "heads");
-    console.log(guess.toString() === "tails");
-    console.log(guess.toString() !== "heads");
-    console.log(guess.toString() !== "tails");
     
-    if ((guess != "heads") || (guess !== "tails"))
+    if (!ensure(guess))
         return ctx.error("error", "heads... or tails? you cant just be typing iajgejuhbjmfrt");
     
     var account = ctx.getAccount(ctx.user.id);
