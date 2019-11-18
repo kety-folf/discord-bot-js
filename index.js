@@ -311,7 +311,7 @@ folf.on('message', async message => {
 	
 	var args = rawArgs.trimLeft().match(/((?:[\w\d])+)(?: *)/gi);
 	
-	for (var int i = 0; i < args.length; i++)
+	for (var i = 0; i < args.length; i++)
 		args[i] = args[i].trim();
 	
 	const commandName = args.shift().trim().toLowerCase();
