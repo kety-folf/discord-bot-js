@@ -310,7 +310,7 @@ folf.on('message', async message => {
 		return;
 	
 	var args = rawArgs.trimLeft().match(/((?:[\w\d])+)(?: *)/gi);
-	const commandName = args.shift().toLowerCase();
+	const commandName = args.shift().trim().toLowerCase();
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
 	
@@ -358,7 +358,7 @@ folf.on('message', async message => {
 	}
 	else
 	{
-		console.log(`Could not find a command of name ${commandName}`);
+		console.log(`Could not find a command of name \'${commandName}\'`);
 	}
 });
 
