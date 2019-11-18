@@ -314,11 +314,12 @@ folf.on('message', async message => {
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
 	
+	console.log(`\'${commandName}\': Parsed Command`);
 	console.log(args.join("\n") + ": Parsed Args");
 	console.log(rawArgs + ": Raw Args");
 	
-	const command = folf.commands.get(commandName); // || folf.commands.get(folf.aliases.get(commandName));
-	
+	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
+	console.log(command ? command.info ? command.info.name : "null": "null" + ": Command results")
 	//var command = folf.commands.get(commandName);
 	//if (!command)
 	//	command = folf.commands.get(getCommandNameFromAlias(commandName));
