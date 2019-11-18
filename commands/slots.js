@@ -36,7 +36,7 @@ module.exports.run = async (ctx) => {
 		account.take(bet);
 	}
 	
-	slotDisplay += '\n' + slots.Join("|");
+	slotDisplay += '\n' + slots.join("|");
 
 	account.sync();
 	return ctx.sendEmbed('slots', slotDisplay);
