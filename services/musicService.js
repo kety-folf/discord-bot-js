@@ -39,12 +39,12 @@ module.exports.playAudio = async (ctx, term = "") => {
     {
         // 1. From the guild, check if the user that executed the command is in a voice channel.
         // 2. If not, return and notify them.
-        if (!ctx.user.voiceChannel)
+        if (!ctx.member.voiceChannel)
             return ctx.error("you gotsta be in channelled voice laddie you cant listen with eyes");
 
         // 3. Otherwise, connect to their voice channel.
         // 4. Set the VoiceConnection object at Server.audioClient there.
-        server.audioClient = await ctx.user.voiceChannel.join();
+        server.audioClient = await ctx.member.voiceChannel.join();
     }
 
     // SEARCHING (OPTIONAL)
