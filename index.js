@@ -2,8 +2,35 @@
 	constructor(serverId)
 	{
 		this.serverId = serverId;
-		this.queue = {};
-		this.audio = null;
+		this.queue = [];
+		this.audioClient = null; // voiceConnection
+		this.currentSong = null; // place current stream song here.
+		this.playing = false;
+	}
+
+	getNextSong()
+	{
+		this.currentSong = null;
+        if (server.queue.length > 0)
+        {
+			server.currentSong = server.queue.shift();
+			return true;
+		}
+		return false;
+	}
+	
+	clearQueue()
+	{
+		this.currentSong = null;
+		this.queue = [];
+	}
+}
+
+class Song {
+	constructor(name, url)
+	{
+		this.name = name;
+		this.url = url;
 	}
 }
 
@@ -22,6 +49,8 @@ class Context {
 		this.args = [];
 		this.rawArgs = "";
 		this.utils = null;
+		this.servers = [];
+		//this.accounts = [];
 	}
 
 	getAccount(userId) {
@@ -36,8 +65,13 @@ class Context {
 		return new Account(userId, balance);
 	}
 
-	getServer(guildId) {
-		return new Server(guildId);
+	getOrAddServer(guildId) {
+		if (this.servers.some(g => g.serverId == guildId))
+			return this.servers.find(g => g.serverId == guildId);
+
+		var server = new Server(guildId);
+		this.servers.add(server);
+		return server;
 	}
 
 	sendEmbed(title, description = "", url = "", imageUrl = "") {

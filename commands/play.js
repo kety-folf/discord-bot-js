@@ -1,7 +1,11 @@
-const ytdl = require('ytdl-core');
-const ffmpeg = require("ffmpeg");
+const music = require("../services/musicService.js");
 
 module.exports.run = async (ctx) => {
+    const term = ctx.rawArgs;
+    await music.playAudio(ctx, term);
+};
+
+/*module.exports.run = async (ctx) => {
       let url = ctx.args[0];
 
       if (!ctx.message.member.voiceChannel)
@@ -22,13 +26,14 @@ module.exports.run = async (ctx) => {
     
       let connection = await ctx.message.member.voiceChannel.join();
 
+      
       let dispatcher = await connection.playStream(ytdl(url, { filter: 'audioonly' }))
           .on('end', () => ctx.guild.me.voiceChannel.leave());
    
       message.edit(ctx.utils.createEmbed('Music', `Now Playing: ${url}`));
     
      return;
-  };
+  };*/
  
   module.exports.info = {
     name: 'play',
