@@ -65,7 +65,7 @@ module.exports.playAudio = async (ctx, term = "") => {
         // 6. If not, set the song value at Server.currentSong.
         // 7. If there is something in currentSong, use Server.queue.add(song).
         //if (server.currentSong)
-        server.queue.add(song);
+        server.queue.push(song);
         //else
         //    server.currentSong = song;
     }
