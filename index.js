@@ -11,9 +11,9 @@
 	getNextSong()
 	{
 		this.currentSong = null;
-        if (server.queue.length > 0)
-        {
-			server.currentSong = server.queue.shift();
+        	if (this.queue.length > 0)
+        	{
+			this.currentSong = this.queue.shift();
 			return true;
 		}
 		return false;
