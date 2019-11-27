@@ -43,6 +43,7 @@ class Context {
 		this.message = message;
 		this.channel = message.channel;
 		this.user = message.author;
+		this.member = message.member;
 		this.guild = message.guild;
 		this.account = this.getAccount(message.author.id);
 		this.db = db;
