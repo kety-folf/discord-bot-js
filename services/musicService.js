@@ -1,6 +1,14 @@
 const searchYoutube = require("yt-search");
 const ytdl = require("ytdl-core");
 
+class Song {
+	constructor(name, url)
+	{
+		this.name = name;
+		this.url = url;
+	}
+}
+
 module.exports.getYouTubeFirstSong = (term) => {
     searchYoutube(term, function(error, result) {
         // TODO: handle error
