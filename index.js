@@ -26,14 +26,6 @@
 	}
 }
 
-class Song {
-	constructor(name, url)
-	{
-		this.name = name;
-		this.url = url;
-	}
-}
-
 // context to use for commands
 class Context {
 	// constructor(options: ContextOptions) {
