@@ -2,9 +2,9 @@ const searchYoutube = require("yt-search");
 const ytdl = require("ytdl-core");
 
 class Song {
-	constructor(name, url)
+	constructor(songName, url)
 	{
-		this.name = name;
+		this.songName = songName;
 		this.url = url;
 	}
 }
