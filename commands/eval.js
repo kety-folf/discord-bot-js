@@ -9,7 +9,7 @@ module.exports.run = async (ctx) => {
 
         let embed = ctx.utils.createEmbed("eval")
           .addField('IN', code)
-          .addField('OUT', evaled);
+          .addField('OUT', script);
 
         ctx.channel.stopTyping();
         return ctx.channel.send(embed);

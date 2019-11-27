@@ -20,19 +20,23 @@ module.exports.run = async (ctx) => {
 			`bet ${bet} > bal ${account.balance}`);
 
 	const reward = bet * ctx.utils.getRandNum(10, 2);
-
-	account.take(bet);
-	
 	var slots = casino.getSlots(ctx.utils, 3, 5);
 	const won = slots.every(s => s == s[0]);
 
-	var slotDisplay = slots.join("|");
+	var slotDisplay = "";
 
 	if (won)
 	{
 		slotDisplay = `you won ${reward}`;
 		account.give(reward);
 	}
+	else
+	{
+		slotDisplay = `you lost ${bet}`;
+		account.take(bet);
+	}
+	
+	slotDisplay += '\n' + slots.join("|");
 
 	account.sync();
 	return ctx.sendEmbed('slots', slotDisplay);

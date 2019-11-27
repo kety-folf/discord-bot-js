@@ -132,7 +132,7 @@ const initialBalance = 400;
 
 const folf = new Client();
 folf.commands = new Collection();
-//folf.aliases = new Collection();
+folf.aliases = new Collection();
 folf.prefix = prefix;
 
 function exists(obj) {
@@ -150,29 +150,6 @@ function getFiles(path, extension = null) {
 
 function getFilesWithName(path, name, extension = null) {
 	return getFiles(path, extension).filter(f => f.startsWith(name));
-}
-
-function getCommandNameFromAlias(commandAlias) {
-	var matchedCommands = folf.commands.filter(s => s.info.aliases.some(a => a == commandAlias));
-
-	if (matchedCommands.length == 1)
-		return matchedCommands[0].info.name;
-	
-	throw new Error("More than one command uses the same aliases.");
-}
-
-function hasCommand(commandName) {
-	return folf.commands.get(commandName) || folf.commands.get(getCommandNameFromAlias(commandName));
-}
-
-function setCommands() {
-	const files = getFiles(commandPath, ".js");
-
-	for (const file of files) {
-
-		const commandSource = require(`${path}${file}`);
-		folf.commands.set(commandSource.info.name, commandSource);
-	}
 }
 
 // return a boolean stating if the command was successfully deleted or not.
@@ -218,9 +195,37 @@ function setCommand(filePath) {
 	if (!commandSource.info)
 		throw new Error("The command source is missing an information export.");
 
-	folf.command.set(commandSource.info.name, commandSource);
-	//if (commandSource.info.aliases)
-	//	commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+	folf.commands.set(commandSource.info.name, commandSource);
+	
+	if (commandSource.info.aliases)
+	    commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+	
+	console.log(`Found command: ${commandSource.info.name}`);
+}
+
+function setCommands() {
+	const files = getFiles(commandPath, ".js");
+
+	for (const file of files) {
+		try {
+		    //setCommand(`${commandPath}${file}`);
+		    const commandSource = require(`${commandPath}${file}`);
+
+		    if (!commandSource.info)
+			throw new Error("The command source is missing an information export.");
+
+		    folf.commands.set(commandSource.info.name, commandSource);
+	
+		    if (commandSource.info.aliases)
+	  	        commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
+	
+		    console.log(`Found command: ${commandSource.info.name}`);
+		}
+		catch(error) {
+		    console.log(error);
+		    return false;
+		}
+	}
 }
 
 const utils = {
@@ -285,6 +290,36 @@ const utils = {
 	}
 };
 
+function getCommandNameFromAlias(commandAlias) {
+	console.log("reading commands.");
+	folf.commands.forEach(c => console.log(c.info ? c.info.name || "no name" : "empty" + '\n'));
+
+	var commandMatch = folf.commands
+	    .find(s => s.info ?
+		  s.info.aliases ?
+		  s.info.aliases.some(a => a == commandAlias)
+		  || (s.info.name ? s.info.name == commandAlias : false)
+		  : s.info.name ?
+		  s.info.name == commandAlias
+		  : false
+		  : false);
+	
+	if (commandMatch)
+	{
+		console.log("found a matching command.");
+		return commandMatch.info.name;
+	}
+	
+	throw new Error("A command could not be matched.");
+}
+
+function hasCommand(commandName) {
+	var command = folf.commands.get(commandName);
+	if (!command)
+		command = folf.commands.get(getCommandNameFromAlias(commandName));
+	return command;
+}
+
 setCommands();
 
 // when the bot is finished getting ready, do this:
@@ -309,14 +344,23 @@ folf.on('message', async message => {
 		return;
 	
 	var args = rawArgs.trimLeft().match(/((?:[\w\d])+)(?: *)/gi);
-	const commandName = args.shift().toLowerCase();
+	
+	for (var i = 0; i < args.length; i++)
+		args[i] = args[i].trim();
+	
+	const commandName = args.shift().trim().toLowerCase();
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
 	
+	console.log(`\'${commandName}\': Parsed Command`);
 	console.log(args.join("\n") + ": Parsed Args");
 	console.log(rawArgs + ": Raw Args");
 	
 	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
+	console.log(command ? command.info ? command.info.name : "null": "null" + ": Command results")
+	//var command = folf.commands.get(commandName);
+	//if (!command)
+	//	command = folf.commands.get(getCommandNameFromAlias(commandName));
 	
 	if(command)
 	{
@@ -350,6 +394,10 @@ folf.on('message', async message => {
 			console.log(error);
 			return ctx.error("bot broke");
 		}
+	}
+	else
+	{
+		console.log(`Could not find a command of name \'${commandName}\'`);
 	}
 });
 
