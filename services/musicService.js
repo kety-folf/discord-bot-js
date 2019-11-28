@@ -18,8 +18,8 @@ module.exports.getSong = (server, term) => {
 	    var video = result.videos[0];
 	    var song = new Song(video.title, `https://www.youtube.com${video.url}`);
 	    server.queue.push(song);
-	    console.log(video.title);
-            console.log(video.url);
+	    console.log(song.title);
+            console.log(song.url);
 	    return;
 	}
 	else
@@ -38,6 +38,7 @@ module.exports.getAudioStream = (url) => {
 module.exports.playAudio = async (ctx, term = "") => {
     
     var server = ctx.getOrAddServer(ctx.guild.id);
+	server.playing = false;
     
     // CONNECTING
     if (!server.audioClient)
@@ -56,10 +57,12 @@ module.exports.playAudio = async (ctx, term = "") => {
     if (term)
     {
 	console.log("Searching for a song...");
-	
+	console.log(server.queue.length);
+	    
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
         this.getSong(server, term);
-	//console.log(`Found song: ${song.songName}`);
+	console.log(server.queue.length);
+	    //console.log(`Found song: ${song.songName}`);
 	//console.log(`A: ${server.queue.length}`);
         // 5. Check if there is anything in currentSong.
         // 6. If not, set the song value at Server.currentSong.
@@ -72,13 +75,14 @@ module.exports.playAudio = async (ctx, term = "") => {
     }
 
     // PLAYING
-    
+    console.log(server.playing);
     if (!server.playing)
     {
 	console.log(`C: ${server.queue.length}`);
 	console.log("Playing a song...");
 	    
         while(server.getNextSong()) {
+	    console.log(server.currentSong.url);
 	    var stream = this.getAudioStream(server.currentSong.url);
 	    console.log("Got stream.");
 	    server.playing = true;
