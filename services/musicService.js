@@ -19,6 +19,7 @@ module.exports.getSong = (term) => {
 	    song = new Song(video.title, `https://www.youtube.com${video.url}`);
 	    console.log(video.title);
             console.log(video.url);
+	    return;
 	}
 
         throw error;
