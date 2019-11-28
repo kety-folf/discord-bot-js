@@ -12,20 +12,21 @@ class Song {
 }
 
 module.exports.getSong = async (server, term) => {
-    var results = await youtube.searchVideos(term);
-    if (results.length > 0)
-    {
-	var video = results[0];
-	var song = new Song(video.title, video.url);
-	server.queue.push(song);
-	console.log(song.songName);
-        console.log(song.url);
-	return song;
-    }
-    else
-	throw new Error("No matching results found.");
+    youtube.searchVideos(term).then(results => {
+        if (results.length > 0)
+        {
+	    var video = results[0];
+	    var song = new Song(video.title, video.url);
+	    server.queue.push(song);
+	    console.log(song.songName);
+            console.log(song.url);
+	    return song;
+        }
+        else
+	    throw new Error("No matching results found.");
 
-    return null;
+        return null;
+    }).catch(console.log);
 };
 
 module.exports.getAudioStream = (url) => {
