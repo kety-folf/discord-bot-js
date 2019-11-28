@@ -10,22 +10,21 @@ class Song {
 }
 
 module.exports.getSong = (term) => {
-    var song = null;
-    searchYoutube(term, function(error, result) {
+    var song = searchYoutube(term, function(error, result) {
 	if (error) throw error;
         // TODO: handle error
         if (result.videos.length > 0)
 	{
 	    var video = result.videos[0];
-	    song = new Song(video.title, `https://www.youtube.com${video.url}`);
+	    var searchResult = new Song(video.title, `https://www.youtube.com${video.url}`);
 	    console.log(video.title);
             console.log(video.url);
-	    console.log(song.songName);
-            console.log(song.url);
-	    return song;
+	    console.log(searchResult.songName);
+            console.log(searchResult.url);
+	    return searchResult;
 	}
-
-        throw error;
+	else
+		return null;
     });
 	
     console.log("I am outside of the searchYoutube method.");
