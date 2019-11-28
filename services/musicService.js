@@ -1,7 +1,8 @@
 const searchYoutube = require("yt-search");
 const ytdl = require("ytdl-core");
 const YouTube = require("simple-youtube-api");
-const youtube = new YouTube("API_KEY");
+const config = require("./config.json");
+const youtube = new YouTube(config.youtube_key);
 class Song {
 	constructor(songName, url)
 	{
