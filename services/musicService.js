@@ -9,15 +9,15 @@ class Song {
 	}
 }
 
-module.exports.getSong = (term) => {
-    var song = null;
+module.exports.getSong = (server, term) => {
     searchYoutube(term, function(error, result) {
 	if (error) throw error;
         // TODO: handle error
         if (result.videos.length > 0)
 	{
 	    var video = result.videos[0];
-	    song = new Song(video.title, `https://www.youtube.com${video.url}`);
+	    var song = new Song(video.title, `https://www.youtube.com${video.url}`);
+	    server.queue.push(song);
 	    console.log(video.title);
             console.log(video.url);
 	    return;
@@ -30,7 +30,7 @@ module.exports.getSong = (term) => {
     console.log(song.songName);
     console.log(song.url);
 
-    return song;
+    return;
 };
 
 module.exports.getAudioStream = (url) => {
@@ -63,15 +63,15 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log("Searching for a song...");
 	
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
-        const song = this.getSong(term);
-	console.log(`Found song: ${song.songName}`);
-	console.log(`A: ${server.queue.length}`);
+        this.getSong(server, term);
+	//console.log(`Found song: ${song.songName}`);
+	//console.log(`A: ${server.queue.length}`);
         // 5. Check if there is anything in currentSong.
         // 6. If not, set the song value at Server.currentSong.
         // 7. If there is something in currentSong, use Server.queue.add(song).
         //if (server.currentSong)
-        server.queue.push(song);
-	console.log(`B: ${server.queue.length}`);
+        //server.queue.push(song);
+	//console.log(`B: ${server.queue.length}`);
         //else
         //    server.currentSong = song;
     }
