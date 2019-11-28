@@ -9,8 +9,8 @@ class Song {
 	}
 }
 
-module.exports.getSong = (server, term) => {
-    searchYoutube(term, function(error, result) {
+module.exports.getSong = async (server, term) => {
+    await searchYoutube(term, function(error, result) {
 	if (error) throw error;
         // TODO: handle error
         if (result.videos.length > 0)
@@ -18,9 +18,9 @@ module.exports.getSong = (server, term) => {
 	    var video = result.videos[0];
 	    var song = new Song(video.title, `https://www.youtube.com${video.url}`);
 	    server.queue.push(song);
-	    console.log(song.title);
+	    console.log(song.songName);
             console.log(song.url);
-	    return;
+	    return song;
 	}
 	else
 		throw new Error("No matching results found.");
@@ -60,7 +60,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log(server.queue.length);
 	    
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
-        this.getSong(server, term);
+        await this.getSong(server, term);
 	console.log(server.queue.length);
 	    //console.log(`Found song: ${song.songName}`);
 	//console.log(`A: ${server.queue.length}`);
@@ -81,21 +81,26 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log(`C: ${server.queue.length}`);
 	console.log("Playing a song...");
 	    
-        while(server.getNextSong()) {
-	    console.log(server.currentSong.url);
-	    var stream = this.getAudioStream(server.currentSong.url);
-	    console.log("Got stream.");
-	    server.playing = true;
-	    console.log("Now playing a stream...");
-            await server.audioClient.playStream(stream);
-	    console.log("Steam complete. Now getting next song...");
-        }
+	function playUntilEmpty(_callback) {    
+            while(server.getNextSong()) {
+	        console.log(server.currentSong.url);
+	        var stream = this.getAudioStream(server.currentSong.url);
+	        console.log("Got stream.");
+	        server.playing = true;
+	        console.log("Now playing a stream...");
+                await server.audioClient.playStream(stream);
+	        console.log("Steam complete. Now getting next song...");
+            }
+	    _callback();
+	}
 
+	playUntilEmpty(() => {
         server.playing = false;
         server.clearQueue();
         server.audioClient.disconnect();
         server.audioClient = null;
         return ctx.channel.send("I have finished playing the queue.");
+	});
     }
     else
     {
