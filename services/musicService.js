@@ -12,6 +12,7 @@ class Song {
 module.exports.getSong = (term) => {
     var song = null;
     searchYoutube(term, function(error, result) {
+	if (error) throw error;
         // TODO: handle error
         if (result.videos.length > 0)
 	{
@@ -19,25 +20,19 @@ module.exports.getSong = (term) => {
 	    song = new Song(video.title, `https://www.youtube.com${video.url}`);
 	    console.log(video.title);
             console.log(video.url);
-	    return;
+	    console.log(song.songName);
+            console.log(song.url);
+	    return song;
 	}
 
         throw error;
     });
+	
+    console.log("I am outside of the searchYoutube method.");
+    console.log(`${song.title}`);
+    console.log(`${song.url}`);
 
     return song;
-};
-
-/*
-    TODO: combine with 'ctx', and make a message collector to get what index
-    the user would want in the video.
-*/
-
-module.exports.getYouTubeUrl = async (term) => {
-    searchYoutube(term, function(error, result) {
-        // TODO: handle error
-        const matches = result.videos;
-    });
 };
 
 module.exports.getAudioStream = (url) => {
