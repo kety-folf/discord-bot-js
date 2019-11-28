@@ -14,9 +14,9 @@
         	if (this.queue.length > 0)
         	{
 			this.currentSong = this.queue.shift();
-			return true;
+			return this.currentSong;
 		}
-		return false;
+		return null;
 	}
 	
 	clearQueue()
