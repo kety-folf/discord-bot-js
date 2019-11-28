@@ -11,7 +11,7 @@ class Song {
 	}
 }
 
-module.exports.getSong = async (server, term) => {
+module.exports.getSong = (server, term) => {
     youtube.searchVideos(term).then(results => {
         if (results.length > 0)
         {
@@ -61,7 +61,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log(server.queue.length);
 	    
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
-        await this.getSong(server, term);
+        this.getSong(server, term);
 	console.log(server.queue.length);
 	    //console.log(`Found song: ${song.songName}`);
 	//console.log(`A: ${server.queue.length}`);
