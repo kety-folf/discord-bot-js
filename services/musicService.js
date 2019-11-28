@@ -1,6 +1,7 @@
 const searchYoutube = require("yt-search");
 const ytdl = require("ytdl-core");
-
+const YouTube = require("simple-youtube-api");
+const youtube = new YouTube("API_KEY");
 class Song {
 	constructor(songName, url)
 	{
@@ -10,22 +11,20 @@ class Song {
 }
 
 module.exports.getSong = async (server, term) => {
-    await searchYoutube(term, function(error, result) {
-	if (error) throw error;
-        // TODO: handle error
-        if (result.videos.length > 0)
-	{
-	    var video = result.videos[0];
-	    var song = new Song(video.title, `https://www.youtube.com${video.url}`);
-	    server.queue.push(song);
-	    console.log(song.songName);
-            console.log(song.url);
-	    return song;
-	}
-	else
-		throw new Error("No matching results found.");
-    });
-    return;
+    var results = await youtube.searchVideos(term);
+    if (results.length > 0)
+    {
+	var video = results[0];
+	var song = new Song(video.title, video.url);
+	server.queue.push(song);
+	console.log(song.songName);
+        console.log(song.url);
+	return song;
+    }
+    else
+	throw new Error("No matching results found.");
+
+    return null;
 };
 
 module.exports.getAudioStream = (url) => {
