@@ -74,9 +74,11 @@ module.exports.playAudio = async (ctx, term = "") => {
     
     if (!server.playing)
     {
-        while(server.getNextSong()) {
+	var nextSong = server.getNextSong();
+        while(nextSong) {
             server.playing = true;
-            await server.audioClient.playStream(this.getAudioStream(server.currentSong.url));
+            await server.audioClient.playStream(this.getAudioStream(nextSong.url));
+	    nextSong = server.getNextSong();
         }
 
         server.playing = false;
