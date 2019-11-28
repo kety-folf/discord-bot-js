@@ -25,11 +25,6 @@ module.exports.getSong = (server, term) => {
 	else
 		throw new Error("No matching results found.");
     });
-	
-    console.log("I am outside of the searchYoutube method.");
-    console.log(song.songName);
-    console.log(song.url);
-
     return;
 };
 
