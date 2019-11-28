@@ -62,7 +62,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
         const song = this.getYouTubeFirstSong(term);
-	console.log("Found song: ${song.songName}");
+	console.log(`Found song: ${song.songName}`);
 	console.log(`A: ${server.queue.length}`);
         // 5. Check if there is anything in currentSong.
         // 6. If not, set the song value at Server.currentSong.
