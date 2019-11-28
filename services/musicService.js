@@ -81,7 +81,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log(`C: ${server.queue.length}`);
 	console.log("Playing a song...");
 	    
-	function playUntilEmpty(_callback) {    
+	async function playUntilEmpty(_callback) {    
             while(server.getNextSong()) {
 	        console.log(server.currentSong.url);
 	        var stream = this.getAudioStream(server.currentSong.url);
@@ -94,7 +94,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	    _callback();
 	}
 
-	playUntilEmpty(() => {
+	await playUntilEmpty(() => {
         server.playing = false;
         server.clearQueue();
         server.audioClient.disconnect();
