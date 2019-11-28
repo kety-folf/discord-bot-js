@@ -9,14 +9,22 @@ class Song {
 	}
 }
 
-module.exports.getYouTubeFirstSong = (term) => {
+module.exports.getSong = (term) => {
+    var song = null;
     searchYoutube(term, function(error, result) {
         // TODO: handle error
         if (result.videos.length > 0)
-            return new Song(result.videos[0].title, `https://www.youtube.com${result.videos[0].url}`);
+	{
+	    var video = result.videos[0];
+	    song = new Song(video.title, `https://www.youtube.com${video.url}`);
+	    console.log(video.title);
+            console.log(video.url);
+	}
 
         throw error;
     });
+
+    return song;
 };
 
 /*
@@ -61,7 +69,7 @@ module.exports.playAudio = async (ctx, term = "") => {
 	console.log("Searching for a song...");
 	
         // 3a. If they specified a URL or search term, use method getYouTubeUrl(term).
-        const song = this.getYouTubeFirstSong(term);
+        const song = this.getSong(term);
 	console.log(`Found song: ${song.songName}`);
 	console.log(`A: ${server.queue.length}`);
         // 5. Check if there is anything in currentSong.
@@ -80,17 +88,14 @@ module.exports.playAudio = async (ctx, term = "") => {
     {
 	console.log(`C: ${server.queue.length}`);
 	console.log("Playing a song...");
-	var nextSong = server.getNextSong();
-	console.log(`Got next song: ${nextSong.songName}...`);
 	    
-        while(nextSong) {
-	    var stream = this.getAudioStream(nextSong.url);
+        while(server.getNextSong()) {
+	    var stream = this.getAudioStream(server.currentSong.url);
 	    console.log("Got stream.");
 	    server.playing = true;
 	    console.log("Now playing a stream...");
             await server.audioClient.playStream(stream);
 	    console.log("Steam complete. Now getting next song...");
-	    nextSong = server.getNextSong();
         }
 
         server.playing = false;
