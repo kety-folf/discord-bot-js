@@ -23,7 +23,7 @@ const load = dirs => {
 folf.on('ready', async () => {
 
 	console.log("Connected as " + folf.user.tag + " in "+ `${folf.guilds.size}` + " servers")
-   folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
+   folf.user.setActivity(`with a very cute Folf | prefix: ${prefix} | API for some commands are down do ${prefix}help to see whats down`);
 folf.user.setStatus("online");
 
 });

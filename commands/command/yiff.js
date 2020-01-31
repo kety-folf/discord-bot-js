@@ -10,6 +10,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
      type = 'straight';
   }
     if (message.channel.nsfw){
+		
       fb.apiRequest("furry", false, `yiff/${type}`, false).then(res => embedimg('yiff',`${type} yiff`,res.imageURL));
 	
 }

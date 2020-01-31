@@ -30,11 +30,11 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
             },
             {
               name: 'blep',
-              value: 'I dont know what to put here'
+              value: 'I dont know what to put here (OFFLINE)'
             },
             {
              name: 'fursuit',
-             value:'sends a picture of a fursuit'
+             value:'sends a picture of a fursuit(OFFLINE)'
             },
             {
              name: 'ping',
@@ -80,7 +80,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   },
   {
     name: "yiff",
-    value: "sends yiff to the chat (must be in NSFW channel)"
+    value: "sends yiff to the chat (must be in NSFW channel)(OFFLINE)"
     
   },
   
@@ -94,7 +94,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   },
   {
     name: 'furry',
-    value: 'sends some furry art'
+    value: 'sends some furry art (OFFLINE)'
   },
   {
     name: '8ball',
