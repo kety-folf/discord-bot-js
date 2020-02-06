@@ -1,5 +1,5 @@
 # Kety Folf's Discord Bot
-bot made by Kety_the_folf#0001 on discord
+bot made by Kety the folf#0001 on discord
 if you want to run the bot you will need to run npm install (only tested on windows)
 
 ---
