@@ -324,8 +324,14 @@ setCommands();
 // when the bot is finished getting ready, do this:
 folf.once('ready', async () => {
 	console.log(`Connected to Discord as ${folf.user.tag} across ${folf.guilds.cache.size} servers.`);
-   	folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
-	folf.user.setStatus("online");
+
+	folf.user.setPresence({
+		activity: {
+			name: `with a very cute Folf | prefix: ${prefix}`,
+			type: 'PLAYING'
+		},
+		status: 'online'
+	});
 });
 
 // when a message is sent, do this:
