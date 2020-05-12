@@ -1,5 +1,7 @@
 # Kety Folf's Discord Bot
-Bot Made by Kety_the_folf#0001 on Discord.
+Bot Made by:
+- Kety_the_folf#0001
+- AbnerSquared
 
 ---
 
