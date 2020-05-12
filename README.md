@@ -1,20 +1,26 @@
 # Kety Folf's Discord Bot
-bot made by Kety_the_folf#0001 on discord
-if you want to run the bot you will need to run npm install (only tested on windows)
+Bot Made by:
+- Kety_the_folf#0001
+- AbnerSquared
 
 ---
-# hosted on an aws server 
+
+# Hosted on an AWS Server
 bot invite: https://top.gg/bot/425138772221362176
 
 ---
 
-# how to setup
-create a config.json
-and put in the following
+# Setup
+1. `npm install` Note: This has only been tested on Windows.
+2. create `config.json` in the same location as `index.js`.
+The `config.json` must contain the following:
 ```
 {
-"token":"Your Discord private key",(the one for bots)
-"prefix":"~",(or any prefix you want it to be)
+    "token": "DISCORD_TOKEN_KEY",
+    "prefix": "PREFIX",
+    "devId": "DEV_ID",
+    "commandPath": "COMMAND_PATH"
 }
 ```
-then run the bat file
+
+3. Once everything is set up, you can now launch the bot using `run.bat`.
