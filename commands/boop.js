@@ -9,7 +9,7 @@ module.exports.run = async (ctx) => {
     var boopReply = `${user} has booped `;
   
     if (!user1 || (user == user1 && user1 == user2))
-        boopReply += "them self";
+        boopReply += "themselves";
     else if (user1 != user2 && user1 != user && user2 != user)
         boopReply += `${user1} and ${user2}`;
     else
