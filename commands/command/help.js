@@ -30,11 +30,11 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
             },
             {
               name: 'blep',
-              value: 'I dont know what to put here (OFFLINE)'
+              value: 'I dont know what to put here '
             },
             {
              name: 'fursuit',
-             value:'sends a picture of a fursuit(OFFLINE)'
+             value:'sends a picture of a fursuit'
             },
             {
              name: 'ping',
@@ -80,7 +80,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   },
   {
     name: "yiff",
-    value: "sends yiff to the chat (must be in NSFW channel)(OFFLINE)"
+    value: "sends yiff to the chat (must be in NSFW channel)"
     
   },
   
@@ -94,7 +94,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   },
   {
     name: 'furry',
-    value: 'sends some furry art (OFFLINE)'
+    value: 'sends some furry art '
   },
   {
     name: '8ball',
@@ -112,6 +112,10 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   {
     name: 'help',
     value: 'if you do help and a command name you can get more info on that command.'
+  },
+  {
+    name: 'support server',
+    value: ' for support join this server https://discord.gg/YkaxzHT'
   }
 
 

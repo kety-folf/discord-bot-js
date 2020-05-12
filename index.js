@@ -1,7 +1,7 @@
 ﻿
 const { Client, Collection, RichEmbed } = require('discord.js');
 const { readdirSync } = require('fs');
-const { token, prefix } = require('./config.json');
+const { token, prefix, dblToken, ytKey } = require('./config.json');
 
 const folf = new Client();
 folf.commands = new Collection();
@@ -21,14 +21,14 @@ const load = dirs => {
   commandsDir.forEach(x => load(x));
 
 folf.on('ready', async () => {
-
 	console.log("Connected as " + folf.user.tag + " in "+ `${folf.guilds.size}` + " servers")
-   folf.user.setActivity(`with a very cute Folf | prefix: ${prefix} | API for some commands are down do ${prefix}help to see whats down`);
+   folf.user.setActivity(`with a very cute Folf | prefix: ${prefix} `);
 folf.user.setStatus("online");
 
 });
 
 folf.on('message', async message => {
+	
 	const arg = message.content.substring(1).trim(" ");
 	function embedErr(title, decrption){// embed function for errors
 		let embed = new RichEmbed()
@@ -37,6 +37,7 @@ folf.on('message', async message => {
 		.setDescription(decrption)
 		message.channel.send(embed)
 	};
+	
 	function clean(text) {
 		if (typeof(text) === "string")
 		  return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -66,7 +67,9 @@ folf.on('message', async message => {
 		.setImage(img)
 		message.channel.send(embed)
 	};
-  
+ 
+
+
   if(message.author.bot || message.channel.type !== 'text') return;
 
   const args = message.content.slice(folf.prefix.length).trim().split(/ +/g);
@@ -74,7 +77,7 @@ folf.on('message', async message => {
 
   if(!message.content.startsWith(folf.prefix)) return;
   const commandfile = folf.commands.get(cmd) || folf.commands.get(folf.aliases.get(cmd));
-  if(commandfile) commandfile.run(folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg, clean);
+  if(commandfile) commandfile.run(folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg, clean, ytKey);
 
 });
 

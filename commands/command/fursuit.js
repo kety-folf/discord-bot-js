@@ -5,7 +5,7 @@ module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,emb
   if(message.author.id !== "263443630767734784") db.add('count.fursuit',1);
 
     fb.apiRequest("furry", true, `fursuit`, false).then(res => embedimg('fursuit',``,res.imageURL.replace(/\s/g, "20")));
-      
+
       };
       
      

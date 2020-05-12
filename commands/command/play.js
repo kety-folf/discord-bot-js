@@ -1,10 +1,22 @@
 const ytdl = require('ytdl-core');
 const ffmpeg = require("ffmpeg");
 const db = require('quick.db')
-module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg) => {
-  var URL = arg.substring(4)
-
-		if(message.author.id !== "263443630767734784") db.add('count.play',1)
+//const { Player } = require("discord-player");
+module.exports.run = async (folf, message, args, embedErr,embedimg,embedlink,embedtxt, arg, ytKey) => {
+	const player = new Player(folf, ytKey);
+ var URL = arg.substring(4)
+ /* const URL = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+serverID= message.guild.id
+		if(message.author.id !== "263443630767734784") db.add('count.play',1);
+		if(folf.player.isPlaying(serverID)){
+			client.player.addToQueue(serverID, URL[0]);
+		embedtxt('queue added', `added ${URL[0]} to queue`)
+		}
+		else{
+			let song = await client.player.play(message.member.voice.channel, URL[0])
+        message.channel.send(`Currently playing ${song.name}!`);
+		} */
+		
     if (!message.member.voiceChannel) embedErr("Error", 'you must be in a voice channel.');
     if (message.guild.me.voiceChannel) return embedErr('Error', 'I am already In a voice channel.');
      if (!URL) return embedErr('Error', 'please input a url following the command.');
