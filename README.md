@@ -19,7 +19,8 @@ The `config.json` must contain the following:
     "token": "DISCORD_TOKEN_KEY",
     "prefix": "PREFIX",
     "devId": "DEV_ID",
-    "commandPath": "COMMAND_PATH"
+    "commandPath": "COMMAND_PATH",
+    "debug": false
 }
 ```
 

@@ -55,12 +55,14 @@ class Context {
 
 		if (index == -1)
 			return;
-
-		console.log(this.servers[index]);
+		
+		if (config.debug)
+			console.log(this.servers[index]);
 
 		this.servers[index] = server;
-
-		console.log(this.servers[index]);
+		
+		if (config.debug)
+			console.log(this.servers[index]);
 	}
 
 	sendEmbed(title, description = "", url = "", imageUrl = "") {
@@ -349,12 +351,18 @@ folf.on('message', async message => {
 	
 	rawArgs = rawArgs.slice(commandName.length).trimLeft();
 	
-	console.log(`\'${commandName}\': Parsed Command`);
-	console.log(args.join("\n") + ": Parsed Args");
-	console.log(rawArgs + ": Raw Args");
+	if (config.debug)
+	{
+		console.log(`\'${commandName}\': Parsed Command`);
+		console.log(args.join("\n") + ": Parsed Args");
+		console.log(rawArgs + ": Raw Args");
+	}
 	
 	const command = folf.commands.get(commandName) || folf.commands.get(folf.aliases.get(commandName));
-	console.log(command ? command.info ? command.info.name : "null": "null" + ": Command results")
+
+	if (config.debug)
+		console.log(command ? command.info ? command.info.name : "null": "null" + ": Command results")
+
 	//var command = folf.commands.get(commandName);
 	//if (!command)
 	//	command = folf.commands.get(getCommandNameFromAlias(commandName));
@@ -396,7 +404,8 @@ folf.on('message', async message => {
 	}
 	else
 	{
-		console.log(`Could not find a command of name \'${commandName}\'`);
+		if (config.debug)
+			console.log(`Could not find a command of name \'${commandName}\'`);
 	}
 });
 
