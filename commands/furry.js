@@ -13,7 +13,8 @@ module.exports.run = async (ctx) =>
   }
 
   fb.apiRequest("furry", true, fur, false)
-      .then(result => ctx.sendEmbed(fur, "", "", result.imageURL));  
+      .then(result => ctx.sendEmbed(fur, "", "", result.imageURL))
+      .catch(error => ctx.error('error', error));  
 };
       
 module.exports.info = {

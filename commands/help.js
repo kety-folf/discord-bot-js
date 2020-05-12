@@ -4,8 +4,8 @@ module.exports.run = async (ctx) =>
 {
   const prefix = ctx.folf.prefix;
 
-  let embed = ctx.utils.createEmbed(`Bot prefix is ${prefix}`, "Commands")
-    .setAuthor(`${ctx.guild.me.displayName} Help`, ctx.guild.iconURL)
+  let embed = ctx.utils.createEmbed("Commands", `Bot prefix is \`${prefix}\`\n`)
+    //.setAuthor(`${ctx.guild.me.displayName}`, ctx.guild.iconURL)
     .setThumbnail(ctx.folf.user.displayAvatarURL);
 
   if (!ctx.args[0])
@@ -16,7 +16,8 @@ module.exports.run = async (ctx) =>
         {
           if (c.info)
           {
-              embed.addField(c.info.name, c.info.description || 'No Description')
+              embed.description += `\`${c.info.name}\` `;
+              //embed.addField(c.info.name, c.info.description || 'No Description')
           }
         });
 
@@ -37,12 +38,13 @@ module.exports.run = async (ctx) =>
     
     command = command.info;
 
+    embed.setTitle(ctx.utils.toPascalCase(command.name));
+
     embed.setDescription(stripIndents`
-    ❯ Command: ${ctx.utils.toPascalCase(command.name)}
+    ❯ Aliases: ${command.aliases ? command.aliases.join(', ') : 'None'}
     ❯ Description: ${command.description || 'No Description'}
     ❯ Usage: ${command.usage ? `\`${prefix}${command.name} ${command.usage}\`` : 'No Usage'}
-    ❯ Accessable by: ${command.accessableby || 'Members'}
-    ❯ Aliases: ${command.aliases ? command.aliases.join(', ') : 'None'}`);
+    ❯ Accessable by: ${command.accessableby || 'Members'}`);
 
     return ctx.channel.send(embed);
   }
@@ -54,7 +56,7 @@ module.exports.info = {
   name: 'help',
   description: 'Displays all commands that the bot has.',
   usage: '<command Name>',
-  category: 'miscellaneous',
+  category: 'misc',
   accessableby: 'Members',
   aliases: ['h', 'hlp', 'commands']
 };

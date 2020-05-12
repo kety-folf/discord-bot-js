@@ -1,6 +1,6 @@
 module.exports.run = async (ctx) => {
      const user = ctx.message.mentions.users.first() || ctx.user;
-     return ctx.sendEmbed("", user, "", user.avatarURL);
+     return ctx.sendEmbed("", user, "", user.avatarURL());
 };
   
 module.exports.info = {

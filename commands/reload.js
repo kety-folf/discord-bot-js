@@ -8,7 +8,7 @@ module.exports.run = async (ctx) => {
         return ctx.error('Error', 'That command doesn\'t exist. Try again.');
 
     if (ctx.utils.reloadCommand(commandName))
-        return ctx.sendEmbed('reload', `Successfully reloaded ${commandName}.js!`);
+        return ctx.sendEmbed('reload', `Successfully reloaded ${commandName}!`);
     else
         return ctx.error('Error', `Could not reload: \`${commandName}\``);
 };

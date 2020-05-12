@@ -2,13 +2,13 @@
   "dependencies": {
     "common-tags": "^1.8.0",
     "discord-db": "^1.0.2",
-    "discord.js": "^11.5.1",
+    "discord.js": "^12.1.1",
     "e621": "0.0.2",
     "ffmpeg": "0.0.4",
-    "furrybotapi": "^1.0.7",
+    "furrybotapi": "^1.0.8",
     "get": "^1.4.0",
     "lowdb": "^1.0.0",
-    "node-opus": "^0.3.2",
+    "opusscript": "^0.0.7",
     "npm": "^6.13.0",
     "path": "^0.12.7",
     "quick.db": "^7.0.0-b22",
@@ -20,6 +20,6 @@
     "yt-search": "^0.4.1",
     "simple-youtube-api": "^5.2.1",
     "ytdl": "^0.12.0",
-    "ytdl-core": "^0.29.2"
+    "ytdl-core": "^2.1.2"
   }
 }

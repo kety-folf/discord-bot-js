@@ -11,14 +11,13 @@ module.exports.run = async (ctx) => {
         return ctx.error('Error', 'you are not in the same VC as the bot.');
 
     var server = ctx.getOrAddServer(ctx.guild.id);
-    music.stop(server, "Cleared and disconnected from the voice channel.");
+    music.skip(server);
 };
-
+ 
 module.exports.info = {
-  name: 'stop',
-  description: 'leaves vc',
+  name: 'skip',
+  description: 'skips the current song, if any',
   usage: '',
   category: 'voice',
-  accessableby: 'members',
-  aliases: ['disconnect', 'leave', 'dc']
+  accessableby: 'members'
 };

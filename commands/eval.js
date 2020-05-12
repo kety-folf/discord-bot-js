@@ -2,6 +2,10 @@ module.exports.run = async (ctx) => {
     try {
         ctx.channel.startTyping();
         const code = ctx.rawArgs;
+
+        if (code.includes("token"))
+          return ctx.error("you numnut no token for you");
+
         let script = eval(code);
  
         if (typeof(script) !== "string")

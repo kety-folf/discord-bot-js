@@ -8,7 +8,8 @@ module.exports.run = async (ctx) => {
         return ctx.error("Error", "not nsfw channel");
 	
     return fb.apiRequest("furry", false, `yiff/${type}`, false)
-        .then(result => ctx.sendEmbed("yiff", `${type} yiff`, "", result.imageURL));
+        .then(result => ctx.sendEmbed("yiff", `${type} yiff`, "", result.imageURL))
+        .catch(error => ctx.error('error', error));
 };
 
 module.exports.info = {

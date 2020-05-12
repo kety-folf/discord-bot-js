@@ -2,34 +2,16 @@
 	constructor(serverId)
 	{
 		this.serverId = serverId;
-		this.queue = [];
-		this.audioClient = null; // voiceConnection
-		this.currentSong = null; // place current stream song here.
-		this.playing = false;
-	}
-
-	getNextSong()
-	{
-		this.currentSong = null;
-        	if (this.queue.length > 0)
-        	{
-			this.currentSong = this.queue.shift();
-			return this.currentSong;
-		}
-		return null;
-	}
-	
-	clearQueue()
-	{
-		this.currentSong = null;
-		this.queue = [];
+		this.queueClient = null;
 	}
 }
+
+
 
 // context to use for commands
 class Context {
 	// constructor(options: ContextOptions) {
-	constructor(client, message, db) {
+	constructor(client, message, db, servers) {
 		this.folf = client;
 		this.self = client.user;
 		this.message = message;
@@ -42,7 +24,7 @@ class Context {
 		this.args = [];
 		this.rawArgs = "";
 		this.utils = null;
-		this.servers = [];
+		this.servers = servers ? servers : [];
 		//this.accounts = [];
 	}
 
@@ -65,6 +47,20 @@ class Context {
 		var server = new Server(guildId);
 		this.servers.push(server);
 		return server;
+	}
+
+	saveOrAddServer(server)
+	{
+		const index = this.servers.findIndex(g => g.serverId == server.serverId);
+
+		if (index == -1)
+			return;
+
+		console.log(this.servers[index]);
+
+		this.servers[index] = server;
+
+		console.log(this.servers[index]);
 	}
 
 	sendEmbed(title, description = "", url = "", imageUrl = "") {
@@ -96,11 +92,15 @@ class Account
 	take(amount) {
 		this.balance -= amount;
 		this.updated = true;
+
+		return this;
 	}
 
 	give(amount) {
 		this.balance += amount;
 		this.updated = true;
+
+		return this;
 	}
 	
 	sync() {
@@ -111,7 +111,7 @@ class Account
 
 /* ACTUAL INDEX.JS */
 
-const { Client, RichEmbed, Collection } = require("discord.js");
+const { Client, MessageEmbed, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const db = require("quick.db");
 const config = require("./config.json");
@@ -127,6 +127,8 @@ const folf = new Client();
 folf.commands = new Collection();
 folf.aliases = new Collection();
 folf.prefix = prefix;
+
+var servers = [];
 
 function exists(obj) {
 	return typeof obj == "undefined" || obj === null;
@@ -212,11 +214,13 @@ function setCommands() {
 		    if (commandSource.info.aliases)
 	  	        commandSource.info.aliases.forEach(a => folf.aliases.set(a, commandSource.info.name));
 	
-		    console.log(`Found command: ${commandSource.info.name}`);
+		    console.log(`Imported command: ${commandSource.info.name}`);
 		}
 		catch(error) {
-		    console.log(error);
-		    return false;
+			console.log(error);
+			console.log(`Could not import command: ${file}`);
+			continue;
+		    //return false;
 		}
 	}
 }
@@ -254,7 +258,7 @@ const utils = {
 	},
 
 	createEmbed: function(title = "", description = "", url = "", imageUrl = "") {
-		var embed = new RichEmbed().setColor(embedColor);
+		var embed = new MessageEmbed().setColor(embedColor);
 
 		if (title)
 			embed.setTitle(title);
@@ -316,8 +320,8 @@ function hasCommand(commandName) {
 setCommands();
 
 // when the bot is finished getting ready, do this:
-folf.on('ready', async () => {
-	console.log(`Connected to Discord as ${folf.user.tag} across ${folf.guilds.size} servers.`);
+folf.once('ready', async () => {
+	console.log(`Connected to Discord as ${folf.user.tag} across ${folf.guilds.cache.size} servers.`);
    	folf.user.setActivity(`with a very cute Folf | prefix: ${prefix}`);
 	folf.user.setStatus("online");
 });
@@ -357,7 +361,7 @@ folf.on('message', async message => {
 	
 	if(command)
 	{
-		const ctx = new Context(folf, message, db);
+		const ctx = new Context(folf, message, db, servers);
 		ctx.rawArgs = rawArgs; // this is just all of the text as one string.
 		ctx.args = args;
 		ctx.utils = utils;
@@ -368,7 +372,7 @@ folf.on('message', async message => {
 					return ctx.error("Error", "you dont have perms to run this command ");
 			}
 
-			command.run(ctx);
+			await command.run(ctx);
 			// DB commands that counted regardless of dev
 			// count.fox count.help
 
@@ -387,6 +391,8 @@ folf.on('message', async message => {
 			console.log(error);
 			return ctx.error("bot broke");
 		}
+
+		servers = ctx.servers;
 	}
 	else
 	{

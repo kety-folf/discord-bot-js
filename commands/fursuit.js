@@ -4,7 +4,8 @@ const fb = new FurryBotAPI("kety-folf's-bot/ 1.11.0");
 module.exports.run = async (ctx) =>
 {
     fb.apiRequest("furry", true, `fursuit`, false)
-        .then(result => ctx.sendEmbed('fursuit',"", "", result.imageURL.replace(/\s/g, "20")));
+        .then(result => ctx.sendEmbed('fursuit',"", "", result.imageURL.replace(/\s/g, "20")))
+        .catch(error => ctx.error('error', error));
 };
       
 module.exports.info = {
