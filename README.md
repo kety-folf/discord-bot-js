@@ -1,17 +1,16 @@
 # Kety Folf's Discord Bot
-Bot Made by:
+This bot is hosted on an AWS server.
+
+## Contributors
 - Kety_the_folf#0001
 - AbnerSquared
 
----
+## Links
+[Top.GG](https://top.gg/bot/425138772221362176)
 
-# Hosted on an AWS Server
-bot invite: https://top.gg/bot/425138772221362176
-
----
-
-# Setup
+## Setup
 1. Run `update.bat`. This will automatically attempt to install all of the required files.
+
 2. Create `config.json` in the same location as `index.js`.
 The `config.json` must contain the following:
 ```
