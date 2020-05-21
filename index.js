@@ -6,11 +6,7 @@
 	}
 }
 
-
-
-// context to use for commands
 class Context {
-	// constructor(options: ContextOptions) {
 	constructor(client, message, db, servers) {
 		this.folf = client;
 		this.self = client.user;
@@ -25,7 +21,6 @@ class Context {
 		this.rawArgs = "";
 		this.utils = null;
 		this.servers = servers ? servers : [];
-		//this.accounts = [];
 	}
 
 	getAccount(userId) {
