@@ -17,6 +17,6 @@ module.exports.info = {
     description: "sends yiff to the channel defalts to straight",
     usage: "[gay | straight]",
     category: "NSFW",
-    accessableby: "members",
+    accessableby: "members", // allowed: any, guildOwner, dev
     aliases: []
 };

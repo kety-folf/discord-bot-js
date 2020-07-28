@@ -1,4 +1,7 @@
+const Utils = require('../Utils');
+
 module.exports.run = async (ctx) => {
+    // TODO: Place flip method in Utils
     const flip = Math.round(Math.random() * 1) == 1 ? "heads" : "tails";
     const bet = 5;
     
@@ -29,7 +32,7 @@ module.exports.run = async (ctx) => {
     if (account.balance < bet)
         return ctx.error("error", "you dont have any money");
 
-    const reward =  bet * ctx.utils.getRandNum(24, 2);
+    const reward =  bet * Utils.getRandNum(24, 2);
     
     const flipTitle = `the coin landed on ${flip}`;
     var flipResult = `you lost \$${bet}`;

@@ -1,4 +1,5 @@
 const casino = require("../services/slotService.js");
+const Utils = require('../Utils');
 
 module.exports.run = async (ctx) => {
 	if (ctx.args.length < 1) // 1 = required arg count
@@ -19,8 +20,8 @@ module.exports.run = async (ctx) => {
 		return ctx.error("error",
 			`bet ${bet} > bal ${account.balance}`);
 
-	const reward = bet * ctx.utils.getRandNum(10, 2);
-	var slots = casino.getSlots(ctx.utils, 3, 5);
+	const reward = bet * Utils.getRandNum(10, 2);
+	var slots = casino.getSlots(3, 5);
 	const won = slots.every(s => s == s[0]);
 
 	var slotDisplay = "";

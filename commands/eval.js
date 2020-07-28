@@ -1,3 +1,5 @@
+const Utils = require('../Utils');
+
 module.exports.run = async (ctx) => {
     try {
         ctx.channel.startTyping();
@@ -11,7 +13,7 @@ module.exports.run = async (ctx) => {
         if (typeof(script) !== "string")
             script = require("util").inspect(script);
 
-        let embed = ctx.utils.createEmbed("eval")
+        let embed = Utils.createEmbed("eval")
           .addField('IN', code)
           .addField('OUT', script);
 

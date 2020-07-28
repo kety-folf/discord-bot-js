@@ -1,8 +1,10 @@
-module.exports.getSlots = (utils, slotCount, slotMax = 5) => {
+const Utils = require('../Utils');
+
+module.exports.getSlots = (slotCount, slotMax = 5) => {
     var slots = [];
     for (var i = 0; i < slotCount; i++)
     {
-        slots[i] = utils.getRandNum(slotMax);
+        slots[i] = Utils.getRandNum(slotMax);
     }
     
     return slots;

@@ -1,4 +1,5 @@
 const replies = require("../assets/8ball.json");
+const Utils = require('../Utils');
 
 module.exports.run = async (ctx) => {
     const question = ctx.args.join(" ");
@@ -6,7 +7,7 @@ module.exports.run = async (ctx) => {
     if(!question)
       return ctx.error('error', 'no question given');
 
-    return ctx.sendEmbed('8ball', replies[ctx.utils.getRandNum(replies.length)]);
+    return ctx.sendEmbed('8ball', replies[Utils.getRandNum(replies.length)]);
 };
 
 module.exports.info = {

@@ -1,4 +1,5 @@
 const system = require('systeminformation');
+const Utils = require('../Utils');
 
 module.exports.run = async (ctx) => {
     try {
@@ -6,7 +7,7 @@ module.exports.run = async (ctx) => {
         const memData = await system.mem();
         const osData = await system.osInfo();
 
-        let embed = ctx.utils.createEmbed("Info", "bot was made by Kety_the_folf#0001 coded in JS with discord.js")
+        let embed = Utils.createEmbed("Info", "bot was made by Kety_the_folf#0001 coded in JS with discord.js")
         .addField('CPU Information:',
             ' - manufucturer: ' + cpuData.manufacturer +
             '\n - brand: ' + cpuData.brand +

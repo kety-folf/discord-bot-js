@@ -2,56 +2,9 @@ const ytdl = require("ytdl-core");
 const YouTube = require("simple-youtube-api");
 const config = require("../config.json");
 const youtube = new YouTube(config.youtube_key);
+const Song = require('../Song');
+const ServerAudioClient = require('../ServerAudioClient');
 
-class Song {
-	constructor(songName, url)
-	{
-		this.songName = songName;
-		this.url = url;
-	}
-}
-
-class ServerQueueClient {
-	constructor(textChannel, voiceChannel)
-	{
-        this.connection = null;
-        this.dispatcher = null;
-		this.queue = [];
-		this.textChannel = textChannel;
-		this.voiceChannel = voiceChannel;
-		this.playing = false;
-		this.currentSong = null;
-	}
-
-	getNextSong()
-	{
-        if (this.currentSong)
-        {
-            console.log("Current song:");
-            console.log(this.currentSong);
-        }
-
-		if (this.queue.length > 0)
-		{
-			this.currentSong = this.queue.shift();
-        }
-        else
-        {
-            this.currentSong = null;
-        }
-        
-        console.log("Next song:");
-        console.log(this.currentSong);
-
-		return this.currentSong;
-	}
-
-	clear()
-	{
-		this.currentSong = null;
-		this.queue = [];
-	}
-}
 
 // SEARCHING
 async function search(service, server, value)
@@ -240,7 +193,7 @@ module.exports.playAudio = async (ctx, term = "") =>
         if (!ctx.member.voice.channel)
             return ctx.error("you gotsta be in channelled voice laddie you cant listen with eyes");
 
-        let queueClient = new ServerQueueClient(ctx.channel, ctx.member.voice.channel);
+        let queueClient = new ServerAudioClient(ctx.channel, ctx.member.voice.channel);
         server.queueClient = queueClient;
     }
     

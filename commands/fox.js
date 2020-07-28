@@ -1,7 +1,9 @@
+const Utils = require('../Utils');
+
 module.exports.run = async (ctx) => {
   return ctx.sendEmbed('Fox',
       'Powered by randomfox.ca', "",
-      `https://randomfox.ca/images/${ctx.utils.getRandNum(123)}.jpg`);  
+      `https://randomfox.ca/images/${Utils.getRandNum(123)}.jpg`);  
 };
   
 module.exports.info = {

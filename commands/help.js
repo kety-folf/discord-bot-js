@@ -1,18 +1,19 @@
 const  { stripIndents }  = require('common-tags'); // not sure what this does.
+const Utils = require('../Utils');
 
 module.exports.run = async (ctx) =>
 {
-  const prefix = ctx.folf.prefix;
+  const prefix = ctx.client.prefix;
 
-  let embed = ctx.utils.createEmbed("Commands", `Bot prefix is \`${prefix}\`\n`)
+  let embed = Utils.createEmbed("Commands", `Bot prefix is \`${prefix}\`\n`)
     //.setAuthor(`${ctx.guild.me.displayName}`, ctx.guild.iconURL)
-    .setThumbnail(ctx.folf.user.displayAvatarURL);
+    .setThumbnail(ctx.client.user.displayAvatarURL);
 
   if (!ctx.args[0])
   {
-      ctx.utils.setAuthor(embed, ctx.folf.user);
+      Utils.setAuthor(embed, ctx.client.user);
 
-      ctx.folf.commands.forEach(c =>
+      ctx.client.commands.forEach(c =>
         {
           if (c.info)
           {
@@ -22,23 +23,22 @@ module.exports.run = async (ctx) =>
         });
 
       embed.setTimestamp(new Date());
-      embed.setFooter("©Kety_the_folf#0001", ctx.folf.user.avatarURL);
+      embed.setFooter("©Kety_the_folf#0001", ctx.client.user.avatarURL);
       return ctx.channel.send(embed);
   }
   else
   {
     const commandName = ctx.args[0].toLowerCase();
-    // commands for ${ctx.folf.user.tag}
-    embed.setFooter(`${ctx.folf.user.username} | Total Commands: ${ctx.folf.commands.size}`, ctx.folf.user.avatarURL);
+    embed.setFooter(`${ctx.client.user.username} | Total Commands: ${ctx.client.commands.size}`, ctx.client.user.avatarURL);
 
-    let command = ctx.folf.commands.get(ctx.folf.aliases.get(commandName) || commandName);
+    let command = ctx.client.commands.get(ctx.client.aliases.get(commandName) || commandName);
     
     if(!command)
         return ctx.error('Invalid Command.', `Do ${prefix}help for a list of the commands.`);
     
     command = command.info;
 
-    embed.setTitle(ctx.utils.toPascalCase(command.name));
+    embed.setTitle(Utils.toPascalCase(command.name));
 
     embed.setDescription(stripIndents`
     ❯ Aliases: ${command.aliases ? command.aliases.join(', ') : 'None'}

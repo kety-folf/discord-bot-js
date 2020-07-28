@@ -1,26 +1,28 @@
 # Kety Folf's Discord Bot
 Bot Made by:
 - Kety_the_folf#0001
-- AbnerSquared
+- [AbnerSquared](https://github.com/AbnerSquared)
 
 ---
 
 # Hosted on an AWS Server
-bot invite: https://top.gg/bot/425138772221362176
+[Vote for this bot~](https://top.gg/bot/425138772221362176)
 
 ---
 
 # Setup
 1. `npm install` Note: This has only been tested on Windows.
-2. create `config.json` in the same location as `index.js`.
+2. Create `config.json` in the same location as `index.js`.
 The `config.json` must contain the following:
 ```
 {
-    "token": "DISCORD_TOKEN_KEY",
-    "prefix": "PREFIX",
-    "devId": "DEV_ID",
-    "commandPath": "COMMAND_PATH",
-    "debug": false
+    "token": "DISCORD_TOKEN_KEY", // This is the token that is used to log in as the bot
+    "prefix": "PREFIX", // This represents the prefix that the bot will listen to
+    "devId": "DEV_ID", // This represents the Discord ID to be marked as a developer
+    "commandPath": "COMMAND_PATH", // This defines where the command files are stored
+    "debug": false, // This  determines if specific things are to be logged on the console
+    "errorColor": "ERROR_COLOR", // this is the color hex code used to set the embed color when an error occurs
+    "defaultColor": "DEFAULT_EMBED_COLOR" // this is the color hex code used to set the default embed color
 }
 ```
 

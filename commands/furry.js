@@ -1,5 +1,6 @@
 const FurryBotAPI = require("furrybotapi");
 const fb = new FurryBotAPI("kety-folf's-bot/ 1.11.0");
+const Utils = require('../Utils');
 
 module.exports.run = async (ctx) =>
 {
@@ -9,7 +10,7 @@ module.exports.run = async (ctx) =>
   {
       const furType = ["boop", "cuddle", "flop", "hold", "howl", "hug"];
       let len = furType.length;
-      fur = furType[ctx.utils.getRandNum(len)];
+      fur = furType[Utils.getRandNum(len)];
   }
 
   fb.apiRequest("furry", true, fur, false)
