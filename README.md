@@ -20,6 +20,7 @@ The `config.json` must contain the following:
     "devId": "DEV_ID", // This represents the Discord ID to be marked as a developer
     "commandPath": "COMMAND_PATH", // This defines where the command files are stored
     "debug": false // This  determines if specific things are to be logged on the console
+    "fur_APIkey": "api key for furrybotapi" // this is not needed to use but removes api cooldown if you have one
 }
 ```
 
