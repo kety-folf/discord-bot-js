@@ -1,10 +1,14 @@
 const FurryBotAPI = require("furrybotapi");
-const fb = new FurryBotAPI("kety-folf's-bot/ pre-1.10.9");
+const config = require("../config.json");
+
+const fb = new FurryBotAPI({
+    userAgent: "Kety Folf's Bot / 2.0.1",
+    apiKey: config.fur_APIkey
+});
 
 module.exports.run = async (ctx) => {
-    fb.apiRequest("animals", true, "blep", false)
-        .then(result => ctx.sendEmbed("blep", "", "", result.imageURL))
-        .catch(error => ctx.error('error', error)); 
+   
+      fb.animals.blep("json", 1).then(res =>ctx.sendEmbed("blep", "", "", res.url));
 };
 
 module.exports.info = {
