@@ -1,15 +1,17 @@
 const FurryBotAPI = require("furrybotapi");
-const fb = new FurryBotAPI("kety-folf's-bot/ 1.11.0");
+const config = require("../config.json");
+
+const fb = new FurryBotAPI({
+    userAgent: "Kety Folf's Bot / 2.0.1",
+    apiKey: config.fur_APIkey
+});
 
 module.exports.run = async (ctx) => {
     const type = ctx.args[0] || "straight";
 
-    if (!ctx.channel.nsfw)
-        return ctx.error("Error", "not nsfw channel");
+    if (!ctx.channel.nsfw) return ctx.error("Error", "not nsfw channel");
 	
-    return fb.apiRequest("furry", false, `yiff/${type}`, false)
-        .then(result => ctx.sendEmbed("yiff", `${type} yiff`, "", result.imageURL))
-        .catch(error => ctx.error('error', error));
+    return fb.furry.yiff[type]("json", 1).then(res => ctx.sendEmbed(type, "", "", res.url));
 };
 
 module.exports.info = {
