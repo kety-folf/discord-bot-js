@@ -1,6 +1,10 @@
 const FurryBotAPI = require("furrybotapi");
-const fb = new FurryBotAPI("kety-folf's-bot/ 1.11.0");
+const config = require("../config.json");
 
+const fb = new FurryBotAPI({
+    userAgent: "Kety Folf's Bot / 2.0.1",
+    apiKey: config.fur_APIkey
+});
 module.exports.run = async (ctx) =>
 {
   let fur = ctx.message.content.substring(6).trim(' ');
@@ -12,9 +16,7 @@ module.exports.run = async (ctx) =>
       fur = furType[ctx.utils.getRandNum(len)];
   }
 
-  fb.apiRequest("furry", true, fur, false)
-      .then(result => ctx.sendEmbed(fur, "", "", result.imageURL))
-      .catch(error => ctx.error('error', error));  
+    fb.furry[fur]("json", 1).then(res => ctx.sendEmbed(fur, "", "", res.url));
 };
       
 module.exports.info = {
