@@ -1,5 +1,5 @@
 # Kety Folf's Discord Bot
-This bot is hosted on an AWS server.
+This bot is hosted on an Raspberry pi 4b+ 4gb ram
 
 ## Contributors
 - Kety_the_folf#0001
