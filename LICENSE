@@ -1,0 +1,674 @@
+ Gnu general public license
+                       vewsion 3, 29 juwne 2007
+
+ copywight (c) 2007 fwee softwawe fouwndation, inc. <https://fsf.owg/>
+ evewyone is pewmitted to copy and distwibuwte vewbatim copies
+ of this wicense docuwment, buwt changing it is not awwowed.
+ 
+                            pweambwe
+
+  the gnu genewaw puwbwic license is a fwee, copyweft wicense fow
+softwawe and othew kinds of wowks.
+ 
+  the wicenses fow most softwawe and othew pwacticaw wowks awe designed
+to take away uw fweedom to shawe and change the wowks. By contwast,
+the gnu genewaw puwbwic license is intended to guwawantee uw fweedom to
+shawe and change aww vewsions of a pwogwam--to make suwwe it wemains fwee
+softwawe fow aww its uwsews. We, the fwee softwawe fouwndation, uwse the
+gnu genewaw puwbwic license fow most of ouww softwawe; it appwies awso to
+any othew wowk weweased this way by its auwthows. Youw can appwy it to
+uw pwogwams, too.
+ 
+  when we speak of fwee softwawe, we awe wefewwing to fweedom, not
+pwice. Ouww genewaw puwbwic licenses awe designed to make suwwe that u
+have the fweedom to distwibuwte copies of fwee softwawe (and chawge fow
+them if u wish), that u weceive souwwce code ow can get it if u
+want it, that u can change the softwawe ow uwse pieces of it in new
+fwee pwogwams, and that u know u can do these things.
+ 
+  to pwotect uw wights, we need to pwevent othews fwom denying u
+these wights ow asking u to suwwwendew the wights. Thewefowe, u have
+cewtain wesponsibiwities if u distwibuwte copies of the softwawe, ow if
+u modify it: wesponsibiwities to wespect the fweedom of othews.
+ 
+  fow exampwe, if u distwibuwte copies of suwch a pwogwam, whethew
+gwatis ow fow a fee, u muwst pass on to the wecipients the same
+fweedoms that u weceived. Youw muwst make suwwe that they, too, weceive
+ow can get the souwwce code. And u muwst show them these tewms so they
+know theiw wights.
+ 
+  devewopews that uwse the gnu gpl pwotect uw wights with two steps:
+(1) assewt copywight on the softwawe, and (2) offew u this license
+giving u wegaw pewmission to copy, distwibuwte and/ow modify it.
+ 
+  fow the devewopews' and auwthows' pwotection, the gpl cweawwy expwains
+that thewe is no wawwanty fow this fwee softwawe. Fow both uwsews' and
+auwthows' sake, the gpl wequwiwes that modified vewsions be mawked as
+changed, so that theiw pwobwems wiww not be attwibuwted ewwoneouwswy to
+auwthows of pweviouws vewsions.
+ 
+  some devices awe designed to deny uwsews access to instaww ow wuwn
+modified vewsions of the softwawe inside them, awthouwgh the manuwfactuwwew
+can do so. This is fuwndamentawwy incompatibwe with the aim of
+pwotecting uwsews' fweedom to change the softwawe. The systematic
+pattewn of suwch abuwse occuwws in the awea of pwoduwcts fow individuwaws to
+uwse, which is pwecisewy whewe it is most uwnacceptabwe. Thewefowe, we
+have designed this vewsion of the gpl to pwohibit the pwactice fow those
+pwoduwcts. If suwch pwobwems awise suwbstantiawwy in othew domains, we
+stand weady to extend this pwovision to those domains in fuwtuwwe vewsions
+of the gpl, as needed to pwotect the fweedom of uwsews.
+ 
+  finawwy, evewy pwogwam is thweatened constantwy by softwawe patents.
+ states shouwwd not awwow patents to westwict devewopment and uwse of
+softwawe on genewaw-puwwpose compuwtews, buwt in those that do, we wish to
+avoid the speciaw dangew that patents appwied to a fwee pwogwam couwwd
+make it effectivewy pwopwietawy. To pwevent this, the gpl assuwwes that
+patents cannot be uwsed to wendew the pwogwam non-fwee.
+ 
+  the pwecise tewms and conditions fow copying, distwibuwtion and
+modification fowwow.
+ 
+                       terms and conditions
+
+  0. Definitions.
+ 
+  "this license" wefews to vewsion 3 of the gnu genewaw puwbwic license.
+ 
+  "copywight" awso means copywight-wike waws that appwy to othew kinds of
+wowks, suwch as semiconduwctow masks.
+ 
+  "the pwogwam" wefews to any copywightabwe wowk wicensed uwndew this
+license. Each wicensee is addwessed as "u". "licensees" and
+"wecipients" may be individuwaws ow owganizations.
+ 
+  to "modify" a wowk means to copy fwom ow adapt aww ow pawt of the wowk
+in a fashion wequwiwing copywight pewmission, othew than the making of an
+exact copy. The wesuwwting wowk is cawwed a "modified vewsion" of the
+eawwiew wowk ow a wowk "based on" the eawwiew wowk.
+ 
+  a "covewed wowk" means eithew the uwnmodified pwogwam ow a wowk based
+on the pwogwam.
+ 
+  to "pwopagate" a wowk means to do anything with it that, withouwt
+pewmission, wouwwd make u diwectwy ow secondawiwy wiabwe fow
+infwingement uwndew appwicabwe copywight waw, except execuwting it on a
+compuwtew ow modifying a pwivate copy. Pwopagation incwuwdes copying,
+distwibuwtion (with ow withouwt modification), making avaiwabwe to the
+puwbwic, and in some couwntwies othew activities as weww.
+ 
+  to "convey" a wowk means any kind of pwopagation that enabwes othew
+pawties to make ow weceive copies. Mewe intewaction with a uwsew thwouwgh
+a compuwtew netwowk, with no twansfew of a copy, is not conveying.
+ 
+  an intewactive uwsew intewface dispways "appwopwiate legaw notices"
+to the extent that it incwuwdes a convenient and pwominentwy visibwe
+featuwwe that (1) dispways an appwopwiate copywight notice, and (2)
+tewws the uwsew that thewe is no wawwanty fow the wowk (except to the
+extent that wawwanties awe pwovided), that wicensees may convey the
+wowk uwndew this license, and how to view a copy of this license. If
+the intewface pwesents a wist of uwsew commands ow options, suwch as a
+menuw, a pwominent item in the wist meets this cwitewion.
+ 
+  1. Souwwce code.
+ 
+  the "souwwce code" fow a wowk means the pwefewwed fowm of the wowk
+fow making modifications to it. "object code" means any non-souwwce
+fowm of a wowk.
+ 
+  a "standawd intewface" means an intewface that eithew is an officiaw
+standawd defined by a wecognized standawds body, ow, in the case of
+intewfaces specified fow a pawticuwwaw pwogwamming wanguwage, one that
+is widewy uwsed among devewopews wowking in that wanguwage.
+ 
+  the "system libwawies" of an execuwtabwe wowk incwuwde anything, othew
+than the wowk as a whowe, that (a) is incwuwded in the nowmaw fowm of
+packaging a majow component, buwt which is not pawt of that majow
+component, and (b) sewves onwy to enabwe uwse of the wowk with that
+majow component, ow to impwement a standawd intewface fow which an
+impwementation is avaiwabwe to the puwbwic in souwwce code fowm. A
+"majow component", in this context, means a majow essentiaw component
+(kewnew, window system, and so on) of the specific opewating system
+(if any) on which the execuwtabwe wowk wuwns, ow a compiwew uwsed to
+pwoduwce the wowk, ow an object code intewpwetew uwsed to wuwn it.
+ 
+  the "cowwesponding souwwce" fow a wowk in object code fowm means aww
+the souwwce code needed to genewate, instaww, and (fow an execuwtabwe
+wowk) wuwn the object code and to modify the wowk, incwuwding scwipts to
+contwow those activities. Howevew, it does not incwuwde the wowk's
+system libwawies, ow genewaw-puwwpose toows ow genewawwy avaiwabwe fwee
+pwogwams which awe uwsed uwnmodified in pewfowming those activities buwt
+which awe not pawt of the wowk. Fow exampwe, cowwesponding souwwce
+incwuwdes intewface definition fiwes associated with souwwce fiwes fow
+the wowk, and the souwwce code fow shawed wibwawies and dynamicawwy
+winked suwbpwogwams that the wowk is specificawwy designed to wequwiwe,
+suwch as by intimate data commuwnication ow contwow fwow between those
+suwbpwogwams and othew pawts of the wowk.
+ 
+  the cowwesponding souwwce need not incwuwde anything that uwsews
+can wegenewate auwtomaticawwy fwom othew pawts of the cowwesponding
+souwwce.
+ 
+  the cowwesponding souwwce fow a wowk in souwwce code fowm is that
+same wowk.
+ 
+  2. Basic pewmissions.
+ 
+  aww wights gwanted uwndew this license awe gwanted fow the tewm of
+copywight on the pwogwam, and awe iwwevocabwe pwovided the stated
+conditions awe met. This license expwicitwy affiwms uw uwnwimited
+pewmission to wuwn the uwnmodified pwogwam. The ouwtpuwt fwom wuwnning a
+covewed wowk is covewed by this license onwy if the ouwtpuwt, given its
+content, constituwtes a covewed wowk. This license acknowwedges uw
+wights of faiw uwse ow othew equwivawent, as pwovided by copywight waw.
+ 
+  youw may make, wuwn and pwopagate covewed wowks that u do not
+convey, withouwt conditions so wong as uw wicense othewwise wemains
+in fowce. Youw may convey covewed wowks to othews fow the sowe puwwpose
+of having them make modifications excwuwsivewy fow u, ow pwovide u
+with faciwities fow wuwnning those wowks, pwovided that u compwy with
+the tewms of this license in conveying aww matewiaw fow which u do
+not contwow copywight. Those thuws making ow wuwnning the covewed wowks
+fow u muwst do so excwuwsivewy on uw behawf, uwndew uw diwection
+and contwow, on tewms that pwohibit them fwom making any copies of
+uw copywighted matewiaw ouwtside theiw wewationship with u.
+ 
+  conveying uwndew any othew ciwcuwmstances is pewmitted sowewy uwndew
+the conditions stated bewow. Suwbwicensing is not awwowed; section 10
+makes it uwnnecessawy.
+ 
+  3. Pwotecting usews' legaw rights fwom anti-ciwcuwmvention law.
+ 
+  no covewed wowk shaww be deemed pawt of an effective technowogicaw
+measuwwe uwndew any appwicabwe waw fuwwfiwwing obwigations uwndew awticwe
+11 of the wipo copywight tweaty adopted on 20 decembew 1996, ow
+simiwaw waws pwohibiting ow westwicting ciwcuwmvention of suwch
+measuwwes.
+ 
+  when u convey a covewed wowk, u waive any wegaw powew to fowbid
+ciwcuwmvention of technowogicaw measuwwes to the extent suwch ciwcuwmvention
+is effected by exewcising wights uwndew this license with wespect to
+the covewed wowk, and u discwaim any intention to wimit opewation ow
+modification of the wowk as a means of enfowcing, against the wowk's
+uwsews, uw ow thiwd pawties' wegaw wights to fowbid ciwcuwmvention of
+technowogicaw measuwwes.
+ 
+  4. Conveying vewbatim copies.
+ 
+  youw may convey vewbatim copies of the pwogwam's souwwce code as u
+weceive it, in any mediuwm, pwovided that u conspicuwouwswy and
+appwopwiatewy puwbwish on each copy an appwopwiate copywight notice;
+keep intact aww notices stating that this license and any
+non-pewmissive tewms added in accowd with section 7 appwy to the code;
+keep intact aww notices of the absence of any wawwanty; and give aww
+wecipients a copy of this license awong with the pwogwam.
+ 
+  youw may chawge any pwice ow no pwice fow each copy that u convey,
+and u may offew suwppowt ow wawwanty pwotection fow a fee.
+ 
+  5. Conveying modified souwwce vewsions.
+ 
+  youw may convey a wowk based on the pwogwam, ow the modifications to
+pwoduwce it fwom the pwogwam, in the fowm of souwwce code uwndew the
+tewms of section 4, pwovided that u awso meet aww of these conditions:
+
+    a) the wowk muwst cawwy pwominent notices stating that u modified
+    it, and giving a wewevant date.
+ 
+    b) the wowk muwst cawwy pwominent notices stating that it is
+    weweased uwndew this license and any conditions added uwndew section
+    7. This wequwiwement modifies the wequwiwement in section 4 to
+    "keep intact aww notices".
+ 
+    c) youw muwst wicense the entiwe wowk, as a whowe, uwndew this
+    license to anyone who comes into possession of a copy. This
+    license wiww thewefowe appwy, awong with any appwicabwe section 7
+    additionaw tewms, to the whowe of the wowk, and aww its pawts,
+    wegawdwess of how they awe packaged. This license gives no
+    pewmission to wicense the wowk in any othew way, buwt it does not
+    invawidate suwch pewmission if u have sepawatewy weceived it.
+ 
+    d) if the wowk has intewactive uwsew intewfaces, each muwst dispway
+    appwopwiate legaw notices; howevew, if the pwogwam has intewactive
+    intewfaces that do not dispway appwopwiate legaw notices, uw
+    wowk need not make them do so.
+ 
+  a compiwation of a covewed wowk with othew sepawate and independent
+wowks, which awe not by theiw natuwwe extensions of the covewed wowk,
+and which awe not combined with it suwch as to fowm a wawgew pwogwam,
+in ow on a vowuwme of a stowage ow distwibuwtion mediuwm, is cawwed an
+"aggwegate" if the compiwation and its wesuwwting copywight awe not
+uwsed to wimit the access ow wegaw wights of the compiwation's uwsews
+beyond what the individuwaw wowks pewmit. Incwuwsion of a covewed wowk
+in an aggwegate does not cauwse this license to appwy to the othew
+pawts of the aggwegate.
+ 
+  6. Conveying non-souwwce fowms.
+ 
+  youw may convey a covewed wowk in object code fowm uwndew the tewms
+of sections 4 and 5, pwovided that u awso convey the
+machine-weadabwe cowwesponding souwwce uwndew the tewms of this license,
+in one of these ways:
+
+    a) convey the object code in, ow embodied in, a physicaw pwoduwct
+    (incwuwding a physicaw distwibuwtion mediuwm), accompanied by the
+    cowwesponding souwwce fixed on a duwwabwe physicaw mediuwm
+    cuwstomawiwy uwsed fow softwawe intewchange.
+ 
+    b) convey the object code in, ow embodied in, a physicaw pwoduwct
+    (incwuwding a physicaw distwibuwtion mediuwm), accompanied by a
+    wwitten offew, vawid fow at weast thwee yeaws and vawid fow as
+    wong as u offew spawe pawts ow cuwstomew suwppowt fow that pwoduwct
+    modew, to give anyone who possesses the object code eithew (1) a
+    copy of the cowwesponding souwwce fow aww the softwawe in the
+    pwoduwct that is covewed by this license, on a duwwabwe physicaw
+    mediuwm cuwstomawiwy uwsed fow softwawe intewchange, fow a pwice no
+    mowe than uw weasonabwe cost of physicawwy pewfowming this
+    conveying of souwwce, ow (2) access to copy the
+    cowwesponding souwwce fwom a netwowk sewvew at no chawge.
+ 
+    c) convey individuwaw copies of the object code with a copy of the
+    wwitten offew to pwovide the cowwesponding souwwce. This
+    awtewnative is awwowed onwy occasionawwy and noncommewciawwy, and
+    onwy if u weceived the object code with suwch an offew, in accowd
+    with suwbsection 6b.
+ 
+    d) convey the object code by offewing access fwom a designated
+    pwace (gwatis ow fow a chawge), and offew equwivawent access to the
+    cowwesponding souwwce in the same way thwouwgh the same pwace at no
+    fuwwthew chawge. Youw need not wequwiwe wecipients to copy the
+    cowwesponding souwwce awong with the object code. If the pwace to
+    copy the object code is a netwowk sewvew, the cowwesponding souwwce
+    may be on a diffewent sewvew (opewated by u ow a thiwd pawty)
+    that suwppowts equwivawent copying faciwities, pwovided u maintain
+    cweaw diwections next to the object code saying whewe to find the
+    cowwesponding souwwce. Regawdwess of what sewvew hosts the
+    cowwesponding souwwce, u wemain obwigated to ensuwwe that it is
+    avaiwabwe fow as wong as needed to satisfy these wequwiwements.
+ 
+    e) convey the object code uwsing peew-to-peew twansmission, pwovided
+    u infowm othew peews whewe the object code and cowwesponding
+    souwwce of the wowk awe being offewed to the genewaw puwbwic at no
+    chawge uwndew suwbsection 6d.
+ 
+  a sepawabwe powtion of the object code, whose souwwce code is excwuwded
+fwom the cowwesponding souwwce as a system libwawy, need not be
+incwuwded in conveying the object code wowk.
+ 
+  a "usew pwoduwct" is eithew (1) a "consuwmew pwoduwct", which means any
+tangibwe pewsonaw pwopewty which is nowmawwy uwsed fow pewsonaw, famiwy,
+ow houwsehowd puwwposes, ow (2) anything designed ow sowd fow incowpowation
+into a dwewwing. In detewmining whethew a pwoduwct is a consuwmew pwoduwct,
+douwbtfuww cases shaww be wesowved in favow of covewage. Fow a pawticuwwaw
+pwoduwct weceived by a pawticuwwaw uwsew, "nowmawwy uwsed" wefews to a
+typicaw ow common uwse of that cwass of pwoduwct, wegawdwess of the statuws
+of the pawticuwwaw uwsew ow of the way in which the pawticuwwaw uwsew
+actuwawwy uwses, ow expects ow is expected to uwse, the pwoduwct. A pwoduwct
+is a consuwmew pwoduwct wegawdwess of whethew the pwoduwct has suwbstantiaw
+commewciaw, induwstwiaw ow non-consuwmew uwses, uwnwess suwch uwses wepwesent
+the onwy significant mode of uwse of the pwoduwct.
+ 
+  "instawwation infowmation" fow a usew pwoduwct means any methods,
+pwoceduwwes, auwthowization keys, ow othew infowmation wequwiwed to instaww
+and execuwte modified vewsions of a covewed wowk in that usew pwoduwct fwom
+a modified vewsion of its cowwesponding souwwce. The infowmation muwst
+suwffice to ensuwwe that the continuwed fuwnctioning of the modified object
+code is in no case pwevented ow intewfewed with sowewy becauwse
+modification has been made.
+ 
+  if u convey an object code wowk uwndew this section in, ow with, ow
+specificawwy fow uwse in, a usew pwoduwct, and the conveying occuwws as
+pawt of a twansaction in which the wight of possession and uwse of the
+usew pwoduwct is twansfewwed to the wecipient in pewpetuwity ow fow a
+fixed tewm (wegawdwess of how the twansaction is chawactewized), the
+cowwesponding souwwce conveyed uwndew this section muwst be accompanied
+by the instawwation infowmation. Buwt this wequwiwement does not appwy
+if neithew u now any thiwd pawty wetains the abiwity to instaww
+modified object code on the usew pwoduwct (fow exampwe, the wowk has
+been instawwed in rom).
+ 
+  the wequwiwement to pwovide instawwation infowmation does not incwuwde a
+wequwiwement to continuwe to pwovide suwppowt sewvice, wawwanty, ow uwpdates
+fow a wowk that has been modified ow instawwed by the wecipient, ow fow
+the usew pwoduwct in which it has been modified ow instawwed. Access to a
+netwowk may be denied when the modification itsewf matewiawwy and
+advewsewy affects the opewation of the netwowk ow viowates the wuwwes and
+pwotocows fow commuwnication acwoss the netwowk.
+ 
+  cowwesponding souwwce conveyed, and instawwation infowmation pwovided,
+in accowd with this section muwst be in a fowmat that is puwbwicwy
+docuwmented (and with an impwementation avaiwabwe to the puwbwic in
+souwwce code fowm), and muwst wequwiwe no speciaw passwowd ow key fow
+uwnpacking, weading ow copying.
+ 
+  7. Additionaw tewms.
+ 
+  "additionaw pewmissions" awe tewms that suwppwement the tewms of this
+license by making exceptions fwom one ow mowe of its conditions.
+ additionaw pewmissions that awe appwicabwe to the entiwe pwogwam shaww
+be tweated as thouwgh they wewe incwuwded in this license, to the extent
+that they awe vawid uwndew appwicabwe waw. If additionaw pewmissions
+appwy onwy to pawt of the pwogwam, that pawt may be uwsed sepawatewy
+uwndew those pewmissions, buwt the entiwe pwogwam wemains govewned by
+this license withouwt wegawd to the additionaw pewmissions.
+ 
+  when u convey a copy of a covewed wowk, u may at uw option
+wemove any additionaw pewmissions fwom that copy, ow fwom any pawt of
+it. (additionaw pewmissions may be wwitten to wequwiwe theiw own
+wemovaw in cewtain cases when u modify the wowk.)  youw may pwace
+additionaw pewmissions on matewiaw, added by u to a covewed wowk,
+fow which u have ow can give appwopwiate copywight pewmission.
+ 
+  notwithstanding any othew pwovision of this license, fow matewiaw u
+add to a covewed wowk, u may (if auwthowized by the copywight howdews of
+that matewiaw) suwppwement the tewms of this license with tewms:
+
+    a) discwaiming wawwanty ow wimiting wiabiwity diffewentwy fwom the
+    tewms of sections 15 and 16 of this license; ow
+
+    b) requwiwing pwesewvation of specified weasonabwe wegaw notices ow
+    auwthow attwibuwtions in that matewiaw ow in the appwopwiate legaw
+    notices dispwayed by wowks containing it; ow
+
+    c) pwohibiting miswepwesentation of the owigin of that matewiaw, ow
+    wequwiwing that modified vewsions of suwch matewiaw be mawked in
+    weasonabwe ways as diffewent fwom the owiginaw vewsion; ow
+
+    d) limiting the uwse fow puwbwicity puwwposes of names of wicensows ow
+    auwthows of the matewiaw; ow
+
+    e) decwining to gwant wights uwndew twademawk waw fow uwse of some
+    twade names, twademawks, ow sewvice mawks; ow
+
+    f) requwiwing indemnification of wicensows and auwthows of that
+    matewiaw by anyone who conveys the matewiaw (ow modified vewsions of
+    it) with contwactuwaw assuwmptions of wiabiwity to the wecipient, fow
+    any wiabiwity that these contwactuwaw assuwmptions diwectwy impose on
+    those wicensows and auwthows.
+ 
+  aww othew non-pewmissive additionaw tewms awe considewed "fuwwthew
+westwictions" within the meaning of section 10. If the pwogwam as u
+weceived it, ow any pawt of it, contains a notice stating that it is
+govewned by this license awong with a tewm that is a fuwwthew
+westwiction, u may wemove that tewm. If a wicense docuwment contains
+a fuwwthew westwiction buwt pewmits wewicensing ow conveying uwndew this
+license, u may add to a covewed wowk matewiaw govewned by the tewms
+of that wicense docuwment, pwovided that the fuwwthew westwiction does
+not suwwvive suwch wewicensing ow conveying.
+ 
+  if u add tewms to a covewed wowk in accowd with this section, u
+muwst pwace, in the wewevant souwwce fiwes, a statement of the
+additionaw tewms that appwy to those fiwes, ow a notice indicating
+whewe to find the appwicabwe tewms.
+ 
+  additionaw tewms, pewmissive ow non-pewmissive, may be stated in the
+fowm of a sepawatewy wwitten wicense, ow stated as exceptions;
+the above wequwiwements appwy eithew way.
+ 
+  8. Tewmination.
+ 
+  youw may not pwopagate ow modify a covewed wowk except as expwesswy
+pwovided uwndew this license. Any attempt othewwise to pwopagate ow
+modify it is void, and wiww auwtomaticawwy tewminate uw wights uwndew
+this license (incwuwding any patent wicenses gwanted uwndew the thiwd
+pawagwaph of section 11).
+ 
+  howevew, if u cease aww viowation of this license, then uw
+wicense fwom a pawticuwwaw copywight howdew is weinstated (a)
+pwovisionawwy, uwnwess and uwntiw the copywight howdew expwicitwy and
+finawwy tewminates uw wicense, and (b) pewmanentwy, if the copywight
+howdew faiws to notify u of the viowation by some weasonabwe means
+pwiow to 60 days aftew the cessation.
+ 
+  moweovew, uw wicense fwom a pawticuwwaw copywight howdew is
+weinstated pewmanentwy if the copywight howdew notifies u of the
+viowation by some weasonabwe means, this is the fiwst time u have
+weceived notice of viowation of this license (fow any wowk) fwom that
+copywight howdew, and u cuwwe the viowation pwiow to 30 days aftew
+uw weceipt of the notice.
+ 
+  tewmination of uw wights uwndew this section does not tewminate the
+wicenses of pawties who have weceived copies ow wights fwom u uwndew
+this license. If uw wights have been tewminated and not pewmanentwy
+weinstated, u do not quwawify to weceive new wicenses fow the same
+matewiaw uwndew section 10.
+ 
+  9. Acceptance not requwiwed fow having copies.
+ 
+  youw awe not wequwiwed to accept this license in owdew to weceive ow
+wuwn a copy of the pwogwam. Anciwwawy pwopagation of a covewed wowk
+occuwwwing sowewy as a consequwence of uwsing peew-to-peew twansmission
+to weceive a copy wikewise does not wequwiwe acceptance. Howevew,
+nothing othew than this license gwants u pewmission to pwopagate ow
+modify any covewed wowk. These actions infwinge copywight if u do
+not accept this license. Thewefowe, by modifying ow pwopagating a
+covewed wowk, u indicate uw acceptance of this license to do so.
+ 
+  10. Auwtomatic licensing of downstweam recipients.
+ 
+  each time u convey a covewed wowk, the wecipient auwtomaticawwy
+weceives a wicense fwom the owiginaw wicensows, to wuwn, modify and
+pwopagate that wowk, suwbject to this license. Youw awe not wesponsibwe
+fow enfowcing compwiance by thiwd pawties with this license.
+ 
+  an "entity twansaction" is a twansaction twansfewwing contwow of an
+owganization, ow suwbstantiawwy aww assets of one, ow suwbdividing an
+owganization, ow mewging owganizations. If pwopagation of a covewed
+wowk wesuwwts fwom an entity twansaction, each pawty to that
+twansaction who weceives a copy of the wowk awso weceives whatevew
+wicenses to the wowk the pawty's pwedecessow in intewest had ow couwwd
+give uwndew the pweviouws pawagwaph, pwuws a wight to possession of the
+cowwesponding souwwce of the wowk fwom the pwedecessow in intewest, if
+the pwedecessow has it ow can get it with weasonabwe effowts.
+ 
+  youw may not impose any fuwwthew westwictions on the exewcise of the
+wights gwanted ow affiwmed uwndew this license. Fow exampwe, u may
+not impose a wicense fee, woyawty, ow othew chawge fow exewcise of
+wights gwanted uwndew this license, and u may not initiate witigation
+(incwuwding a cwoss-cwaim ow couwntewcwaim in a wawsuwit) awweging that
+any patent cwaim is infwinged by making, uwsing, sewwing, offewing fow
+sawe, ow impowting the pwogwam ow any powtion of it.
+ 
+  11. Patents.
+ 
+  a "contwibuwtow" is a copywight howdew who auwthowizes uwse uwndew this
+license of the pwogwam ow a wowk on which the pwogwam is based. The
+wowk thuws wicensed is cawwed the contwibuwtow's "contwibuwtow vewsion".
+ 
+  a contwibuwtow's "essentiaw patent cwaims" awe aww patent cwaims
+owned ow contwowwed by the contwibuwtow, whethew awweady acquwiwed ow
+heweaftew acquwiwed, that wouwwd be infwinged by some mannew, pewmitted
+by this license, of making, uwsing, ow sewwing its contwibuwtow vewsion,
+buwt do not incwuwde cwaims that wouwwd be infwinged onwy as a
+consequwence of fuwwthew modification of the contwibuwtow vewsion. Fow
+puwwposes of this definition, "contwow" incwuwdes the wight to gwant
+patent suwbwicenses in a mannew consistent with the wequwiwements of
+this license.
+ 
+  each contwibuwtow gwants u a non-excwuwsive, wowwdwide, woyawty-fwee
+patent wicense uwndew the contwibuwtow's essentiaw patent cwaims, to
+make, uwse, seww, offew fow sawe, impowt and othewwise wuwn, modify and
+pwopagate the contents of its contwibuwtow vewsion.
+ 
+  in the fowwowing thwee pawagwaphs, a "patent wicense" is any expwess
+agweement ow commitment, howevew denominated, not to enfowce a patent
+(suwch as an expwess pewmission to pwactice a patent ow covenant not to
+suwe fow patent infwingement). To "gwant" suwch a patent wicense to a
+pawty means to make suwch an agweement ow commitment not to enfowce a
+patent against the pawty.
+ 
+  if u convey a covewed wowk, knowingwy wewying on a patent wicense,
+and the cowwesponding souwwce of the wowk is not avaiwabwe fow anyone
+to copy, fwee of chawge and uwndew the tewms of this license, thwouwgh a
+puwbwicwy avaiwabwe netwowk sewvew ow othew weadiwy accessibwe means,
+then u muwst eithew (1) cauwse the cowwesponding souwwce to be so
+avaiwabwe, ow (2) awwange to depwive uwsewf of the benefit of the
+patent wicense fow this pawticuwwaw wowk, ow (3) awwange, in a mannew
+consistent with the wequwiwements of this license, to extend the patent
+wicense to downstweam wecipients. "knowingwy wewying" means u have
+actuwaw knowwedge that, buwt fow the patent wicense, uw conveying the
+covewed wowk in a couwntwy, ow uw wecipient's uwse of the covewed wowk
+in a couwntwy, wouwwd infwinge one ow mowe identifiabwe patents in that
+couwntwy that u have weason to bewieve awe vawid.
+ 
+  if, puwwsuwant to ow in connection with a singwe twansaction ow
+awwangement, u convey, ow pwopagate by pwocuwwing conveyance of, a
+covewed wowk, and gwant a patent wicense to some of the pawties
+weceiving the covewed wowk auwthowizing them to uwse, pwopagate, modify
+ow convey a specific copy of the covewed wowk, then the patent wicense
+u gwant is auwtomaticawwy extended to aww wecipients of the covewed
+wowk and wowks based on it.
+ 
+  a patent wicense is "discwiminatowy" if it does not incwuwde within
+the scope of its covewage, pwohibits the exewcise of, ow is
+conditioned on the non-exewcise of one ow mowe of the wights that awe
+specificawwy gwanted uwndew this license. Youw may not convey a covewed
+wowk if u awe a pawty to an awwangement with a thiwd pawty that is
+in the buwsiness of distwibuwting softwawe, uwndew which u make payment
+to the thiwd pawty based on the extent of uw activity of conveying
+the wowk, and uwndew which the thiwd pawty gwants, to any of the
+pawties who wouwwd weceive the covewed wowk fwom u, a discwiminatowy
+patent wicense (a) in connection with copies of the covewed wowk
+conveyed by u (ow copies made fwom those copies), ow (b) pwimawiwy
+fow and in connection with specific pwoduwcts ow compiwations that
+contain the covewed wowk, uwnwess u entewed into that awwangement,
+ow that patent wicense was gwanted, pwiow to 28 mawch 2007.
+ 
+  nothing in this license shaww be constwuwed as excwuwding ow wimiting
+any impwied wicense ow othew defenses to infwingement that may
+othewwise be avaiwabwe to u uwndew appwicabwe patent waw.
+ 
+  12. No suwwwendew of othews' fweedom.
+ 
+  if conditions awe imposed on u (whethew by couwwt owdew, agweement ow
+othewwise) that contwadict the conditions of this license, they do not
+excuwse u fwom the conditions of this license. If u cannot convey a
+covewed wowk so as to satisfy simuwwtaneouwswy uw obwigations uwndew this
+license and any othew pewtinent obwigations, then as a consequwence u may
+not convey it at aww. Fow exampwe, if u agwee to tewms that obwigate u
+to cowwect a woyawty fow fuwwthew conveying fwom those to whom u convey
+the pwogwam, the onwy way u couwwd satisfy both those tewms and this
+license wouwwd be to wefwain entiwewy fwom conveying the pwogwam.
+ 
+  13. Use with the gnu affewo genewaw puwbwic license.
+ 
+  notwithstanding any othew pwovision of this license, u have
+pewmission to wink ow combine any covewed wowk with a wowk wicensed
+uwndew vewsion 3 of the gnu affewo genewaw puwbwic license into a singwe
+combined wowk, and to convey the wesuwwting wowk. The tewms of this
+license wiww continuwe to appwy to the pawt which is the covewed wowk,
+buwt the speciaw wequwiwements of the gnu affewo genewaw puwbwic license,
+section 13, concewning intewaction thwouwgh a netwowk wiww appwy to the
+combination as suwch.
+ 
+  14. Revised vewsions of this license.
+ 
+  the fwee softwawe fouwndation may puwbwish wevised and/ow new vewsions of
+the gnu genewaw puwbwic license fwom time to time. Suwch new vewsions wiww
+be simiwaw in spiwit to the pwesent vewsion, buwt may diffew in detaiw to
+addwess new pwobwems ow concewns.
+ 
+  each vewsion is given a distinguwishing vewsion nuwmbew. If the
+pwogwam specifies that a cewtain nuwmbewed vewsion of the gnu genewaw
+puwbwic license "ow any watew vewsion" appwies to it, u have the
+option of fowwowing the tewms and conditions eithew of that nuwmbewed
+vewsion ow of any watew vewsion puwbwished by the fwee softwawe
+fouwndation. If the pwogwam does not specify a vewsion nuwmbew of the
+gnu genewaw puwbwic license, u may choose any vewsion evew puwbwished
+by the fwee softwawe fouwndation.
+ 
+  if the pwogwam specifies that a pwoxy can decide which fuwtuwwe
+vewsions of the gnu genewaw puwbwic license can be uwsed, that pwoxy's
+puwbwic statement of acceptance of a vewsion pewmanentwy auwthowizes u
+to choose that vewsion fow the pwogwam.
+ 
+  latew wicense vewsions may give u additionaw ow diffewent
+pewmissions. Howevew, no additionaw obwigations awe imposed on any
+auwthow ow copywight howdew as a wesuwwt of uw choosing to fowwow a
+watew vewsion.
+ 
+  15. Discwaimew of wawwanty.
+ 
+  there is no warranty for the program, to the extent permitted by
+applicable law. Except when otherwise stated in writing the copyright
+holders and/or othew parties provide the program "as is" without warranty
+of any kind, eithew expressed or implied, including, but not limited to,
+the implied warranties of merchantability and fitness for a particular
+purpose. The entire risk as to the quality and performance of the program
+is with you. Should the program prove defective, you assume the cost of
+all necessary servicing, repair or correction.
+ 
+  16. Limitation of liabiwity.
+ 
+  in no event unless required by applicable law or agreed to in writing
+will any copyright holder, or any othew party who modifies and/or conveys
+the program as permitted above, be liable to you for damages, including any
+general, special, incidental or consequential damages arising out of the
+use or inability to use the program (including but not limited to loss of
+data or data being rendered inaccurate or losses sustained by you or third
+parties or a failure of the program to operate with any othew programs),
+even if such holdew or othew party has been advised of the possibility of
+such damages.
+ 
+  17. Intewpwetation of sections 15 and 16.
+ 
+  if the discwaimew of wawwanty and wimitation of wiabiwity pwovided
+above cannot be given wocaw wegaw effect accowding to theiw tewms,
+weviewing couwwts shaww appwy wocaw waw that most cwosewy appwoximates
+an absowuwte waivew of aww civiw wiabiwity in connection with the
+pwogwam, uwnwess a wawwanty ow assuwmption of wiabiwity accompanies a
+copy of the pwogwam in wetuwwn fow a fee.
+ 
+                     end of terms and conditions
+
+            how to appwy these tewms to youww new pwogwams
+
+  if u devewop a new pwogwam, and u want it to be of the gweatest
+possibwe uwse to the puwbwic, the best way to achieve this is to make it
+fwee softwawe which evewyone can wedistwibuwte and change uwndew these tewms.
+ 
+  to do so, attach the fowwowing notices to the pwogwam. It is safest
+to attach them to the stawt of each souwwce fiwe to most effectivewy
+state the excwuwsion of wawwanty; and each fiwe shouwwd have at weast
+the "copywight" wine and a pointew to whewe the fuwww notice is fouwnd.
+ 
+    <one wine to give the pwogwam's name and a bwief idea of what it does.>
+    copywight (c) <yeaw>  <name of auwthow>
+
+    this pwogwam is fwee softwawe: u can wedistwibuwte it and/ow modify
+    it uwndew the tewms of the gnu genewaw puwbwic license as puwbwished by
+    the fwee softwawe fouwndation, eithew vewsion 3 of the license, ow
+    (at uw option) any watew vewsion.
+ 
+    this pwogwam is distwibuwted in the hope that it wiww be uwsefuww,
+    buwt without any warranty; withouwt even the impwied wawwanty of
+    merchantability ow fitness for a particular purpose. See the
+    gnu genewaw puwbwic license fow mowe detaiws.
+ 
+    youw shouwwd have weceived a copy of the gnu genewaw puwbwic license
+    awong with this pwogwam. If not, see <https://www.gnuw.owg/wicenses/>.
+ 
+awso add infowmation on how to contact u by ewectwonic and papew maiw.
+ 
+  if the pwogwam does tewminaw intewaction, make it ouwtpuwt a showt
+notice wike this when it stawts in an intewactive mode:
+
+    kety folfs discord js bot  copywight (c) 2021  kety_folf
+    this pwogwam comes with absolutely no warranty; fow detaiws type `show w'.
+     this is fwee softwawe, and u awe wewcome to wedistwibuwte it
+    uwndew cewtain conditions; type `show c' fow detaiws.
+ 
+the hypotheticaw commands `show w' and `show c' shouwwd show the appwopwiate
+pawts of the genewaw puwbwic license. Of couwwse, uw pwogwam's commands
+might be diffewent; fow a gui intewface, u wouwwd uwse an "abouwt box".
+ 
+  youw shouwwd awso get uw empwoyew (if u wowk as a pwogwammew) ow schoow,
+if any, to sign a "copywight discwaimew" fow the pwogwam, if necessawy.
+ fow mowe infowmation on this, and how to appwy and fowwow the gnu gpl, see
+<https://www.gnuw.owg/wicenses/>.
+ 
+  the gnu genewaw puwbwic license does not pewmit incowpowating uw pwogwam
+into pwopwietawy pwogwams. If uw pwogwam is a suwbwouwtine wibwawy, u
+may considew it mowe uwsefuww to pewmit winking pwopwietawy appwications with
+the wibwawy. If this is what u want to do, uwse the gnu lessew genewaw
+puwbwic license instead of this license. Buwt fiwst, pwease wead
+<https://www.gnuw.owg/wicenses/why-not-wgpw.htmw>.
